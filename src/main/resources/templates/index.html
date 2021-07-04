@@ -16,7 +16,10 @@
     </div>
     <div sec:authorize="isAuthenticated()">
         <p>You are logged in - kwak!</p>
+        <a th:href="@{/logout}">Log Out</a>
     </div>
+
+
 </body>
 
 </html>
