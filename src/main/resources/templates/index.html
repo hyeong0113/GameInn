@@ -16,6 +16,9 @@
     </div>
     <div sec:authorize="isAuthenticated()">
         <p>You are logged in - kwak!</p>
+        <img th:src="${profile.get('picture')}" />
+        <h2 th:text="${profile.get('name')}"></h2>
+        <p th:text="${profile.get('email')}"></p>
         <a th:href="@{/logout}">Log Out</a>
     </div>
 
