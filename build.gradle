@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'war'
 }
 
 group = 'com.cmpt276'
@@ -21,6 +22,10 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	providedCompile 'javax:javaee-api:8.0.1'
+	providedCompile 'javax.security.enterprise:javax.security.enterprise-api:1.0'
+	implementation 'com.auth0:mvc-auth-commons:1.+'
 }
 
 test {

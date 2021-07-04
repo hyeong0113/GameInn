@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    public String getHome(Model model, @AuthenticationPrincipal OidcUser principal) {
+    public String home(Model model, @AuthenticationPrincipal OidcUser principal) {
         return "index";
     }
 }
