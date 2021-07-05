@@ -12,9 +12,12 @@ public class UserService {
     @Autowired
     private IUserRepository repository;
 
-    public User addUser(String userSubId) {
-        User user = new User(userSubId);
-        return repository.save(user);
+    public void addUser(String sub) {
+        if (repository.findUserBySub(sub) == null) {
+            User user = new User(sub);
+            repository.save(user);
+        }
+        return;
     }
 
     public List<User> getUsers() {
@@ -24,6 +27,10 @@ public class UserService {
     public User getUserById(Long id) {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
     }
+
+    // public User getUserById(String sub) {
+    //     return repository;
+    // }
 
     // public User updateUserSocialLinks(User user, Long id) {
     //     User found = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
