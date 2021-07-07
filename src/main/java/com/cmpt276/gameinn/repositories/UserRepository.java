@@ -11,9 +11,8 @@ public class UserRepository implements IUserRepositoryCustom {
 	@PersistenceContext
     private EntityManager entityManager;
 
-    public User findUserBySub(String sub) {
-        User found = (User)entityManager.find(User.class, sub);
+    public User findUserByEmail(String email) {
+        User found = (User)entityManager.find(User.class, email);
         return found;
     }
-
 }

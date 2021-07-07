@@ -18,17 +18,11 @@
             load_login_page();
         </script>
     </div>
-    <div sec:authorize="isAuthenticated()">
+    <div sec:authorize="isAuthenticated()" th:switch="${userInfo}">
         <p>Profile here</p>
-        <img id="user-photo" src="" />
-
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            var profile = JSON.parse(localStorage.getItem("profile"));
-            /*]]>*/
-            var photo_url = profile["picture"];
-            document.getElementById('user-photo').src = photo_url;
-        </script>
+        <img th:src="${userInfo.getPhoto()}" />
+        <p th:text="${userInfo.getName()}"></p>
+        <p th:text="${userInfo.getEmail()}"></p>
     </div>
 </body>
 
