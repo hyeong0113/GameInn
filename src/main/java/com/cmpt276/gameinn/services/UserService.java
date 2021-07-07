@@ -28,16 +28,19 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
     }
 
-    // public User getUserById(String sub) {
-    //     return repository;
-    // }
+    // These commented functions are for social network accounts
+    /*
+    public User getUserById(String sub) {
+        return repository;
+    }
 
-    // public User updateUserSocialLinks(User user, Long id) {
-    //     User found = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
-    //     found.setsocialAccountsList(user.getsocialAccountsList());
+    public User updateUserSocialLinks(User user, Long id) {
+        User found = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
+        found.setsocialAccountsList(user.getsocialAccountsList());
 
-    //     return repository.save(found);
-    // }
+        return repository.save(found);
+    }
+    */
 
     public void deleteUser(Long id) {
         repository.deleteById(id);
