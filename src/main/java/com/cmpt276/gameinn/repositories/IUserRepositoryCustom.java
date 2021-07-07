@@ -3,5 +3,5 @@ package com.cmpt276.gameinn.repositories;
 import com.cmpt276.gameinn.models.User;
 
 public interface IUserRepositoryCustom {
-    User findUserByEmail(String email);
+    User findUserBySub(String email);
 }

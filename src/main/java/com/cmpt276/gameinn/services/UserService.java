@@ -13,14 +13,13 @@ public class UserService {
     private IUserRepository repository;
 
     public User addUser(String sub, String name, String email, String photo) {
-        if (repository.findUserByEmail(email) == null) {
-            sub = sub.substring(sub.lastIndexOf('|') + 1);
-            System.out.println("sub:            :   " + sub);
+        sub = sub.substring(sub.lastIndexOf('|') + 1);
+        if (repository.findUserBySub(sub) == null) {
             User user = new User(sub, name, email, photo);
             repository.save(user);
             return user;
         }
-        return repository.findUserByEmail(email);
+        return repository.findUserBySub(sub);
     }
 
     public List<User> getUsers() {
@@ -31,12 +30,12 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
     }
 
-    public User getUserByEmail(String email) {
-        return repository.findUserByEmail(email);
+    public User getUserBySub(String sub) {
+        return repository.findUserBySub(sub);
     }
 
     public User updateUser(User user) {
-        User found = repository.findUserByEmail(user.getEmail());
+        User found = repository.findUserBySub(user.getEmail());
         found.setName(user.getName());
         found.setAbout(user.getAbout());
         found.setSocialAccountsList(user.getSocialAccountsList());
@@ -45,7 +44,7 @@ public class UserService {
     }
 
     public void deleteUser(String email) {
-        User found = repository.findUserByEmail(email);
+        User found = repository.findUserBySub(email);
         repository.delete(found);
     }
 }

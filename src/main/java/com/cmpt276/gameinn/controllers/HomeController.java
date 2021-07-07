@@ -34,9 +34,9 @@ public class HomeController {
     }
 
     // Move to profile page
-    @GetMapping("/profile/{email}")
-    public String profile(@PathVariable String email, Model model) {
-        User found = service.getUserByEmail(email);
+    @GetMapping("/profile/{sub}")
+    public String profile(@PathVariable String sub, Model model) {
+        User found = service.getUserBySub(sub);
         model.addAttribute("userInfo", found);
 
         return "profile";
