@@ -18,7 +18,7 @@ public class HomeController {
     @Autowired
     private UserService service;
 
-    // Move to main page (in our app, it will be clip list page)
+    // Move to main page (in our app, it will be clip list page) - June Kwak
     @GetMapping("/")
     public String home(@AuthenticationPrincipal OidcUser principal, Model model) {
         if (principal != null) {

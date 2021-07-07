@@ -19,9 +19,8 @@
         </script>
     </div>
     <div sec:authorize="isAuthenticated()" th:switch="${profile}">
-        <p>You are logged in - kwak!</p>
         <img th:src="${profile.getPhoto()}" />
-        <a th:href="@{profile/{email}(email=${profile.getSubId()})}" th:text="${profile.getSubId()}"></a>
+        <a th:href="@{profile/{email}(email=${profile.getSubId()})}" th:text="${profile.getName()}"></a>
         <p th:text="${profile.getEmail()}"></p>
         <a th:href="@{/logout}">Log Out</a>
     </div>
