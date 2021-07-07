@@ -12,7 +12,13 @@
 
 <body>
     <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{/oauth2/authorization/auth0}">Log In</a>
+        <h4>You are not authorized yet</h4>
+        <h5>You need to login first</h5>
+        <script th:inline="javascript">
+            setTimeout(function() {
+                window.location.href = "/oauth2/authorization/auth0";
+            }, 2000);
+        </script>
     </div>
     <div sec:authorize="isAuthenticated()">
         <p>You are logged in - kwak!</p>
