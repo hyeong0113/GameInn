@@ -1,0 +1,6 @@
+{
+  "name": "GameInn",
+  "description": "",
+  "image": "heroku/gradle",
+  "addons": [ "heroku-postgresql" ]
+}
