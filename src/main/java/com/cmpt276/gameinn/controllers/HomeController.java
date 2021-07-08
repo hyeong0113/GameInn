@@ -37,6 +37,7 @@ public class HomeController {
             role_refined.deleteCharAt(role.length() - 1);
             role_refined.deleteCharAt(0);
 
+            
             User profile = service.addUser(sub, name, email, photo, role_refined.toString());
             model.addAttribute("profile", profile);
         }
