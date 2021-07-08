@@ -1,36 +1,38 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'war'
+    id 'org.springframework.boot'  version '+'
+    id 'java'
 }
 
+apply plugin: 'io.spring.dependency-management'
+
 group = 'com.cmpt276'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = '1.0'
+sourceCompatibility = '16'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.security:spring-security-oauth2-resource-server'
-  	implementation 'org.springframework.security:spring-security-oauth2-jose'
-	runtimeOnly 'org.postgresql:postgresql'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.postgresql:postgresql:+'
+	implementation 'org.webjars:jquery:+'
+    implementation 'org.webjars:jquery-ui:+'
+    implementation 'org.webjars:bootstrap:+'
+    implementation 'org.webjars:webjars-locator:+'
+
+	implementation 'javax:javaee-api:+'
+	implementation 'javax.security.enterprise:javax.security.enterprise-api:+'
+	implementation 'com.auth0:mvc-auth-commons:+'
+
+    testImplementation 'junit:junit:+'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-
-	providedCompile 'javax:javaee-api:8.0.1'
-	providedCompile 'javax.security.enterprise:javax.security.enterprise-api:1.0'
-	implementation 'com.auth0:mvc-auth-commons:1.+'
-}
-
-test {
-	useJUnitPlatform()
 }
