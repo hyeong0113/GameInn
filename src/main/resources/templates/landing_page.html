@@ -12,18 +12,16 @@
 </head>
 
 <body>
-    <div sec:authorize="!isAuthenticated()">
-        <p id="not-authenticated"></p>
+    <div sec:authorize="isAuthenticated()" th:switch="${user}">
+        <p th:text="|Hello, ${user.getName()}|"></p>
+        <p id="admin-text"></p>
         <script th:inline="javascript">
-            load_login_page();
+            /*<![CDATA[*/
+            var sub = /*[[${user.getSubId()}]]*/ '';
+            var role = /*[[${user.getRole()}]]*/ '';
+            load_admin_message(role);
+            load_main_page(sub);
+            /*]]>*/
         </script>
     </div>
-    <div sec:authorize="isAuthenticated()" th:switch="${user}">
-        <img th:src="${user.getPhoto()}" />
-        <a th:href="@{user/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
-        <p th:text="${user.getEmail()}"></p>
-        <a th:href="@{/logout}">Log Out</a>
-    </div>
 </body>
-
-</html>

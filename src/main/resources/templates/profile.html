@@ -19,10 +19,10 @@
         </script>
     </div>
     <h4>Uer Profile</h4>
-    <div sec:authorize="isAuthenticated()" th:switch="${userInfo}">
-        <img th:src="${userInfo.getPhoto()}" />
-        <p th:text="${userInfo.getName()}"></p>
-        <p th:text="${userInfo.getEmail()}"></p>
+    <div sec:authorize="isAuthenticated()" th:switch="${user}">
+        <img th:src="${user.getPhoto()}" />
+        <p th:text="${user.getName()}"></p>
+        <p th:text="${user.getEmail()}"></p>
 
         <!-- demo ui for social account list of the user. Need to edit later iteration - June Kwak-->
         <table class="table table-striped table-responsive-md">
