@@ -12,12 +12,14 @@ public class UserService {
     @Autowired
     private IUserRepository repository;
 
-    public void addUser(String sub) {
+    public User addUser(String sub, String name, String email, String photo, String role) {
+        sub = sub.substring(sub.lastIndexOf('|') + 1);
         if (repository.findUserBySub(sub) == null) {
-            User user = new User(sub);
+            User user = new User(sub, name, email, photo, role);
             repository.save(user);
+            return user;
         }
-        return;
+        return repository.findUserBySub(sub);
     }
 
     public List<User> getUsers() {
@@ -28,18 +30,21 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
     }
 
-    // public User getUserById(String sub) {
-    //     return repository;
-    // }
+    public User getUserBySub(String sub) {
+        return repository.findUserBySub(sub);
+    }
 
-    // public User updateUserSocialLinks(User user, Long id) {
-    //     User found = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
-    //     found.setsocialAccountsList(user.getsocialAccountsList());
+    public User updateUser(User user) {
+        User found = repository.findUserBySub(user.getEmail());
+        found.setName(user.getName());
+        found.setAbout(user.getAbout());
+        found.setSocialAccountsList(user.getSocialAccountsList());
 
-    //     return repository.save(found);
-    // }
+        return repository.save(found);
+    }
 
-    public void deleteUser(Long id) {
-        repository.deleteById(id);
+    public void deleteUser(String email) {
+        User found = repository.findUserBySub(email);
+        repository.delete(found);
     }
 }

@@ -25,60 +25,35 @@
             border-radius: 5px;
         }
         
-        .spinner-border {
-            margin-left: 170px;
+        .welcome-text {
+            margin-left: 110px;
+            margin-top: 170px;
+        }
+        
+        .welcome-admin-text {
+            margin-left: 90px;
             margin-top: 10px;
-            color: #7063F8 !important;
         }
         
         .background-page {
             background-color: #E5E5E5;
         }
-        
-        .not-authenticated-text {
-            margin-left: 120px;
-            margin-top: 150px;
-        }
-        
-        #admin-tag {
-            color: #FFFFFF !important;
-            background-color: #7063F8 !important;
-        }
-        
-        .logout-button {
-            color: #FFFFFF !important;
-            background-color: #7063F8 !important;
-        }
     </style>
 </head>
 
 <body class="background-page">
-    <div sec:authorize="!isAuthenticated()">
+    <div sec:authorize="isAuthenticated()" th:switch="${user}">
         <div class="loading-container">
-            <p id="not-authenticated" class="not-authenticated-text"></p>
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+            <p class="welcome-text" th:text="|Hello, ${user.getName()}|"></p>
+            <p class="welcome-admin-text" id="admin-text"></p>
         </div>
         <script th:inline="javascript">
-            load_login_page();
-        </script>
-    </div>
-    <div sec:authorize="isAuthenticated()" th:switch="${user}">
-
-        <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
-
-        <img th:src="${user.getPhoto()}" />
-        <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
-        <p th:text="${user.getEmail()}"></p>
-        <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
-        <script th:inline="javascript">
             /*<![CDATA[*/
+            var sub = /*[[${user.getSubId()}]]*/ '';
             var role = /*[[${user.getRole()}]]*/ '';
-            load_admin_tag(role);
+            load_admin_message(role);
+            load_main_page(sub);
             /*]]>*/
         </script>
     </div>
 </body>
-
-</html>
