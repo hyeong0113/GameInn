@@ -34,6 +34,8 @@ public class User {
 
     private String about;
 
+    private String role;
+
     @ElementCollection
     @Column(name = "accounts")
     private List<String> socialAccountsList;
@@ -41,12 +43,13 @@ public class User {
     public User() {
     }
 
-    public User(String sub, String name, String email, String photo) {
+    public User(String sub, String name, String email, String photo, String role) {
         this.sub = sub;
         this.name = name;
         this.email = email;
         this.photo = photo;
         this.about = "";
+        this.role = role;
         this.socialAccountsList = new ArrayList<String>();
     }
 
@@ -84,6 +87,14 @@ public class User {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getRole() {
+      return this.role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getAbout() {

@@ -14,22 +14,30 @@ import java.util.Map;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
 
+
 @Controller
 public class HomeController {
     @Autowired
     private UserService service;
 
+    private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
+
     // Move to main page (in our app, it will be clip list page) - June Kwak
     @GetMapping("/")
     public String home(@AuthenticationPrincipal OidcUser principal, Model model) {
         if (principal != null) {
-            System.out.println(principal.getClaims());
             String sub = principal.getClaims().get("sub").toString();
             String name = principal.getClaims().get("name").toString();
             String email = principal.getClaims().get("email").toString();
             String photo = principal.getClaims().get("picture").toString();
 
-            User profile = service.addUser(sub, name, email, photo);
+            // Get user role
+            String role = principal.getClaims().get(apiRole).toString();
+            StringBuilder role_refined = new StringBuilder(role);
+            role_refined.deleteCharAt(role.length() - 1);
+            role_refined.deleteCharAt(0);
+
+            User profile = service.addUser(sub, name, email, photo, role_refined.toString());
             model.addAttribute("profile", profile);
         }
         return "index";
