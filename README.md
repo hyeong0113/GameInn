@@ -1,6 +1,6 @@
 # GameInn
 
-# 2021-07-04 by Hyungjune Kwak
+# 2021-07-04
 ## log in, log out implemented via auth0
 ## User table and its backend constructed with minimal basic information
 ### --> only sotring subId
