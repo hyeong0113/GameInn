@@ -1,6 +1,5 @@
 package com.cmpt276.gameinn.testcases.User;
 
-
 import com.cmpt276.gameinn.models.User;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +40,6 @@ public class UserEntityTest {
     public void shouldUserNameGetterFailWithDifferentName(){
         assertNotEquals("aaaaa",user.getName());
     }
-
 
     // Test sub setter and getter
     @Test

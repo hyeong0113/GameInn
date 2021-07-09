@@ -57,6 +57,10 @@ public class User {
         return this.id;
     }
 
+    public void setId(Long id) {
+      this.id = id;
+  }
+
     public String getSubId() {
         return this.sub;
     }
@@ -125,7 +129,7 @@ public class User {
   
     @Override
     public int hashCode() {
-      return Objects.hash(this.id, this.sub, this.name, this.email, this.photo, this.about);
+      return Objects.hash(this.id, this.sub, this.name, this.email, this.photo, this.about, this.role);
     }
   
     @Override
@@ -135,6 +139,7 @@ public class User {
                         + ", email='" + this.email
                         + ", photo='" + this.photo
                         + ", about='" + this.about
+                        + ", role='" + this.role
                         + ", socialAccountsList='" + this.socialAccountsList +'\'' + '}';
     }
 }

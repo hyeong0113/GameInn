@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with" + id));
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No User with " + id));
     }
 
     public User getUserBySub(String sub) {
@@ -35,16 +35,27 @@ public class UserService {
     }
 
     public User updateUser(User user) {
-        User found = repository.findUserBySub(user.getEmail());
+        User found = repository.findUserBySub(user.getSubId());
+        if (found == null) {
+            throw new IllegalArgumentException("No User with " + user.getSubId());
+        }
+
         found.setName(user.getName());
-        found.setAbout(user.getAbout());
+        found.setEmail(user.getEmail());
+        found.setPhoto(user.getPhoto());
+        found.setRole(user.getRole());
         found.setSocialAccountsList(user.getSocialAccountsList());
 
-        return repository.save(found);
+        repository.save(found);
+        return found;
     }
 
-    public void deleteUser(String email) {
-        User found = repository.findUserBySub(email);
+    public void deleteUser(String sub) {
+        User found = repository.findUserBySub(sub);
+        if (found == null) {
+            throw new IllegalArgumentException("No User with " + sub);
+        }
+
         repository.delete(found);
     }
 }
