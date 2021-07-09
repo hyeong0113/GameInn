@@ -1,0 +1,123 @@
+<html lang "en">
+
+	<head>
+		<link rel="stylesheet" href="css/list.css" />
+		<title> List Page </title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>
+
+		<h1> GameInn </h1>
+
+
+
+		<!--Navigation bar-->
+		<div class="topnav">
+
+			<!--Hamburger Menu-->
+			<a class="menu" href="#home">
+				<div class="container" onclick="myFunction(this)">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+
+				<script>
+					function myFunction(x) {
+						x.classList.toggle("change");
+					}
+				</script>
+			</a>
+
+			<!--Search Icon in Navigation-->
+
+
+			<a class="active" href="#home">
+				<form class="example" action="action_page.php">
+					<button name="lookup" type="submit"><i class="fa fa-search"></i></button>
+					<input type="text" placeholder="Search.." name="search">
+				</form>
+			</a>
+
+			<!--Profile Icon-->
+			<a class="profonmenu" href="#prof"> <button type="text" class="profile">Profile</button> </a>
+
+			<!--  <button class="profile">Profile</button> -->
+
+			<!--3 Dot Drop Down Icon -->
+
+			<div class="dots" style="text-align:right">
+				<span class="dot"></span>
+				<br>
+				<span class="dot"></span>
+				<br>
+				<span class="dot"></span>
+				<br>
+			</div>
+
+
+		</div>
+
+
+		<!-- Main Body -->
+		<button class="button">Add Queue</button>
+		<form class="example2" action="action_page.php">
+			<input type="text" placeholder="Search game in Queues" name="search">
+			<button type="submit"><i class="fa fa-search"></i></button>
+		</form>
+
+
+		<!--Table Content-->
+		<div class "block">
+			<br> <br> <br>
+			<table class="table1">
+				<tr>
+					<th> Title </th>
+					<th> Game </th>
+					<th> UserName </th>
+					<th> Status </th>
+					<th> Number of Players </th>
+				</tr>
+
+				<tr>
+					<th> Among US 10 players </th>
+					<th> Among US </th>
+					<th> June Kwak </th>
+					<th> Public </th>
+					<th> 1/10 </th>
+				</tr>
+
+
+				<tr>
+					<th> League of legends 5vs5 stream </th>
+					<th> League of legends </th>
+					<th> Thomas Johnson </th>
+					<th> Private </th>
+					<th> 7/10 </th>
+				</tr>
+
+				<tr>
+					<th> Wow raid expert </th>
+					<th> World of Warcraft </th>
+					<th> Jeremy Yankins </th>
+					<th> Public </th>
+					<th> 13/20 </th>
+				</tr>
+
+			</table>
+
+
+		</div>
+
+		<p style="text-align:center;">
+			< &nbsp; <u> 1 </u> &nbsp; >
+		</p>
+
+		<br> <br>
+		<p> PS. These are dummy values! We will update the page in the next iteration with functions. </p>
+	</body>
+
+</html>
