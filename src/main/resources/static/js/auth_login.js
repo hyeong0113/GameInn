@@ -16,3 +16,9 @@ function load_admin_message(role) {
         document.getElementById("admin-text").innerHTML = "You are logined as Administrator";
     }
 }
+
+function load_admin_tag(role) {
+    if (role == "admin") {
+        document.getElementById("admin-tag").innerHTML = "ADMIN";
+    }
+}
