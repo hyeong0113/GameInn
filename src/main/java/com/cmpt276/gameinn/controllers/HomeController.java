@@ -1,7 +1,7 @@
 package com.cmpt276.gameinn.controllers;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
