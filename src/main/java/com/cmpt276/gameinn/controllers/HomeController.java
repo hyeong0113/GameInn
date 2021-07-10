@@ -6,6 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,7 +19,7 @@ import com.cmpt276.gameinn.services.*;
 
 	// Move to landing page
 	@GetMapping("/") public String home(@AuthenticationPrincipal OidcUser
-		principal, HttpSession session, Model model) {
+		principal, HttpServletResponse response, Model model) {
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
 			String name = principal.getClaims().get("name").toString();
@@ -34,7 +35,7 @@ import com.cmpt276.gameinn.services.*;
 			User user = service.addUser(sub, name, email, photo,
 				role_refined.toString());
 			model.addAttribute("user", user);
-			session.setAttribute("user", user);
+			response.addCookie(new Cookie("user", user));
 
 			return "landing_page";
 		}
@@ -60,11 +61,15 @@ import com.cmpt276.gameinn.services.*;
 		return "index";
 	}
 
-	@GetMapping("/list") String groupFinder(Model model) {
+	@GetMapping("/list") String groupFinder(@CookieValue("user") String user,
+		Model model) {
+		model.addAttribute("user", user);
 		return "list";
 	}
 
-	@GetMapping("/clips") String addClip(Model model) {
+	@GetMapping("/clips") String groupFinder(@CookieValue("user") String user,
+		Model model) {
+		model.addAttribute("user", user);
 		return "addClipPage";
 	}
 }
