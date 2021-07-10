@@ -1,3 +1,40 @@
 body {
     background-color: #E5E5E5;
 }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 1rem;
+    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+}
+
+.nav-link {
+    display: block;
+    padding: 6px 0px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: #7063F8;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+    .sidebar a {
+        font-size: 18px;
+    }
+}

@@ -33,7 +33,7 @@
     </head>
 
     <body>
-        <div sec:authorize="isAuthenticated()" th:switch="${user}">
+        <div sec:authorize="isAuthenticated()" th:object="${user}">
             <div class="loading-container">
                 <p class="welcome-text" th:text="|Hello, ${user.getName()}|"></p>
                 <p class="welcome-admin-text" id="admin-text"></p>

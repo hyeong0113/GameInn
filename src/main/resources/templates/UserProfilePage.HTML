@@ -3,90 +3,94 @@
 
     <head>
         <div th:insert="fragments/common :: mainHeader"></div>
-        <link rel="stylesheet" href="css/UserProfilePage.CSS">
+        <link rel="stylesheet" href="/css/UserProfilePage.CSS">
         <title>User Profile Page</title>
     </head>
 
     <body>
+        <div class="row">
+            <div th:replace="fragments/common :: sidebar"></div>
 
-        <h1 id="userP">User Profile</h1>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <h1 id="userP">User Profile</h1>
 
-        <form id="fix">
-            <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" />
-            <a id='name' href="url">June Kwak</a>
+                <form id="fix">
+                    <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" />
+                    <a id='name' href="url">June Kwak</a>
 
-            <button id="edit" type="submit" class="btn btn-light">Edit Profile</button>
+                    <button id="edit" type="submit" class="btn btn-light">Edit Profile</button>
 
-            <div>
-                <label id="textareatext" for="textarea">About me:</label>
-                <textarea id='textarea' name="desc" cols="25" rows="3"></textarea>
-            </div>
-
-            <div>
-                <label for="fixedE">Email:</label>
-                <input id='fixedE' type="email" placeholder="a.a@.com" required>
-            </div>
-
-            <div>
-                <label for="fixedP">Password:</label>
-                <input id='fixedP' type="password" required>
-            </div>
-
-            <div>
-                <label for="fixedRP">Re-enter Password:</label>
-                <input id='fixedRP' type="password" required>
-            </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <a href="#" class="fab fa-facebook"></a>
-                        <a href="url">www.facebook.com</a>
+                    <div>
+                        <label id="textareatext" for="textarea">About me:</label>
+                        <textarea id='textarea' name="desc" cols="25" rows="3"></textarea>
                     </div>
 
-                    <div class="col">
-                        <a href="#" class="fab fa-twitter"></a>
-                        <a href="url">https://twitter.com</a>
+                    <div>
+                        <label for="fixedE">Email:</label>
+                        <input id='fixedE' type="email" placeholder="a.a@.com" required>
                     </div>
 
-                    <div class="w-100"></div>
-
-                    <div class="col">
-                        <a href="#" class="fab fa-twitch"></a>
-                        <a href="url">https://www.twitch.tv</a>
+                    <div>
+                        <label for="fixedP">Password:</label>
+                        <input id='fixedP' type="password" required>
                     </div>
 
-                    <div class="col">
-                        <a href="#" class="fab fa-steam"></a>
-                        <a href="url">https://store.steampowered.com</a>
+                    <div>
+                        <label for="fixedRP">Re-enter Password:</label>
+                        <input id='fixedRP' type="password" required>
                     </div>
 
-                    <div class="w-100"></div>
-                    <div class="col">
-                        <a href="#" class="fab fa-youtube"></a>
-                        <a href="url">https://www.youtube.com</a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="fab fa-facebook"></a>
+                                <a href="url">www.facebook.com</a>
+                            </div>
+
+                            <div class="col">
+                                <a href="#" class="fab fa-twitter"></a>
+                                <a href="url">https://twitter.com</a>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col">
+                                <a href="#" class="fab fa-twitch"></a>
+                                <a href="url">https://www.twitch.tv</a>
+                            </div>
+
+                            <div class="col">
+                                <a href="#" class="fab fa-steam"></a>
+                                <a href="url">https://store.steampowered.com</a>
+                            </div>
+
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <a href="#" class="fab fa-youtube"></a>
+                                <a href="url">https://www.youtube.com</a>
+                            </div>
+
+                            <div class="col">
+                                <a href="#" class="fab fa-reddit"></a>
+                                <a href="url">https://www.reddit.com</a>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col">
+                                <a href="#" class="fab fa-instagram"></a>
+                                <a href="url">https://www.instagram.com</a>
+                            </div>
+
+                            <div class="col">
+                                <a href="#" class="fab fa-skype"></a>
+                                <a href="url">https://www.skype.com/en</a>
+                            </div>
+
+                        </div>
                     </div>
-
-                    <div class="col">
-                        <a href="#" class="fab fa-reddit"></a>
-                        <a href="url">https://www.reddit.com</a>
-                    </div>
-
-                    <div class="w-100"></div>
-
-                    <div class="col">
-                        <a href="#" class="fab fa-instagram"></a>
-                        <a href="url">https://www.instagram.com</a>
-                    </div>
-
-                    <div class="col">
-                        <a href="#" class="fab fa-skype"></a>
-                        <a href="url">https://www.skype.com/en</a>
-                    </div>
-
-                </div>
-            </div>
-        </form>
+                </form>
+            </main>
     </body>
 
 </html>
