@@ -36,7 +36,7 @@ import com.cmpt276.gameinn.services.*;
 			User user = service.addUser(sub, name, email, photo,
 				role_refined.toString());
 			model.addAttribute("user", user);
-			response.addCookie(new Cookie("user", user));
+			response.addCookie(new Cookie("user", sub));
 
 			return "landing_page";
 		}
@@ -62,13 +62,13 @@ import com.cmpt276.gameinn.services.*;
 		return "index";
 	}
 
-	@GetMapping("/list") String groupFinder(@CookieValue("user") User user,
+	@GetMapping("/list") String groupFinder(@CookieValue("user") String user,
 		Model model) {
 		model.addAttribute("user", user);
 		return "list";
 	}
 
-	@GetMapping("/clips") String groupFinder(@CookieValue("user") User user,
+	@GetMapping("/clips") String groupFinder(@CookieValue("user") String user,
 		Model model) {
 		model.addAttribute("user", user);
 		return "addClipPage";
