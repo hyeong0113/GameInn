@@ -18,7 +18,7 @@
                 <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/profile/{sub}(sub=${session.user.getSubId()})}"><i class="fa fa-fw fa-home"></i> Profile</a>
+                        <a class="nav-link" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fa fa-fw fa-home"></i> Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/list}"><i class="fas fa-users"></i></i> Group Finder</a>

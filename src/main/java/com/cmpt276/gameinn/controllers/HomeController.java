@@ -62,15 +62,19 @@ import com.cmpt276.gameinn.services.*;
 		return "index";
 	}
 
-	@GetMapping("/list") String groupFinder(@CookieValue("userID") String user,
+	@GetMapping("/list") String groupFinder(@CookieValue("userID") String sub,
 		Model model) {
-		model.addAttribute("user", user);
+		User found = service.getUserBySub(sub);
+		model.addAttribute("user", found);
+
 		return "list";
 	}
 
-	@GetMapping("/clips") String addClip(@CookieValue("userID") String user,
+	@GetMapping("/clips") String addClip(@CookieValue("userID") String sub,
 		Model model) {
-		model.addAttribute("user", user);
+		User found = service.getUserBySub(sub);
+		model.addAttribute("user", found);
+
 		return "addClipPage";
 	}
 }
