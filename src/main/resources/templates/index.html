@@ -1,84 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>GameInn</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script th:src="@{/js/auth_login.js} "></script>
+    <head>
+        <div th:insert="fragments/common :: mainHeader"></div>
+        <title>GameInn</title>
+        <script th:src="@{/js/auth_login.js} "></script>
 
-    <style type="text/css">
-        .loading-container {
-            width: 400px;
-            height: 400px;
-            position: fixed;
-            background-color: #FFFFFF;
-            top: 50%;
-            left: 50%;
-            margin-top: -200px;
-            margin-left: -200px;
-            border: 1px solid;
-            border-radius: 5px;
-        }
-        
-        .spinner-border {
-            margin-left: 170px;
-            margin-top: 10px;
-            color: #7063F8 !important;
-        }
-        
-        .background-page {
-            background-color: #E5E5E5;
-        }
-        
-        .not-authenticated-text {
-            margin-left: 120px;
-            margin-top: 150px;
-        }
-        
-        #admin-tag {
-            color: #FFFFFF !important;
-            background-color: #7063F8 !important;
-        }
-        
-        .logout-button {
-            color: #FFFFFF !important;
-            background-color: #7063F8 !important;
-        }
-    </style>
-</head>
+        <style type="text/css">
+            .loading-container {
+                width: 400px;
+                height: 400px;
+                position: fixed;
+                background-color: #FFFFFF;
+                top: 50%;
+                left: 50%;
+                margin-top: -200px;
+                margin-left: -200px;
+                border: 1px solid;
+                border-radius: 5px;
+            }
 
-<body class="background-page">
-    <div sec:authorize="!isAuthenticated()">
-        <div class="loading-container">
-            <p id="not-authenticated" class="not-authenticated-text"></p>
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading....</span>
+            .spinner-border {
+                margin-left: 170px;
+                margin-top: 10px;
+                color: #7063F8 !important;
+            }
+
+            .not-authenticated-text {
+                margin-left: 120px;
+                margin-top: 150px;
+            }
+
+            #admin-tag {
+                color: #FFFFFF !important;
+                background-color: #7063F8 !important;
+            }
+
+            .logout-button {
+                color: #FFFFFF !important;
+                background-color: #7063F8 !important;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div sec:authorize="!isAuthenticated()">
+            <div class="loading-container">
+                <p id="not-authenticated" class="not-authenticated-text"></p>
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading....</span>
+                </div>
             </div>
+            <script th:inline="javascript">
+                load_login_page();
+            </script>
         </div>
-        <script th:inline="javascript">
-            load_login_page();
-        </script>
-    </div>
-    <div sec:authorize="isAuthenticated()" th:switch="${user}">
+        <div sec:authorize="isAuthenticated()" th:object="${user}">
+            <div class="row">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-        <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
 
-        <img th:src="${user.getPhoto()}" />
-        <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
-        <p th:text="${user.getEmail()}"></p>
-        <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            var role = /*[[${user.getRole()}]]*/ '';
-            load_admin_tag(role);
-            /*]]>*/
-        </script>
-    </div>
-</body>
+                    <img th:src="${user.getPhoto()}" />
+                    <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
+                    <p th:text="${user.getEmail()}"></p>
+                    <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
+                </main>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var role = /*[[${user.getRole()}]]*/ '';
+                    load_admin_tag(role);
+                    /*]]>*/
+                </script>
+            </div>
+    </body>
 
 </html>
