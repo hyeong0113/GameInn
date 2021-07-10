@@ -55,21 +55,25 @@
                 load_login_page();
             </script>
         </div>
-        <div sec:authorize="isAuthenticated()" th:switch="${user}">
+        <div sec:authorize="isAuthenticated()" th:object="${user}">
+            <div class="row">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-            <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
 
-            <img th:src="${user.getPhoto()}" />
-            <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
-            <p th:text="${user.getEmail()}"></p>
-            <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                var role = /*[[${user.getRole()}]]*/ '';
-                load_admin_tag(role);
-                /*]]>*/
-            </script>
-        </div>
+                    <img th:src="${user.getPhoto()}" />
+                    <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
+                    <p th:text="${user.getEmail()}"></p>
+                    <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
+                </main>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var role = /*[[${user.getRole()}]]*/ '';
+                    load_admin_tag(role);
+                    /*]]>*/
+                </script>
+            </div>
     </body>
 
 </html>

@@ -1,5 +1,6 @@
 package com.cmpt276.gameinn.controllers;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -17,7 +18,7 @@ import com.cmpt276.gameinn.services.*;
 
 	// Move to landing page
 	@GetMapping("/") public String home(@AuthenticationPrincipal OidcUser
-		principal, Model model) {
+		principal, HttpSession session, Model model) {
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
 			String name = principal.getClaims().get("name").toString();
@@ -33,6 +34,7 @@ import com.cmpt276.gameinn.services.*;
 			User user = service.addUser(sub, name, email, photo,
 				role_refined.toString());
 			model.addAttribute("user", user);
+			session.setAttribute("user", user);
 
 			return "landing_page";
 		}
@@ -45,6 +47,7 @@ import com.cmpt276.gameinn.services.*;
 		Model model) {
 		User found = service.getUserBySub(sub);
 		model.addAttribute("user", found);
+
 		return "index";
 	}
 
@@ -54,10 +57,14 @@ import com.cmpt276.gameinn.services.*;
 		User found = service.getUserBySub(sub);
 		model.addAttribute("user", found);
 
-		return "profile";
+		return "index";
 	}
 
-	@GetMapping("/list") String groupFinder() {
+	@GetMapping("/list") String groupFinder(Model model) {
 		return "list";
+	}
+
+	@GetMapping("/clips") String addClip(Model model) {
+		return "addClipPage";
 	}
 }
