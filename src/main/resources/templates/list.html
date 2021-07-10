@@ -1,73 +1,21 @@
-<html lang "en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 	<head>
+		<div th:insert="fragments/common :: mainHeader"></div>
 		<link rel="stylesheet" href="css/list.css" />
 		<title> List Page </title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
-
-		<h1> GameInn </h1>
-
-
-
-		<!--Navigation bar-->
-		<div class="topnav">
-
-			<!--Hamburger Menu-->
-			<a class="menu" href="#home">
-				<div class="container" onclick="myFunction(this)">
-					<div class="bar1"></div>
-					<div class="bar2"></div>
-					<div class="bar3"></div>
-				</div>
-
-				<script>
-					function myFunction(x) {
-						x.classList.toggle("change");
-					}
-				</script>
-			</a>
-
-			<!--Search Icon in Navigation-->
-
-
-			<a class="active" href="#home">
-				<form class="example" action="action_page.php">
-					<button name="lookup" type="submit"><i class="fa fa-search"></i></button>
-					<input type="text" placeholder="Search.." name="search">
-				</form>
-			</a>
-
-			<!--Profile Icon-->
-			<a class="profonmenu" href="#prof"> <button type="text" class="profile">Profile</button> </a>
-
-			<!--  <button class="profile">Profile</button> -->
-
-			<!--3 Dot Drop Down Icon -->
-
-			<div class="dots" style="text-align:right">
-				<span class="dot"></span>
-				<br>
-				<span class="dot"></span>
-				<br>
-				<span class="dot"></span>
-				<br>
-			</div>
-
-
-		</div>
-
-
 		<!-- Main Body -->
-		<button class="button">Add Queue</button>
-		<form class="example2" action="action_page.php">
-			<input type="text" placeholder="Search game in Queues" name="search">
-			<button type="submit"><i class="fa fa-search"></i></button>
-		</form>
+		<div class="buttons">
+			<button id="addQueue">Add Queue</button>
+			<form class="search" action="#">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit"><i class="fas fa-search"></i></button>
+			</form>
+		</div>
 
 
 		<!--Table Content-->
