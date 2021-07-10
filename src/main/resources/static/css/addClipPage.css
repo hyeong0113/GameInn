@@ -1,4 +1,4 @@
-#form1{
+#form1 {
     position: relative;
     align-items: center;
     display: block;
@@ -9,7 +9,8 @@
     width: 60%;
     top: 40px;
 }
-#GT{
+
+#GT {
     position: relative;
     border-radius: 10px;
     border-color: black;
@@ -18,7 +19,8 @@
     height: 10px;
     left: 16px;
 }
-#CT{
+
+#CT {
     position: relative;
     border-color: black;
     padding: 10px;
@@ -26,7 +28,8 @@
     height: 10px;
     left: 32px;
 }
-#Tags{
+
+#Tags {
     position: relative;
     border-color: black;
     padding: 10px;
@@ -34,7 +37,8 @@
     height: 10px;
     left: 61px;
 }
-#link{
+
+#link {
     position: relative;
     border-color: black;
     padding: 10px;
@@ -42,7 +46,8 @@
     height: 10px;
     left: 66px;
 }
-#buttonWork{
+
+#buttonWork {
     position: relative;
     float: right;
     padding: 1px;

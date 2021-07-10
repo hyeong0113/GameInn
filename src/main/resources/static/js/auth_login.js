@@ -7,7 +7,7 @@ function load_login_page() {
 
 function load_main_page(sub) {
     setTimeout(function() {
-        window.location.href = "/main/" + sub;
+        window.location.href = "/profile/" + sub;
     }, 3000);
 }
 

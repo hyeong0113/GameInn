@@ -1,71 +1,85 @@
-#ip1{
+#ip1 {
     border-radius: 10px;
     border-color: black;
     padding: 10px;
     width: 80%;
     height: 10px;
 }
-#ip2{
+
+#ip2 {
     border-color: black;
     padding: 10px;
     width: 80%;
     height: 10px;
 }
-#ip3{
-    border-color: black;
-    padding: 5px;
-}
-#ip4{
-    border-color: black;
-    padding: 5px;
-}
-#RequiredLevel{
-    border-color: black;
-    padding: 5px;
-}
-#ip5{
-    border-color: black;
-    padding: 5px;
-}
-#div1{
-}
-#h2{
-    margin: 70px 20px 100px 300px;
 
+#ip3 {
+    border-color: black;
+    padding: 5px;
 }
-#des{
+
+#ip4 {
+    border-color: black;
+    padding: 5px;
+}
+
+#RequiredLevel {
+    border-color: black;
+    padding: 5px;
+}
+
+#ip5 {
+    border-color: black;
+    padding: 5px;
+}
+
+#div1 {}
+
+#h2 {
+    margin: 70px 20px 100px 300px;
+}
+
+#des {
     display: block;
     margin-bottom: 10px;
 }
-#description{
+
+#description {
     border-color: black;
     padding: 10px;
 }
-#createButton{
+
+#createButton {
     margin: 30px 20px 0px 450px;
-    box-shadow:10px 10px 10px 5px black;
+    box-shadow: 10px 10px 10px 5px black;
 }
-#tab1{
+
+#tab1 {
     margin-left: 2em;
-    padding:2px;
+    padding: 2px;
 }
-#tab2{
+
+#tab2 {
     margin-left: 2em;
-    padding:2px;
+    padding: 2px;
 }
-#tab3{
+
+#tab3 {
     margin-left: 2em;
-    padding:2px;
+    padding: 2px;
 }
-#Radios1{
+
+#Radios1 {
     margin-left: 10px;
     margin-top: 10px;
 }
-#Radios2{
+
+#Radios2 {
     margin-left: 10px;
     margin-top: 10px;
 }
-#formStyle2{
+
+#formStyle2 {
     align-items: center;
     margin: 100px 20px 100px 400px;
 }
