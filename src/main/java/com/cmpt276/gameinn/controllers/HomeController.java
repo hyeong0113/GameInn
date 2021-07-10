@@ -36,7 +36,7 @@ import com.cmpt276.gameinn.services.*;
 			User user = service.addUser(sub, name, email, photo,
 				role_refined.toString());
 			model.addAttribute("user", user);
-			response.addCookie(new Cookie("user", sub));
+			response.addCookie(new Cookie("userID", sub));
 
 			return "landing_page";
 		}
