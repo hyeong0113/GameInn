@@ -25,5 +25,8 @@ import com.cmpt276.gameinn.auth.LogoutHandler;
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.addLogoutHandler(logoutHandler);
+
+		http.authorizeRequests()
+			.antMatchers("/favicon.ico").permitAll();
 	}
 }
