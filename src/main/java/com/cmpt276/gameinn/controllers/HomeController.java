@@ -68,8 +68,8 @@ import com.cmpt276.gameinn.services.*;
 		return "list";
 	}
 
-	@GetMapping("/clips") String groupFinder(@CookieValue("user") String user,
-		Model model) {
+	@GetMapping("/clips") String addClip(@CookieValue("user") String user, Model
+		model) {
 		model.addAttribute("user", user);
 		return "addClipPage";
 	}
