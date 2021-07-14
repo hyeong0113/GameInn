@@ -3,8 +3,8 @@
 
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/link2CSS.css">
-    <title>form</title>
+    <title>Clip list</title>
+    <link rel="stylesheet" href="/css/clipList.css">
 </head>
 
 <body>
@@ -12,31 +12,45 @@
         <div th:replace="fragments/common :: sidebar"></div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="post-header">
-                <div class="user-photo">
-                    <img th:src="${user.getPhoto()}" />
-                </div>
-                <div class="header-info">
-                    <div class="user-name">
-                        <a th:href="/" th:text="June Kwak"></a>
+            <div class="inner-background">
+                <div class="clip-post border border-1 rounded">
+                    <div class="post-header">
+                        <div class="user-photo-section">
+                            <img class="user-photo rounded-circle" th:src="${user.getPhoto()}" />
+                        </div>
+                        <!-- <div class="header-info"> -->
+                        <div class="name-and-title">
+                            <div class="user-name">
+                                <!-- <a th:href="/" th:text="June Kwak"></a> -->
+                                <p4>June Kwak</p4>
+                            </div>
+                            <div class="clip-title">
+                                <p4>Most epic fail</p4>
+                            </div>
+                        </div>
+
+                        <div class="timestamp">
+                            <p6>6 hrs ago</p6>
+                        </div>
+                        <!-- </div> -->
+                        <div class="header-button">
+                            <button class="button-option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                  </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="timestamp">
-                        <p4>6 hrs ago</p4>
+                    <div class="post-body">
+                        <div class="post-clip">
+                            <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
-                    <div class="clip-title">
-                        <p4>Most epic fail</p4>
-                    </div>
-                </div>
-                <div class="header-button">
-                    <button>...</button>
                 </div>
             </div>
-            <div class="post-body">
-                <div class="post-clip">
-                    <iframe width="420" height="345" src="https://youtu.be/eoGplps8BBE">
-                    </iframe>
-                </div>
-            </div>
+
+
         </main>
     </div>
 </body>

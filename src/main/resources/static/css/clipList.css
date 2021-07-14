@@ -1,0 +1,69 @@
+.inner-background {
+    background-color: #FFFFFF;
+    width: 80%;
+    margin-left: 15px;
+    height: 100%;
+    position: absolute;
+}
+
+.clip-post {
+    position: relative;
+    width: 40%;
+    height: 450px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+#clip-source {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
+    width: 80%;
+    height: 50%;
+    height: 230px;
+}
+
+.user-photo-section {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.user-photo {
+    margin-left: 5%;
+    width: 50px;
+    height: 50px;
+}
+
+.user-name {
+    display: inline-block;
+}
+
+.timestamp {
+    display: inline-block;
+    padding-left: 5%;
+    color: #E5E5E5;
+}
+
+.clip-title {
+    display: inline-block;
+}
+
+.header-button {
+    padding-left: 40%;
+}
+
+.post-header {
+    display: flex;
+    padding-left: 5%;
+    padding-top: 5%;
+}
+
+.name-and-title {
+    width: 20%;
+}
+
+.button-option {
+    border: none;
+    background: none;
+}
