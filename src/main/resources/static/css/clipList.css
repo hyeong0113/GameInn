@@ -83,8 +83,19 @@ p {
     font-size: 14px;
 }
 
+.header {
+    height: 110px;
+    width: 40%;
+    margin-left: 415px;
+    padding-top: 100px;
+}
 
-/* Dropdown-nutton */
+.search-input {
+    width: 200px;
+}
+
+
+/* Dropdown-button */
 
 .btn-check:focus+.btn,
 .btn:focus {
@@ -94,7 +105,18 @@ p {
 
 .btn-group>.btn-group:not(:last-child)>.btn,
 .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
-    /* border-top-right-radius: inherit; */
-    /* border-bottom-right-radius: 0; */
     border-radius: 5px !important;
+}
+
+
+/* Add clip button */
+
+.add-clip-button {
+    background-color: #7063F8;
+    color: #ffffff;
+}
+
+.add-clip-button:hover {
+    background-color: #ffffff !important;
+    color: #7063F8 !important;
 }
