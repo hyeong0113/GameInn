@@ -1,5 +1,4 @@
 .inner-background {
-    background-color: #FFFFFF;
     width: 80%;
     margin-left: 15px;
     height: 100%;
@@ -9,9 +8,10 @@
 .clip-post {
     position: relative;
     width: 40%;
-    height: 450px;
+    height: 500px;
     margin: 0 auto;
     margin-top: 50px;
+    background-color: #FFFFFF;
 }
 
 #clip-source {
@@ -59,11 +59,21 @@
     padding-top: 5%;
 }
 
+.post-footer {
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
 .name-and-title {
     width: 20%;
+    padding-left: 5px;
 }
 
 .button-option {
     border: none;
     background: none;
+}
+
+p {
+    margin: 0 !important;
 }
