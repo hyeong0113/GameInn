@@ -4,6 +4,7 @@
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
     <title>Clip list</title>
+    <script th:src="@{/js/clip_list.js} "></script>
     <link rel="stylesheet" href="/css/clipList.css">
 </head>
 
@@ -13,6 +14,7 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="inner-background">
+
                 <div class="clip-post shadow-sm p-3 mb-5 bg-body rounded">
                     <div class="post-header">
                         <div class="user-photo-section">
@@ -23,19 +25,20 @@
                                 <p class="fs-6">June Kwak</p>
                             </div>
                             <div class="clip-title">
-                                <p class="fs-6">Most epic fail</p>
+                                <p class="title">Most epic fail</p>
                             </div>
                         </div>
 
-                        <div class="timestamp">
-                            <p class="fs-6">6 hrs ago</p>
-                        </div>
-                        <div class="header-button">
-                            <button class="button-option">
+                        <div class="btn-group header-button">
+                            <button class="btn button-option btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                   </svg>
                             </button>
+                            <ul id="button-menu" class="button-content dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
                         </div>
                     </div>
                     <div class="post-body">
@@ -53,6 +56,10 @@
                             <p class="fs-6">
                                 <a class="go-to-source" href="https://www.youtube.com/eoGplps8BBE">Got to Source</a>
                             </p>
+
+                            <div class="timestamp">
+                                <p class="fs-6">6 hrs ago</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,22 +73,23 @@
                         </div>
                         <div class="name-and-title">
                             <div class="user-name">
-                                <p class="fs-6">Tome Lee</p>
+                                <p class="fs-6">AAAAAAAAAAAAAAA</p>
                             </div>
                             <div class="clip-title">
-                                <p class="fs-6">I want to play this</p>
+                                <p class="title">Most epic fail</p>
                             </div>
                         </div>
 
-                        <div class="timestamp">
-                            <p class="fs-6">20 hrs ago</p>
-                        </div>
-                        <div class="header-button">
-                            <button class="button-option">
+                        <div class="btn-group header-button">
+                            <button class="btn button-option btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                   </svg>
                             </button>
+                            <ul id="button-menu" class="button-content dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
                         </div>
                     </div>
                     <div class="post-body">
@@ -99,6 +107,9 @@
                             <p class="fs-6">
                                 <a class="go-to-source" href="https://www.youtube.com/eoGplps8BBE">Got to Source</a>
                             </p>
+                            <div class="timestamp">
+                                <p class="fs-6">20 hrs ago</p>
+                            </div>
                         </div>
                     </div>
                 </div>
