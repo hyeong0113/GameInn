@@ -1,0 +1,33 @@
+.loading-container {
+    width: 400px;
+    height: 400px;
+    position: fixed;
+    background-color: #FFFFFF;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -200px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.spinner-border {
+    margin-left: 170px;
+    margin-top: 10px;
+    color: #7063F8 !important;
+}
+
+.not-authenticated-text {
+    margin-left: 120px;
+    margin-top: 150px;
+}
+
+#admin-tag {
+    color: #FFFFFF !important;
+    background-color: #7063F8 !important;
+}
+
+.logout-button {
+    color: #FFFFFF !important;
+    background-color: #7063F8 !important;
+}

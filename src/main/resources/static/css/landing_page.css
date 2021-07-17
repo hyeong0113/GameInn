@@ -1,0 +1,22 @@
+.loading-container {
+    width: 400px;
+    height: 400px;
+    position: fixed;
+    background-color: #FFFFFF;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -200px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.welcome-text {
+    margin-left: 110px;
+    margin-top: 170px;
+}
+
+.welcome-admin-text {
+    margin-left: 90px;
+    margin-top: 10px;
+}

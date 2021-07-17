@@ -1,0 +1,122 @@
+.inner-background {
+    width: 80%;
+    margin-left: 15px;
+    height: 100%;
+    position: absolute;
+}
+
+.clip-post {
+    position: relative;
+    width: 40%;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #FFFFFF;
+}
+
+#clip-source {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
+    width: 80%;
+    height: 50%;
+    height: 230px;
+}
+
+.user-photo-section {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.user-photo {
+    margin-left: 5%;
+    width: 50px;
+    height: 50px;
+}
+
+.user-name {
+    display: inline-block;
+}
+
+.timestamp {
+    color: #E5E5E5;
+}
+
+.clip-title {
+    display: inline-block;
+}
+
+.header-button {
+    padding-left: 40%;
+}
+
+.post-header {
+    display: flex;
+    padding-left: 5%;
+    padding-top: 5%;
+}
+
+.post-footer {
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
+.name-and-title {
+    width: 20%;
+    padding-left: 5px;
+}
+
+.button-option {
+    border: none;
+    background: none;
+    height: 30px;
+    padding-left: 75px;
+}
+
+p {
+    margin: 0 !important;
+    font-size: 13px;
+}
+
+.title {
+    font-size: 14px;
+}
+
+.header {
+    height: 110px;
+    width: 40%;
+    margin-left: 415px;
+    padding-top: 100px;
+}
+
+.search-input {
+    width: 200px;
+}
+
+
+/* Dropdown-button */
+
+.btn-check:focus+.btn,
+.btn:focus {
+    outline: 0;
+    box-shadow: none !important;
+}
+
+.btn-group>.btn-group:not(:last-child)>.btn,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-radius: 5px !important;
+}
+
+
+/* Add clip button */
+
+.add-clip-button {
+    background-color: #7063F8;
+    color: #ffffff;
+}
+
+.add-clip-button:hover {
+    background-color: #ffffff !important;
+    color: #7063F8 !important;
+}
