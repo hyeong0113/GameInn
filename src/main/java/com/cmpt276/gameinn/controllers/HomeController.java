@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.api.igdb.request.IGDBWrapper;
+
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
 
 @Controller public class HomeController {
 	@Autowired private UserService service;
+
+	@Autowired private IGDBService IGDB;
+
 	private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
 
 	// Move to landing page
@@ -64,7 +69,6 @@ import com.cmpt276.gameinn.services.*;
 
 	@GetMapping("/list") public String groupFinder(@CookieValue("userID") String
 		sub, Model model) {
-		System.out.printf(sub);
 		User found = service.getUserBySub(sub);
 		model.addAttribute("user", found);
 
@@ -73,10 +77,22 @@ import com.cmpt276.gameinn.services.*;
 
 	@GetMapping("/clips") public String addClip(@CookieValue("userID") String
 		sub, Model model) {
-		System.out.printf(sub);
 		User found = service.getUserBySub(sub);
 		model.addAttribute("user", found);
 
 		return "addClipPage";
+	}
+
+	@GetMapping("/apiTest") public String igdbTest(@CookieValue("userID") String
+		sub, Model model) {
+		User found = service.getUserBySub(sub);
+		model.addAttribute("user", found);
+
+		IGDBWrapper igdbClient = IGDBWrapper.INSTANCE;
+		igdbClient.setCredentials(IGDB.getClientId(), IGDB.getAccessToken());
+
+		System.out.println(igdbClient);
+
+		return "template";
 	}
 }

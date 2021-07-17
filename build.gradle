@@ -11,6 +11,7 @@ sourceCompatibility = '16'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -31,6 +32,8 @@ dependencies {
 	implementation 'javax:javaee-api:+'
 	implementation 'javax.security.enterprise:javax.security.enterprise-api:+'
 	implementation 'com.auth0:mvc-auth-commons:+'
+
+    implementation 'com.github.husnjak:igdb-api-jvm:+'
 
     testImplementation 'junit:junit:+'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
