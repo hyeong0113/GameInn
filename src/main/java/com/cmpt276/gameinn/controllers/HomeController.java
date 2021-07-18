@@ -80,7 +80,7 @@ import com.cmpt276.gameinn.services.*;
 		User found = service.getUserBySub(sub);
 		model.addAttribute("user", found);
 
-		return "addClipPage";
+		return "clipList";
 	}
 
 	@GetMapping("/apiTest") public String igdbTest(@CookieValue("userID") String
