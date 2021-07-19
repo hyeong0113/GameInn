@@ -34,6 +34,7 @@ dependencies {
 	implementation 'com.auth0:mvc-auth-commons:+'
 
     implementation 'com.github.husnjak:igdb-api-jvm:+'
+    implementation 'org.json:json:+'
 
     testImplementation 'junit:junit:+'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

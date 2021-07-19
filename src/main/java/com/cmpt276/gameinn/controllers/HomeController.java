@@ -11,7 +11,15 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.api.igdb.apicalypse.APICalypse;
+import com.api.igdb.apicalypse.Sort;
+import com.api.igdb.exceptions.RequestException;
 import com.api.igdb.request.IGDBWrapper;
+import com.api.igdb.request.JsonRequestKt;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.*;
+import proto.Game;
 
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
@@ -88,11 +96,29 @@ import com.cmpt276.gameinn.services.*;
 		User found = service.getUserBySub(sub);
 		model.addAttribute("user", found);
 
-		IGDBWrapper igdbClient = IGDBWrapper.INSTANCE;
-		igdbClient.setCredentials(IGDB.getClientId(), IGDB.getAccessToken());
+		IGDBWrapper wrapper = IGDBWrapper.INSTANCE;
+		wrapper.setCredentials(IGDB.getClientId(), IGDB.getAccessToken());
 
-		System.out.println(igdbClient);
+		APICalypse apicalypse = new APICalypse().fields("*").search(
+			"Apex Legends");
 
-		return "template";
+		try {
+			String result = JsonRequestKt.jsonGames(wrapper, apicalypse);
+			JSONArray arr = new JSONArray(result);
+			List<String> games = new ArrayList();
+
+			for (int i = 0; i < arr.length(); i++) {
+				JSONObject game = (JSONObject)arr.get(i);
+				String name = game.getString("name");
+				System.out.println(game);
+				games.add(name);
+			}
+
+			System.out.println(games);
+			model.addAttribute("games", games);
+		} catch (RequestException e) {
+			e.printStackTrace();
+		}
+		return "apiTest";
 	}
 }
