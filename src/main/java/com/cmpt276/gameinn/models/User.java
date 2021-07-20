@@ -18,11 +18,6 @@ import javax.persistence.Table;
 	// subId - unique id after successful registration via auth0
 	@NotNull private String sub;
 
-	@NotNull private String name;
-
-	@NotNull private String email;
-
-	@NotNull private String photo;
 	private String about;
 	private String role;
 
@@ -31,12 +26,8 @@ import javax.persistence.Table;
 
 	public User() {}
 
-	public User(String sub, String name, String email, String photo, String
-		role) {
+	public User(String sub, String role) {
 		this.sub = sub;
-		this.name = name;
-		this.email = email;
-		this.photo = photo;
 		this.about = "";
 		this.role = role;
 		this.socialAccountsList = new ArrayList<String>();
@@ -56,30 +47,6 @@ import javax.persistence.Table;
 
 	public void setSubId(String sub) {
 		this.sub = sub;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhoto() {
-		return this.photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 
 	public String getRole() {
@@ -119,14 +86,10 @@ import javax.persistence.Table;
 	}
 
 	@Override public int hashCode() {
-		return Objects.hash(this.id, this.sub, this.name, this.email,
-			this.photo, this.about, this.role);
+		return Objects.hash(this.id, this.sub, this.role);
 	}
 
 	@Override public String toString() {
-		return "Employee{" + "id=" + this.id + ", subId='" + this.sub +
-			   ", name='" + this.name + ", email='" + this.email + ", photo='" +
-			   this.photo + ", about='" + this.about + ", role='" + this.role +
-			   ", socialAccountsList='" + this.socialAccountsList + '\'' + '}';
+		return "Employee{" + "id=" + this.id + ", subId='" + this.sub + ", role='" + this.role + '\'' + '}';
 	}
 }
