@@ -1,55 +1,14 @@
-#form1 {
-    position: relative;
-    align-items: center;
-    display: block;
-    border: 2px solid black;
-    padding: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
-    top: 40px;
+.Center1{
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    padding: 4%;
 }
-
-#GT {
+#mx-auto1{
     position: relative;
-    border-radius: 10px;
-    border-color: black;
-    padding: 10px;
-    width: 80%;
-    height: 10px;
-    left: 16px;
-}
-
-#CT {
-    position: relative;
-    border-color: black;
-    padding: 10px;
-    width: 80%;
-    height: 10px;
-    left: 32px;
-}
-
-#Tags {
-    position: relative;
-    border-color: black;
-    padding: 10px;
-    width: 80%;
-    height: 10px;
-    left: 61px;
-}
-
-#link {
-    position: relative;
-    border-color: black;
-    padding: 10px;
-    width: 80%;
-    height: 10px;
-    left: 66px;
-}
-
-#buttonWork {
-    position: relative;
-    float: right;
-    padding: 1px;
-    bottom: 5px;
+    left: 60%;
+    width: 100px;
+    height: 30px;
+    background: #ffffff;
 }

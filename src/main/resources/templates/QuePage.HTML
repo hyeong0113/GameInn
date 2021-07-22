@@ -3,6 +3,8 @@
 
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
+    <link rel="stylesheet" href="/css/QuePage.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>QueuePage</title>
 </head>
 
@@ -10,25 +12,25 @@
     <div class="row">
         <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h2 id="h2">Create Queue</h2>
+
+        <h2 class="pl-5 mb-3 m-5">Create Queue</h2>
+
+        <div class="Center3">
 
             <form id="formStyle2" action="#" method="post">
-                <div class="form-group">
-                    <label for="ip1">Game Title:</label>
-                    <input id="ip1" type="text" placeholder="Search">
+                <div>
+                    <label for="gameTitle1">Game Title:</label>
+                    <input id="gameTitle1" type="text" placeholder="Search" class="border border-dark p-1 m-1">
                 </div>
 
-
-                <div class="form-group">
-                    <label for="ip2">Queue Title:</label>
-                    <input type="text" id="ip2">
+                <div>
+                    <label for="QueueTitle">Queue Title:</label>
+                    <input type="text" id="QueueTitle" class="border border-dark p-1">
                 </div>
 
-
-                <div class="form-group">
+                <div>
                     <label for="RequiredLevel">Required Level:</label>
-                    <select id="RequiredLevel">
+                    <select id="RequiredLevel" class="border border-dark p-1">
                             <option value="select">Select</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -43,9 +45,9 @@
                 </div>
 
 
-                <div class="form-group">
-                    <label for="ip3">Game Style:</label>
-                    <select id="ip3">
+                <div>
+                    <label for="gameStyle">Game Style:</label>
+                    <select id="gameStyle" class="border border-dark p-1">
                             <option value="Select">Select</option>
                             <option value="Casual">Casual</option>
                             <option value="Profesional">Profesional</option>
@@ -54,30 +56,32 @@
 
 
 
-                <div class="form-group">
-                    <label for="ip4">Number Of Players:</label>
-                    <input type="number" min="1" max="10" id="ip4">
+                <div>
+                    <label for="numOfPlayers">Number Of Players:</label>
+                    <input type="number" min="1" max="10" id="numOfPlayers" class="border border-dark p-1">
                 </div>
 
                 <div>
-                    <input class="form-check-input" type="radio" name="exampleRadios1" id="Radios1" value="option1">
-                    <label id="tab1" class="form-check-label" for="Radios1">public</label>
-                    <input class="form-check-input" type="radio" name="exampleRadios2" id="Radios2" value="option2">
-                    <label id="tab2" class="form-check-label" for="Radios2">private</label>
-                    <label id="tab3" for="ip5">Password:</label>
-                    <input type="password" id="ip5">
+                    <input class="ml-2 form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                    <label id="tab1" class="ml-4 form-check-label" for="gridRadios1">public</label>
+                    <input class="ml-2 form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label id="tab2" class="ml-4 form-check-label" for="gridRadios2">private</label>
+                    <label id="tab3" for="ip5" class="ml-3">Password:</label>
+                    <input type="password" id="ip5" class="border border-dark p-1">
 
                 </div>
 
                 <div>
                     <label id="des" for="description">Description:</label>
-                    <textarea name="description" id="description" cols="50" rows="7"></textarea>
+                    <textarea name="description" id="description" cols="60" rows="7"></textarea>
                 </div>
 
 
-                <button id="createButton" type="submit" class="btn btn-light">Create</button>
+                <button id="createButton" type="submit">Create</button>
             </form>
-        </main>
+        </div>
+    </div>
+
 </body>
 
 </html>
