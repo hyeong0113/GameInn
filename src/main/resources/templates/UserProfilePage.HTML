@@ -1,97 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-    <head>
-        <div th:insert="fragments/common :: mainHeader"></div>
-        <link rel="stylesheet" href="/css/UserProfilePage.CSS">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>User Profile Page</title>
-    </head>
+<head>
+    <div th:insert="fragments/common :: mainHeader"></div>
+    <link rel="stylesheet" href="/css/UserProfilePage.CSS">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>User Profile Page</title>
+</head>
 
-    <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+<body>
+    <div class="row">
+        <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h1 class="ml-5 mt-4 p-5">User Profile</h1>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h1 class="ml-5 mt-4 p-5">User Profile</h1>
 
-                <form class="Center4">
-                    <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
-                    <a class="ml-3 mt-5 pt-4" id='name' href="url">June Kwak</a>
+            <form class="Center4">
+                <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
+                <a class="ml-3 mt-5 pt-4" id='name' href="url">June Kwak</a>
 
-                    <button id="edit" type="submit" >Edit Profile</button>
+                <button id="edit" type="submit">Edit Profile</button>
 
-                    <div>
-                        <label id="textareatext" for="textarea">About me:</label>
-                        <textarea class="ml-3 border border-dark" id='textarea' name="desc" cols="25" rows="3"></textarea>
-                    </div>
+                <div>
+                    <label id="textareatext" for="textarea">About me:</label>
+                    <textarea class="ml-3 border border-dark" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                </div>
 
-                    <div>
-                        <label for="fixedE">Email:</label>
-                        <input class="ml-5 border border-dark" id='fixedE' type="email" placeholder="a.a@.com" required>
-                    </div>
+                <div>
+                    <label for="fixedE">Email:</label>
+                    <input class="ml-5 border border-dark" id='fixedE' type="email" placeholder="a.a@.com" required>
+                </div>
 
-                    <div>
-                        <label for="fixedP">Password:</label>
-                        <input class="ml-3 border border-dark" id='fixedP' type="password" required>
-                    </div>
+                <div>
+                    <label for="fixedP">Password:</label>
+                    <input class="ml-3 border border-dark" id='fixedP' type="password" required>
+                </div>
 
-                    <div>
-                        <label for="fixedRP">Re-enter Password:</label>
-                        <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
-                    </div>
+                <div>
+                    <label for="fixedRP">Re-enter Password:</label>
+                    <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
+                </div>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <a href="#" class="fab fa-facebook"></a>
-                                <a href="url">www.facebook.com</a>
-                            </div>
+                <div class="col">
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="url">https://www.instagram.com</a>
+                </div>
 
-                            <div class="col">
-                                <a href="#" class="fab fa-twitter"></a>
-                                <a href="url">https://twitter.com</a>
-                            </div>
-
-                            <div class="w-100"></div>
-
-                            <div class="col">
-                                <a href="#" class="fab fa-twitch"></a>
-                                <a href="url">https://www.twitch.tv</a>
-                            </div>
-
-                            <div class="col">
-                                <a href="#" class="fab fa-steam"></a>
-                                <a href="url">https://store.steampowered.com</a>
-                            </div>
-
-                            <div class="w-100"></div>
-                            <div class="col">
-                                <a href="#" class="fab fa-youtube"></a>
-                                <a href="url">https://www.youtube.com</a>
-                            </div>
-
-                            <div class="col">
-                                <a href="#" class="fab fa-reddit"></a>
-                                <a href="url">https://www.reddit.com</a>
-                            </div>
-
-                            <div class="w-100"></div>
-
-                            <div class="col">
-                                <a href="#" class="fab fa-instagram"></a>
-                                <a href="url">https://www.instagram.com</a>
-                            </div>
-
-                            <div class="col">
-                                <a href="#" class="fab fa-skype"></a>
-                                <a href="url">https://www.skype.com/en</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-            </main>
-    </body>
+                <div class="col">
+                    <a href="#" class="fab fa-skype"></a>
+                    <a href="url">https://www.skype.com/en</a>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
 
 </html>
