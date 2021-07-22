@@ -20,13 +20,17 @@ import com.cmpt276.gameinn.auth.LogoutHandler;
 
 	@Override protected void configure(HttpSecurity http)
 	throws Exception {
-		http.oauth2Login()
-			.and()
-			.logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.addLogoutHandler(logoutHandler);
-
+		// When you add more endponts for backend, add it with ".antMatchers("/controller_name/**").permitAll()" under http.authorizeRequests()
 		http.authorizeRequests()
-			.antMatchers("/favicon.ico").permitAll();
+				.antMatchers("/groupfinders/**").permitAll()
+				.antMatchers("/favicon.ico").permitAll()
+			.and()
+				.oauth2Login()
+			.and()
+				.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.addLogoutHandler(logoutHandler)
+			.and()
+				.csrf().disable();
 	}
 }
