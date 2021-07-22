@@ -151,6 +151,17 @@ public class GroupFinder {
     {
         this.writerId = writerid;
     }
+
+    @Override public int hashCode() {
+		return Objects.hash(this.title, this.gameTitle, this.totalPlayers, this.currentPlayers,
+			this.requiredLevel, this.GameStyle);
+	}
+
+	@Override public String toString() {
+		return "Employee{" + "title=" + this.title + ", gametiitle='" + this.gameTitle +
+			 ", totalPlayers='" + this.totalPlayers + ", currentPlayers='" + this.currentPlayers + ", required level='" +
+			   this.requiredLevel + ", gameStyle='" + this.GameStyle + '\'' + '}';
+	}
 }
 
 
