@@ -95,6 +95,7 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 					"https://api.twitch.tv/helix/search/categories")
 						.headers(IGDB.getTwitchHeaders())
 						.queryString("query", query)
+						.queryString("first", 50)
 						.asString();
 				JSONObject result = new JSONObject(jsonResponse.getBody());
 				JSONArray arr = result.getJSONArray("data");

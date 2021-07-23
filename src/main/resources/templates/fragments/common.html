@@ -12,21 +12,21 @@
             <link rel="stylesheet" href="/css/main.css">
         </div>
 
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" th:fragment="sidebar">
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 collapse" th:fragment="sidebar">
             <div class="position-sticky">
                 <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fa fa-fw fa-home"></i> Profile</a>
+                        <a class="nav-link px-0 py-2" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fas fa-home"></i> Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/groupfinders}"><i class="fas fa-users"></i></i> Group Finder</a>
+                        <a class="nav-link px-0 py-2" th:href="@{/groupfinders}"><i class="fas fa-users"></i></i> Group Finder</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
+                        <a class="nav-link px-0 py-2" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
+                        <a class="nav-link px-0 py-2" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </li>
                 </ul>
             </div>
