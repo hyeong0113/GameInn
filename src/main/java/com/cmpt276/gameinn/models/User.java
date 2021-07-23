@@ -19,7 +19,12 @@ import javax.persistence.Table;
 	// subId - unique id after successful registration via auth0
 	@NotNull private String sub;
 
+	@NotNull private String name;
+
+	@NotNull private String picture;
+
 	private String about;
+
 	private String role;
 
 	@ElementCollection @Column(name = "accounts")
@@ -29,15 +34,17 @@ import javax.persistence.Table;
     private List<GroupFinder> groupFinders;
 
 	
-	// @OneToMany(mappedBy = "clip")
-    // private List<Clip> clips;
+	@OneToMany(mappedBy = "RUser")
+    private List<Clip> clips;
 
 	public User() {}
 
-	public User(String sub, String role) {
+	public User(String sub, String role, String name, String picture) {
 		this.sub = sub;
 		this.about = "";
 		this.role = role;
+		this.name = name;
+		this.picture = picture;
 		this.socialAccountsList = new ArrayList<String>();
 	}
 
@@ -65,6 +72,22 @@ import javax.persistence.Table;
 		this.role = role;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
 	public String getAbout() {
 		return this.about;
 	}
@@ -89,13 +112,13 @@ import javax.persistence.Table;
 		this.groupFinders = groupFinders;
 	}
 
-	// public List<Clip> getClips() {
-	// 	return this.clips;
-	// }
+	public List<Clip> getClips() {
+		return this.clips;
+	}
 
-	// public void setClips(List<Clip> clips) {
-	// 	this.clips = clips;
-	// }
+	public void setClips(List<Clip> clips) {
+		this.clips = clips;
+	}
 
 
 

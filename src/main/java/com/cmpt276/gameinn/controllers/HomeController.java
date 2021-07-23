@@ -24,8 +24,10 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
 			String role = getRoleFromResponse(principal);
-			
-			User user = service.addUser(sub, role);
+			String name = principal.getClaims().get("name").toString();
+			String picture = principal.getClaims().get("picture").toString();
+
+			User user = service.addUser(sub, role, name, picture);
 
 			UserInfo.setSub(user.getSubId());
 			UserWrapper userWrapper = new UserWrapper(principal);
@@ -57,13 +59,6 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 
 		return "index";
 	}
-
-	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinder(@PathVariable(required = false) String sub, Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
-
-		return "groupFinderList";
-	}
-
 
 	private String getRoleFromResponse(OidcUser principal) {
 		String role = principal.getClaims().get(apiRole).toString();

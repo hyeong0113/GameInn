@@ -53,7 +53,7 @@ public class GroupFinder {
     public GroupFinder() {}
 
     public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
-                    int totalPlayers, int currentPlayers, String description, User user, String password) {
+                    int totalPlayers, int currentPlayers, String description, String password, User user) {
 		this.title = title;
         this.gameTitle = gameTitle;
         this.gameStyle = gameStyle;

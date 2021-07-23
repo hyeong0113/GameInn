@@ -19,38 +19,39 @@ public class GroupFinderService {
     @Autowired
     private IUserRepository userRepository;
 
-    public GroupFinder addGroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, Long writerId, String password) {
-        User user = userRepository.findById(writerId).orElseThrow(() -> new IllegalArgumentException("No User with " + writerId));
-        GroupFinder groupFinder = new GroupFinder(title, gameTitle, gameStyle, requiredLevel, totalPlayers, currentPlayers, description, user, password);
-        return groupFinderRepository.save(groupFinder);
+    public GroupFinder addGroupFinder(GroupFinder groupFinder, User user) {
+        GroupFinder created = new GroupFinder(groupFinder.getTitle(), groupFinder.getGameTitle(), groupFinder.getGameStyle(),
+                                                groupFinder.getRequiredLevel(), groupFinder.getTotalPlayers(), groupFinder.getCurrentPlayers(),
+                                                groupFinder.getDescription(), groupFinder.getPassword(), user);
+        return groupFinderRepository.save(created);
     }
 
     public List<GroupFinder> getGroupFinders() {
         return groupFinderRepository.findAll();
     }
 
-    public GroupFinder getGroupFinderByID (Long id){
+    public GroupFinder getGroupFinderByID(Long id){
         return groupFinderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + id));
     }
 
-    public GroupFinder updateGroupFinder(GroupFinder groupfinder) throws Exception {
-        GroupFinder found = groupFinderRepository.findById(groupfinder.getId()).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + groupfinder.getId()));
+    public GroupFinder updateGroupFinder(GroupFinder groupFinder) throws Exception {
+        GroupFinder found = groupFinderRepository.findById(groupFinder.getId()).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + groupFinder.getId()));
         if (found == null){
-            throw new IllegalArgumentException("No GroupFinder with " + groupfinder.getId());
+            throw new IllegalArgumentException("No GroupFinder with " + groupFinder.getId());
         }
 
-        if (groupfinder.getUser().getId() != found.getUser().getId()) {
+        if (groupFinder.getUser().getId() != found.getUser().getId()) {
             throw new Exception("You are not authorized to edit clip.");
         }
 
-        found.setTitle(groupfinder.getTitle());
-        found.setGameTitle(groupfinder.getGameTitle());
-        found.setGameStyle(groupfinder.getGameStyle());
-        found.setRequiredLevel(groupfinder.getRequiredLevel());
-        found.setTotalPlayers(groupfinder.getTotalPlayers());
-        found.setCurrentPlayers(groupfinder.getCurrentPlayers());
-        found.setDescription(groupfinder.getDescription());
-        found.setPassword(groupfinder.getPassword());
+        found.setTitle(groupFinder.getTitle());
+        found.setGameTitle(groupFinder.getGameTitle());
+        found.setGameStyle(groupFinder.getGameStyle());
+        found.setRequiredLevel(groupFinder.getRequiredLevel());
+        found.setTotalPlayers(groupFinder.getTotalPlayers());
+        found.setCurrentPlayers(groupFinder.getCurrentPlayers());
+        found.setDescription(groupFinder.getDescription());
+        found.setPassword(groupFinder.getPassword());
 
         groupFinderRepository.save(found);
         return found;
