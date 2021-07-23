@@ -4,6 +4,7 @@
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
     <title>Clip list</title>
+    <script th:src="@{/js/clip_list.js} "></script>
     <link rel="stylesheet" href="/css/clipList.css">
 </head>
 
@@ -12,9 +13,18 @@
         <div th:replace="fragments/common :: sidebar"></div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
             <div class="inner-background">
                 <div class="header">
-                    <button type="button" class="btn add-clip-button float-start" data-bs-toggle="modal" href="addEditClipPage.html" data-bs-target="#addClip">Add Clip</button>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        var source = /*[[${user.getSubId()}]]*/ '';
+                        console.log("subid check::: " + source);
+                        /*]]>*/
+                    </script>
+                    <!-- <button type="button" class="btn add-clip-button float-start" data-bs-toggle="modal" href="addEditClipPage.html" data-bs-target="#addClipModal">Add Clip</button> -->
+                    <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
+
                     <div class="input-group rounded float-end search-input">
                         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                         <span class="input-group-text border-0" id="search-addon">
@@ -23,58 +33,85 @@
                     </div>
                 </div>
 
+                <table>
+                    <tbody th:each="clip : ${clip_list}">
+                        <div class="clip-post shadow-sm p-3 mb-5 bg-body rounded">
+                            <div class="post-header">
+                                <div class="user-photo-section">
+                                    <img class="user-photo rounded-circle" th:src="${clip.getUser().getPicture()}" />
+                                </div>
+                                <div class="name-and-title">
+                                    <div class="user-name">
+                                        <td class="fs-6" th:text="${clip.getUser().getName()}"></td>
+                                    </div>
+                                    <div class="clip-title">
+                                        <td class="fs-6" th:text="${clip.getTitle()}"></td>
+                                    </div>
+                                </div>
 
-                <div class="clip-post shadow-sm p-3 mb-5 bg-body rounded">
-                    <div class="post-header">
-                        <div class="user-photo-section">
-                            <img class="user-photo rounded-circle" th:src="${user.getPhoto()}" />
-                        </div>
-                        <div class="name-and-title">
-                            <div class="user-name">
-                                <p class="fs-6">June Kwak</p>
+                                <div class="btn-group header-button">
+                                    <button class="btn button-option btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                      </svg>
+                                </button>
+                                    <ul id="button-menu" class="button-content dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="@{/clips/{sub}/addEdit/edit/{id}(sub={clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
+                                        <li><a class="dropdown-item" href="@{/clips/{sub}/delete/{id}(sub={clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="clip-title">
-                                <p class="title">Most epic fail</p>
+
+                            <div class="post-body">
+                                <!-- <div class="post-clip">
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        var source = /*[[${clip.getSourceLink()}]]*/ '';
+                                        const videoId = getId(source);
+                                        const iframeMarkup = '<iframe src="//www.youtube.com/embed/' +
+                                            videoId + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen';
+                                        /*]]>*/
+                                        $('#clip-source').contents().find('html').html(s);
+                                    </script>
+                                    <iframe id="clip-source">
+                                </iframe> -->
+                                <div class="post-clip">
+                                    <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="post-footer">
+                                <td class="fs-6" th:text="${clip.getGameTitle()}">
+                                    <p class="fs-6">
+                                        Game:
+                                    </p>
+                                </td>
+
+
+                                <td class="fs-6" th:text="${clip.getTags()}">
+                                    <p class="fs-6">
+                                        Tags:
+                                    </p>
+                                </td>
+                                <!-- <p class="fs-6">
+                                    <td>
+                                        <a class="go-to-source" th:href="${clip.getSourceLink()}" th:text="Go to Source"></a>
+                                    </td>
+                                </p> -->
+
+                                <div class="timestamp">
+                                    <td>
+                                        <p class="fs-6">6 hrs ago</p>
+                                    </td>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="btn-group header-button">
-                            <button class="btn button-option btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
-                                  </svg>
-                            </button>
-                            <ul id="button-menu" class="button-content dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-clip">
-                            <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="post-footer">
-                            <p class="fs-6">
-                                Game: <a class="game-title" href="#">#League_of_legends</a>
-                            </p>
-                            <p class="fs-6">
-                                tags: <a class="tags" href="#">#League_of_legends</a>
-                            </p>
-                            <p class="fs-6">
-                                <a class="go-to-source" href="https://www.youtube.com/eoGplps8BBE">Got to Source</a>
-                            </p>
-
-                            <div class="timestamp">
-                                <p class="fs-6">6 hrs ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+    </div>
+    </table>
 
 
-                <!-- Second post for demo. When backend is built, we need to iterate with this form-->
+    <!-- Second post for demo. When backend is built, we need to iterate with this form
                 <div class="clip-post shadow-sm p-3 mb-5 bg-body rounded">
                     <div class="post-header">
                         <div class="user-photo-section">
@@ -121,11 +158,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> -->
+    </div>
 
 
-        </main>
+    </main>
     </div>
 </body>
 
