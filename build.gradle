@@ -31,7 +31,6 @@ dependencies {
     implementation 'org.webjars:bootstrap:+'
     implementation 'org.webjars:webjars-locator:+'
 
-
 	implementation 'javax:javaee-api:+'
 	implementation 'javax.security.enterprise:javax.security.enterprise-api:+'
 	implementation 'com.auth0:mvc-auth-commons:+'
@@ -39,8 +38,9 @@ dependencies {
     implementation 'com.github.husnjak:igdb-api-jvm:+'
     implementation 'org.json:json:+'
 
+    implementation 'com.mashape.unirest:unirest-java:+'
+
     testImplementation 'junit:junit:+'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'com.mashape.unirest:unirest-java:1.3.27'
 }

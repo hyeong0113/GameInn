@@ -1,33 +1,33 @@
 <html>
 
-<body>
-    <div th:fragment="mainHeader">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/fd77361902.js" crossorigin="anonymous"></script>
+    <body>
+        <div th:fragment="mainHeader">
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/fd77361902.js" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="/css/main.css">
-    </div>
-
-    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" th:fragment="sidebar">
-        <div class="position-sticky">
-            <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fa fa-fw fa-home"></i> Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/list}"><i class="fas fa-users"></i></i> Group Finder</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
-                </li>
-            </ul>
+            <link rel="stylesheet" href="/css/main.css">
         </div>
-        <small class="footer">Copyright &copy; 2021 GameInn</small>
-    </nav>
-</body>
+
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" th:fragment="sidebar">
+            <div class="position-sticky">
+                <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fa fa-fw fa-home"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/list}"><i class="fas fa-users"></i></i> Group Finder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
+                    </li>
+                </ul>
+            </div>
+            <small class="footer">Copyright &copy; 2021 GameInn</small>
+        </nav>
+    </body>
 
 </html>

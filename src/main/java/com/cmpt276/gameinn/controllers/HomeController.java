@@ -2,12 +2,20 @@ package com.cmpt276.gameinn.controllers;
 
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import  org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.*;
 
 import com.cmpt276.gameinn.constant.UserInfo;
 import com.cmpt276.gameinn.models.User;
@@ -16,7 +24,6 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 
 @Controller public class HomeController {
 	@Autowired private UserService service;
-
 	@Autowired private IGDBService IGDB;
 
 	private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
@@ -80,32 +87,28 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		return "clipList";
 	}
 
-	@GetMapping("/apiTest") public String igdbTest(@CookieValue("userID") String
-		sub, Model model) {
-		User found = service.getUserBySub(sub);
-		model.addAttribute("user", found);
-
-		IGDBWrapper wrapper = IGDBWrapper.INSTANCE;
-		wrapper.setCredentials(IGDB.getClientId(), IGDB.getAccessToken());
-
-		APICalypse apicalypse = new APICalypse().fields("*").search(
-			"Apex Legends");
+	@GetMapping("/apiTest") public String igdbTest(Model model) {
+		model.addAttribute("user", UserInfo.getWrapper());
 
 		try {
-			String result = JsonRequestKt.jsonGames(wrapper, apicalypse);
-			JSONArray arr = new JSONArray(result);
+			HttpResponse<String> jsonResponse = Unirest.get(
+				"https://api.twitch.tv/helix/search/categories")
+					.headers(IGDB.getTwitchHeaders())
+					.queryString("query", "Apex Legends")
+					.asString();
+			JSONObject result = new JSONObject(jsonResponse.getBody());
+			JSONArray arr = result.getJSONArray("data");
 			List<String> games = new ArrayList();
 
 			for (int i = 0; i < arr.length(); i++) {
 				JSONObject game = (JSONObject)arr.get(i);
 				String name = game.getString("name");
-				System.out.println(game);
 				games.add(name);
 			}
 
 			System.out.println(games);
 			model.addAttribute("games", games);
-		} catch (RequestException e) {
+		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
 		return "apiTest";

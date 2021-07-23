@@ -2,6 +2,8 @@ package com.cmpt276.gameinn.services;
 
 import com.api.igdb.request.TwitchAuthenticator;
 import com.api.igdb.utils.TwitchToken;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -36,5 +38,13 @@ import org.springframework.stereotype.Service;
 
 	public String getAccessToken() {
 		return accessToken;
+	}
+
+	public Map<String, String> getTwitchHeaders() {
+		Map<String, String> headers = new HashMap<>();
+		headers.put("Client-ID", getClientId());
+		headers.put("Authorization", "Bearer " + getAccessToken());
+
+		return headers;
 	}
 }
