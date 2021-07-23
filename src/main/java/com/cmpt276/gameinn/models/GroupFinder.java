@@ -45,7 +45,7 @@ public class GroupFinder {
 
     public GroupFinder() {}
 
-    public GroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, string description, string writerid) {
+    public GroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, String writerid) {
 		this.title = title;
         tihs.gameTitle = gameTitle;
 		this.requiredLevel = requiredLevel;
