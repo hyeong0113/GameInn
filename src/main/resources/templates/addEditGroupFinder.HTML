@@ -4,82 +4,88 @@
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
     <link rel="stylesheet" href="/css/QuePage.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>QueuePage</title>
+    <link rel="stylesheet" href="/css/link2CSS.css">
+    <title>Add GroupFinder</title>
 </head>
 
 <body>
     <div class="row">
         <div th:replace="fragments/common :: sidebar"></div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
 
-        <h2 class="pl-5 mb-3 m-5">Create Queue</h2>
+            <h2 class="pl-5 mb-3 m-5">Add GroupFinder</h2>
 
-        <div class="Center3">
+            <div class="Center3">
 
-            <form id="formStyle2" action="#" method="post">
-                <div>
-                    <label for="gameTitle1">Game Title:</label>
-                    <input id="gameTitle1" type="text" placeholder="Search" class="border border-dark p-1 m-1">
-                </div>
+                <form action="#" th:action="@{/groupfinders/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${groupFinder}" method="post">
 
-                <div>
-                    <label for="QueueTitle">Queue Title:</label>
-                    <input type="text" id="QueueTitle" class="border border-dark p-1">
-                </div>
+                    <div>
+                        <label for="gameTitle">Game title:</label>
+                        <div class="col-sm-10">
+                            <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game Title" required>
+                        </div>
+                    </div>
 
-                <div>
-                    <label for="RequiredLevel">Required Level:</label>
-                    <select id="RequiredLevel" class="border border-dark p-1">
+                    <div>
+                        <label for="title">Post title:</label>
+                        <div class="col-sm-10">
+                            <input id="title" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- <label for="RequiredLevel">Required Level:</label>
+                        <select id="RequiredLevel" class="form-control border border-dark" th:field="*{requiredLevel}" placeholder="Title" required>
                             <option value="select">Select</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-
+                            <option value="0">Any</option>
+                            <option value="1">Beginner</option>
+                            <option value="2">Intermediate</option>
+                            <option value="3">Expert</option>
+                        </select> -->
+                        <label for="RequiredLevel">Required Level:</label>
+                        <select name="requiredLevel">
+                            <option th:each="level : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level}" th:text="${level}">
+                            </option>
                         </select>
-                </div>
+                    </div>
 
 
-                <div>
-                    <label for="gameStyle">Game Style:</label>
-                    <select id="gameStyle" class="border border-dark p-1">
+                    <div>
+                        <label for="gameStyle">Game Style:</label>
+                        <!-- <select id="gameStyle" class="border border-dark p-1">
                             <option value="Select">Select</option>
                             <option value="Casual">Casual</option>
                             <option value="Profesional">Profesional</option>
+                        </select> -->
+                        <select name="gameStyle">
+                            <option th:each="style : ${T(com.cmpt276.gameinn.constant.EnumCollection.GameStyle).values()}" th:value="${style}" th:text="${style}">
+                            </option>
                         </select>
-                </div>
+                    </div>
 
+                    <div>
+                        <label for="totalPlayers">Total number of players:</label>
+                        <input type="number" min="1" th:field="*{totalPlayers}" class="form-control" id="totalPlayers" placeholder="Total players" required>
+                    </div>
 
+                    <div>
+                        <label for="password" class="ml-3">Password:</label>
+                        <!-- <input type="password" id="ip5" class="border border-dark p-1"> -->
+                        <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Password">
+                    </div>
 
-                <div>
-                    <label for="numOfPlayers">Number Of Players:</label>
-                    <input type="number" min="1" max="10" id="numOfPlayers" class="border border-dark p-1">
-                </div>
+                    <div>
+                        <label id="des" for="description">Description:</label>
+                        <textarea type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description" cols="60" rows="7" required></textarea>
+                    </div>
 
-                <div>
-                    <input class="ml-2 form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                    <label id="tab1" class="ml-4 form-check-label" for="gridRadios1">public</label>
-                    <input class="ml-2 form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label id="tab2" class="ml-4 form-check-label" for="gridRadios2">private</label>
-                    <label id="tab3" for="ip5" class="ml-3">Password:</label>
-                    <input type="password" id="ip5" class="border border-dark p-1">
-
-                </div>
-
-                <div>
-                    <label id="des" for="description">Description:</label>
-                    <textarea name="description" id="description" cols="60" rows="7"></textarea>
-                </div>
-
-
-                <button id="createButton" type="submit">Create</button>
-            </form>
-        </div>
+                    <div class="row">
+                        <input id="createButton" type="submit" class="add-groupfinder" value="Add">
+                    </div>
+                </form>
+            </div>
+        </main>
     </div>
 
 </body>
