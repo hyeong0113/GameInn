@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:insert="fragments/common :: mainHeader"></div>
-    <title>GameInn</title>
-    <script th:src="@{/js/auth_login.js} "></script>
-    <link rel="stylesheet" href="/css/login.css">
-</head>
+    <head>
+        <div th:insert="fragments/common :: mainHeader"></div>
+        <title>GameInn</title>
+        <script th:src="@{/js/auth_login.js} "></script>
+        <link rel="stylesheet" href="/css/login.css">
+    </head>
 
-<body>
-    <div sec:authorize="!isAuthenticated()">
-        <div class="loading-container">
-            <p id="not-authenticated" class="not-authenticated-text"></p>
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading....</span>
+    <body>
+        <div sec:authorize="!isAuthenticated()">
+            <div class="loading-container">
+                <p id="not-authenticated" class="not-authenticated-text"></p>
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading....</span>
+                </div>
             </div>
-        </div>
-        <script th:inline="javascript">
-            load_login_page();
-        </script>
-    </div>
-    <div sec:authorize="isAuthenticated()" th:object="${user}">
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
-
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
-
-                <img th:src="${user.getPhoto()}" />
-                <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
-                <p th:text="${user.getEmail()}"></p>
-                <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
-
-                <p></p>
-            </main>
             <script th:inline="javascript">
-                /*<![CDATA[*/
-                var role = /*[[${user.getRole()}]]*/ '';
-                load_admin_tag(role);
-                /*]]>*/
+                load_login_page();
             </script>
         </div>
-</body>
+        <div sec:authorize="isAuthenticated()" th:object="${user}">
+            <div class="row">
+                <div th:replace="fragments/common :: sidebar"></div>
+
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
+
+                    <img th:src="${user.getPhoto()}" />
+                    <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
+                    <p th:text="${user.getEmail()}"></p>
+
+                    <p></p>
+                </main>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var role = /*[[${user.getRole()}]]*/ '';
+                    load_admin_tag(role);
+                    /*]]>*/
+                </script>
+            </div>
+    </body>
 
 </html>
