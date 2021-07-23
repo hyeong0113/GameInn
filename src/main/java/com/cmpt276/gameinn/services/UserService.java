@@ -5,17 +5,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.User;
-import com.cmpt276.gameinn.repositories.IUserRepository;
+import com.cmpt276.gameinn.repositories.User.IUserRepository;
 
 @Service
 public class UserService {
     @Autowired
     private IUserRepository repository;
 
-    public User addUser(String sub, String role) {
+    public User addUser(String sub, String role, String name, String picture) {
         sub = sub.substring(sub.lastIndexOf('|') + 1);
         if (repository.findUserBySub(sub) == null) {
-            User user = new User(sub, role);
+            User user = new User(sub, role, name, picture);
             repository.save(user);
             return user;
         }

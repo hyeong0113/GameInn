@@ -1,4 +1,4 @@
-package com.cmpt276.gameinn.repositories;
+package com.cmpt276.gameinn.repositories.GroupFinder;
 
 import com.cmpt276.gameinn.models.GroupFinder;
 

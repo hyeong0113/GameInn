@@ -42,7 +42,9 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
 			String role = getRoleFromResponse(principal);
-			User user = service.addUser(sub, role);
+			String name = principal.getClaims().get("name").toString();
+			String picture = principal.getClaims().get("picture").toString();
+			User user = service.addUser(sub, role, name, picture);
 
 			UserInfo.setSub(user.getSubId());
 			UserWrapper userWrapper = new UserWrapper(principal);
@@ -75,18 +77,6 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		return "index";
 	}
 
-	@GetMapping("/list") public String groupFinder(Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
-
-		return "list";
-	}
-
-	@GetMapping("/clips") public String addClip(Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
-
-		return "clipList";
-	}
-
 	@GetMapping("/apiTest") public String igdbTest(Model model) {
 		model.addAttribute("user", UserInfo.getWrapper());
 
@@ -94,7 +84,7 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 			HttpResponse<String> jsonResponse = Unirest.get(
 				"https://api.twitch.tv/helix/search/categories")
 					.headers(IGDB.getTwitchHeaders())
-					.queryString("query", "Apex Legends")
+					.queryString("query", "Mario Party")
 					.asString();
 			JSONObject result = new JSONObject(jsonResponse.getBody());
 			JSONArray arr = result.getJSONArray("data");
