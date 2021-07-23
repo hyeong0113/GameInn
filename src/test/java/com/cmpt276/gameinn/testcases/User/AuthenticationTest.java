@@ -10,29 +10,35 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.junit.Test;
 
 public class AuthenticationTest {
+    // Header
+    private final String CONTENT_TYPE = "content-type";
+    private final String CONTENT_TYPE_CONTENT = "application/json";
 
+    // Body content
+    private final String TOKEN_URL = "https://gameinn.us.auth0.com/oauth/token";
     private final String userEmail = "admin@admin.com";
+    private final String CONNECTION = "Username-Password-Authentication";
+    private final String EMAIL_LOGIN = "admin%40admin.com";
+    private final String PASSWORD_LOGIN = "qwe123QWE%40";
+    private final String CLIENT_ID = "3T69QL1FF2h55f02ujE1ImtMuJLP8Awj";
+    private final String CLIENT_SECRET = "B0lOI_6lk2_tpsAgCVCLj4r_YoKDRS6QK4fcGG8KmalaImYkIJKMOCiq_N5KNgqB";
+    private final String AUDIENCE = "https://gameinn.us.auth0.com/api/v2/";
+    private final String GRAND_TYPE = "client_credentials";
 
     @Test
     public void givenUserNameAndPasswordThenReturnTokenSuccessfully() throws UnirestException {
-        HttpResponse<String> response = Unirest.post("https://gameinn.us.auth0.com/oauth/token")
-            .header("content-type", "application/json")
-            .body("{\"connection\":\"Username-Password-Authentication\",\"username\":\"admin%40admin.com\",\"password\":\"qwe123QWE%40\",\"client_id\":\"3T69QL1FF2h55f02ujE1ImtMuJLP8Awj\",\"client_secret\":\"B0lOI_6lk2_tpsAgCVCLj4r_YoKDRS6QK4fcGG8KmalaImYkIJKMOCiq_N5KNgqB\",\"audience\":\"https://gameinn.us.auth0.com/api/v2/\",\"grant_type\":\"client_credentials\"}")
-            .asString();
-
-            assertNotNull(response.getBody());
-            assertEquals(200, response.getStatus());
+        HttpResponse<String> response = getToken();
+        
+        assertNotNull(response.getBody());
+        assertEquals(200, response.getStatus());
     }
 
+    private final String USER_URL = "https://gameinn.us.auth0.com/api/v2/users/auth0%7C60e56d0a68dabc00690a5eab?include_fields=true";
 
     @Test
     public void givenUserNameAndPasswordThenReturnUserInfoSuccessfully() throws UnirestException {
-        HttpResponse<String> token = Unirest.post("https://gameinn.us.auth0.com/oauth/token")
-            .header("content-type", "application/json")
-            .body("{\"connection\":\"Username-Password-Authentication\",\"username\":\"admin%40admin.com\",\"password\":\"qwe123QWE%40\",\"client_id\":\"3T69QL1FF2h55f02ujE1ImtMuJLP8Awj\",\"client_secret\":\"B0lOI_6lk2_tpsAgCVCLj4r_YoKDRS6QK4fcGG8KmalaImYkIJKMOCiq_N5KNgqB\",\"audience\":\"https://gameinn.us.auth0.com/api/v2/\",\"grant_type\":\"client_credentials\"}")
-            .asString();
+        HttpResponse<String> token = getToken();
 
-            // openid profile email
         String[] couple = token.getBody().split(",");
 
         String accessToken = "";
@@ -49,7 +55,7 @@ public class AuthenticationTest {
         }
 
         String bearerToken = "Bearer " + accessToken;
-        HttpResponse<String> response = Unirest.get("https://gameinn.us.auth0.com/api/v2/users/auth0%7C60e56d0a68dabc00690a5eab?include_fields=true")
+        HttpResponse<String> response = Unirest.get(USER_URL)
             .header("authorization", bearerToken)
             .asString();
 
@@ -70,5 +76,16 @@ public class AuthenticationTest {
 
         assertNotNull(response.getBody());
         assertEquals(userEmail, responseEmail);
+    }
+
+    private HttpResponse<String> getToken() throws UnirestException {
+        String bodyContent = String.format("{\"connection\":\"%s\",\"username\":\"%s\",\"password\":\"%s\",\"client_id\":\"%s\",\"client_secret\":\"%s\",\"audience\":\"%s\",\"grant_type\":\"%s\"}", CONNECTION, EMAIL_LOGIN, PASSWORD_LOGIN, CLIENT_ID, CLIENT_SECRET, AUDIENCE, GRAND_TYPE);
+
+        HttpResponse<String> response = Unirest.post(TOKEN_URL)
+            .header(CONTENT_TYPE, CONTENT_TYPE_CONTENT)
+            .body(bodyContent)
+            .asString();
+
+        return response;
     }
 }
