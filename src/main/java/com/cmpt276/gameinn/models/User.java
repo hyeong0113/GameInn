@@ -22,11 +22,15 @@ import javax.persistence.Table;
 	private String about;
 	private String role;
 
-	@ElementCollection @Column(name = "accounts") private
-	List<String> socialAccountsList;
+	@ElementCollection @Column(name = "accounts")
+	private List<String> socialAccountsList;
 
-	@OneToMany(mappedBy = "groupFinder")
+	@OneToMany(mappedBy = "RUser")
     private List<GroupFinder> groupFinders;
+
+	
+	// @OneToMany(mappedBy = "clip")
+    // private List<Clip> clips;
 
 	public User() {}
 
@@ -84,6 +88,16 @@ import javax.persistence.Table;
 	public void setGroupFinders(List<GroupFinder> groupFinders) {
 		this.groupFinders = groupFinders;
 	}
+
+	// public List<Clip> getClips() {
+	// 	return this.clips;
+	// }
+
+	// public void setClips(List<Clip> clips) {
+	// 	this.clips = clips;
+	// }
+
+
 
 	@Override public boolean equals(Object o) {
 		if (this == o)

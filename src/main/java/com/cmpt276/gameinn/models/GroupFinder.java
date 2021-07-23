@@ -48,7 +48,7 @@ public class GroupFinder {
     @ManyToOne
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private User RUser;
 
     public GroupFinder() {}
 
@@ -61,7 +61,7 @@ public class GroupFinder {
         this.totalPlayers = totalPlayers;
         this.currentPlayers = currentPlayers;
         this.description = description;
-        this.user = user;
+        this.RUser = user;
         this.password = password;
         if (password.isEmpty()) {
             this.isPrivate = true;
@@ -150,12 +150,12 @@ public class GroupFinder {
 
     public User getUser()
     {
-        return this.user;
+        return this.RUser;
     }
 
     public void setUser(User user)
     {
-        this.user = user;
+        this.RUser = user;
     }
 
     
@@ -181,22 +181,3 @@ public class GroupFinder {
 			   this.requiredLevel + ", gameStyle='" + this.gameStyle + '\'' + '}';
 	}
 }
-
-
-// GroupFinder
-// ← → User (many to 1) "DONE"  ------
-// - title (String) "DONE"------------
-// - gameTitle (String)           -----------                                                     
-// - requiredLevel (maybe Enum)-------------
-// - gameStyle (maybe Enum) -------------
-// - totalPlayers (int)----------------
-// - currentPlayers (int)------------------
-// - isPrivate (bool)----------------
-// - status (maybe Enum)
-// determined by isPrivate
-// - password (String)------------------
-// - description (String) ---------------------
-// - writerId (String)--------------------------
-//  This is from User for determining the user is poster or not
-// - comments (List of Comment)
-// For now, this entity is not mandatory. If you have enought time, try this
