@@ -16,12 +16,6 @@
 
             <div class="inner-background">
                 <div class="header">
-                    <script th:inline="javascript">
-                        /*<![CDATA[*/
-                        var source = /*[[${user.getSubId()}]]*/ '';
-                        console.log("subid check::: " + source);
-                        /*]]>*/
-                    </script>
                     <!-- <button type="button" class="btn add-clip-button float-start" data-bs-toggle="modal" href="addEditClipPage.html" data-bs-target="#addClipModal">Add Clip</button> -->
                     <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
 
@@ -42,10 +36,10 @@
                                 </div>
                                 <div class="name-and-title">
                                     <div class="user-name">
-                                        <p class="fs-6" th:text="${clip.getUser().getName()}"></p>
+                                        <p class="user-name-content" th:text="${clip.getUser().getName()}"></p>
                                     </div>
                                     <div class="clip-title">
-                                        <p class="fs-6" th:text="${clip.getTitle()}"></p>
+                                        <p class="clip-title-content" th:text="${clip.getTitle()}"></p>
                                     </div>
                                 </div>
 
@@ -86,9 +80,9 @@
                                 </p>
 
 
-                                <p class="fs-6" th:text="${clip.getTags()}">
+                                <!-- <p class="fs-6" th:text="${clip.getTags()}">
                                     Tags:
-                                </p>
+                                </p> -->
                                 <!-- <p class="fs-6">
                                     <td>
                                         <a class="go-to-source" th:href="${clip.getSourceLink()}" th:text="Go to Source"></a>

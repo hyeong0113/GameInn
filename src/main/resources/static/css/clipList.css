@@ -76,7 +76,14 @@
 
 p {
     margin: 0 !important;
-    font-size: 13px;
+}
+
+.user-name-content {
+    font-size: 0.8rem!important;
+}
+
+.clip-title-content {
+    font-size: 0.8rem!important;
 }
 
 .title {
