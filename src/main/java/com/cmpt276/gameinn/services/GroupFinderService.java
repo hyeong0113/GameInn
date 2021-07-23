@@ -5,16 +5,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.GroupFinder;
-import com.cmpt276.gameinn.models.GroupFinder.RequiredLevel;
+import com.cmpt276.gameinn.models.User;
+import com.cmpt276.gameinn.constant.EnumCollection.GameStyle;
+import com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel;
 import com.cmpt276.gameinn.repositories.IGroupFinderRepository;
+import com.cmpt276.gameinn.repositories.IUserRepository;
 
 @Service
 public class GroupFinderService {
     @Autowired
     private IGroupFinderRepository repository;
 
-    public GroupFinder addGroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, String writerid) {
-        GroupFinder groupFinder = new GroupFinder(title, gameTitle, requiredLevel, totalPlayers, currentPlayers, description, writerid);
+    @Autowired
+    private IUserRepository userRepository;
+
+    public GroupFinder addGroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, Long writerId, String password) {
+        User user = userRepository.findById(writerId).orElseThrow(() -> new IllegalArgumentException("No User with " + writerId));
+        GroupFinder groupFinder = new GroupFinder(title, gameTitle, gameStyle, requiredLevel, totalPlayers, currentPlayers, description, user, password);
         return repository.save(groupFinder);
     }
 
@@ -50,9 +57,3 @@ public class GroupFinderService {
     }
 
 }
-
-
-
-// Implement basic Create, Read, Update, Delete methods first
-// For reads, getAll() getById()
-// Then implement custom methods

@@ -1,59 +1,71 @@
 package com.cmpt276.gameinn.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+import com.cmpt276.gameinn.constant.EnumCollection.GameStyle;
+import com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.Table;
-
-
 
 @Entity @Table(name = "groupFinders")
 public class GroupFinder {
-    
-    public enum RequiredLevel {
-        EXPERT, BEGINNER, INTERMEDIATE, ANY
-    }
-
-    public enum GameStyle {
-        CASUAL, PROFESSIONAL;
-    }
 
     @Id @GeneratedValue private Long id;
 
-
+    @NotNull
     private String title;
+
+    @NotNull
     private String gameTitle;
+
+    @NotNull
     private RequiredLevel requiredLevel;
 
+    @NotNull
     private int totalPlayers;
+
+    @NotNull
     private int currentPlayers;
 
+    @NotNull
+    private GameStyle gameStyle;
+
     private String description;
-    private String writerId;
 
     private String password;
 
-    private GameStyle GameStyle;
-
     private boolean isPrivate = false;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
 
     public GroupFinder() {}
 
-    public GroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, String writerId) {
+    public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
+                    int totalPlayers, int currentPlayers, String description, User user, String password) {
 		this.title = title;
         this.gameTitle = gameTitle;
+        this.gameStyle = gameStyle;
 		this.requiredLevel = requiredLevel;
         this.totalPlayers = totalPlayers;
         this.currentPlayers = currentPlayers;
         this.description = description;
-        this.writerId = writerId;
+        this.user = user;
+        this.password = password;
+        if (password.isEmpty()) {
+            this.isPrivate = true;
+        }
     }
 
     public Long getId() {
@@ -88,12 +100,12 @@ public class GroupFinder {
 		this.requiredLevel = requiredLevel;
 	}
     
-    public com.cmpt276.gameinn.models.GroupFinder.GameStyle getGameStyle() {
-		return this.GameStyle;
+    public GameStyle getGameStyle() {
+		return this.gameStyle;
 	}
 
 	public void setGameStyle(GameStyle gameStyle) {
-		this.GameStyle = gameStyle;
+		this.gameStyle = gameStyle;
 	}
 
     public int getTotalPlayers()
@@ -116,17 +128,6 @@ public class GroupFinder {
         this.currentPlayers = crnt;
     }
 
-    public String getPassword()
-    {
-        return this.password;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
-    
-
     public String getDescription()
     {
         return this.description;
@@ -136,17 +137,6 @@ public class GroupFinder {
     {
         this.description = despt;
     }
-
-    public String getWriterID()
-    {
-        return this.writerId;
-    }
-
-    public void setWriterID(String writerId)
-    {
-        this.writerId = writerId;
-    }
-
     
     public boolean getIsPrivate()
     {
@@ -158,16 +148,37 @@ public class GroupFinder {
         this.isPrivate = isPrivate;
     }
 
+    public User getUser()
+    {
+        return this.user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    
+    public String getPassword()
+    {
+        return this.password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
 
     @Override public int hashCode() {
 		return Objects.hash(this.title, this.gameTitle, this.totalPlayers, this.currentPlayers,
-			this.requiredLevel, this.GameStyle);
+			this.requiredLevel, this.gameStyle);
 	}
 
 	@Override public String toString() {
 		return "Employee{" + "title=" + this.title + ", gametiitle='" + this.gameTitle +
 			 ", totalPlayers='" + this.totalPlayers + ", currentPlayers='" + this.currentPlayers + ", required level='" +
-			   this.requiredLevel + ", gameStyle='" + this.GameStyle + '\'' + '}';
+			   this.requiredLevel + ", gameStyle='" + this.gameStyle + '\'' + '}';
 	}
 }
 

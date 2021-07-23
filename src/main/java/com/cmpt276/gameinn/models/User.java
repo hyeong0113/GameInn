@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.Column;
@@ -23,6 +24,9 @@ import javax.persistence.Table;
 
 	@ElementCollection @Column(name = "accounts") private
 	List<String> socialAccountsList;
+
+	@OneToMany(mappedBy = "groupFinder")
+    private List<GroupFinder> groupFinders;
 
 	public User() {}
 
@@ -71,6 +75,14 @@ import javax.persistence.Table;
 
 	public void setSocialAccountsList(List<String> socialAccountsList) {
 		this.socialAccountsList = socialAccountsList;
+	}
+
+	public List<GroupFinder> getGroupFinders() {
+		return this.groupFinders;
+	}
+
+	public void setGroupFinders(List<GroupFinder> groupFinders) {
+		this.groupFinders = groupFinders;
 	}
 
 	@Override public boolean equals(Object o) {
