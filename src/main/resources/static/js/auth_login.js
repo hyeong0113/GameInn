@@ -6,9 +6,17 @@ function load_login_page() {
 }
 
 function load_main_page(sub) {
-    setTimeout(function() {
-        window.location.href = "/clips";
-    }, 3000);
+    if (sub) {
+        var path = "/clips/" + sub
+        setTimeout(function() {
+            window.location.href = path;
+        }, 3000);
+    } else {
+        setTimeout(function() {
+            window.location.href = "/clips";
+        }, 3000);
+    }
+
 }
 
 function load_admin_message(role) {

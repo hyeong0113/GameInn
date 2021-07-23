@@ -1,4 +1,4 @@
-package com.cmpt276.gameinn.repositories;
+package com.cmpt276.gameinn.repositories.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -24,8 +24,10 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
 			String role = getRoleFromResponse(principal);
-			
-			User user = service.addUser(sub, role);
+			String name = principal.getClaims().get("name").toString();
+			String picture = principal.getClaims().get("picture").toString();
+
+			User user = service.addUser(sub, role, name, picture);
 
 			UserInfo.setSub(user.getSubId());
 			UserWrapper userWrapper = new UserWrapper(principal);
@@ -56,18 +58,6 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		model.addAttribute("user", UserInfo.getWrapper());
 
 		return "index";
-	}
-
-	@GetMapping("/list") public String groupFinder(Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
-
-		return "list";
-	}
-
-	@GetMapping("/clips") public String addClip(Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
-
-		return "clipList";
 	}
 
 	private String getRoleFromResponse(OidcUser principal) {
