@@ -37,7 +37,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
 
     // Assure User is logged in and have an authorization to create
     @PostMapping("/groupfinders/{sub}/addEdit/add") public String addGroupFinder(@PathVariable(required = true)String sub,
-                                                                                @Valid @RequestBody GroupFinder groupFinder, BindingResult result, Model model) {
+                                                                                @Valid GroupFinder groupFinder, BindingResult result, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
             return "addEditGroupFinder";

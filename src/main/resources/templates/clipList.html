@@ -42,10 +42,10 @@
                                 </div>
                                 <div class="name-and-title">
                                     <div class="user-name">
-                                        <td class="fs-6" th:text="${clip.getUser().getName()}"></td>
+                                        <p class="fs-6" th:text="${clip.getUser().getName()}"></p>
                                     </div>
                                     <div class="clip-title">
-                                        <td class="fs-6" th:text="${clip.getTitle()}"></td>
+                                        <p class="fs-6" th:text="${clip.getTitle()}"></p>
                                     </div>
                                 </div>
 
@@ -81,18 +81,14 @@
                                 </div>
                             </div>
                             <div class="post-footer">
-                                <td class="fs-6" th:text="${clip.getGameTitle()}">
-                                    <p class="fs-6">
-                                        Game:
-                                    </p>
-                                </td>
+                                <p class="fs-6" th:text="${clip.getGameTitle()}">
+                                    Game:
+                                </p>
 
 
-                                <td class="fs-6" th:text="${clip.getTags()}">
-                                    <p class="fs-6">
-                                        Tags:
-                                    </p>
-                                </td>
+                                <p class="fs-6" th:text="${clip.getTags()}">
+                                    Tags:
+                                </p>
                                 <!-- <p class="fs-6">
                                     <td>
                                         <a class="go-to-source" th:href="${clip.getSourceLink()}" th:text="Go to Source"></a>
@@ -100,9 +96,7 @@
                                 </p> -->
 
                                 <div class="timestamp">
-                                    <td>
-                                        <p class="fs-6">6 hrs ago</p>
-                                    </td>
+                                    <p class="fs-6">6 hrs ago</p>
                                 </div>
                             </div>
                         </div>

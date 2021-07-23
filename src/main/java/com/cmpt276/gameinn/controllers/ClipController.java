@@ -25,7 +25,7 @@ public class ClipController {
 
 
     @GetMapping("/clips/{sub}/addEdit")
-    public String showAddEditClipPage(@PathVariable(required = true)String sub, Model model) {
+    public String showAddEditClipPage(@PathVariable(required = true)String sub, Clip clip, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         return "addEditClipPage";
     }
@@ -38,7 +38,7 @@ public class ClipController {
 	}
 
     // Assure User is logged in and have an authorization to create
-    @PostMapping("/clips/{sub}/addEdit/add") public String addClip(@PathVariable(required = true)String sub, @Valid @RequestBody Clip clip, BindingResult result, Model model) {
+    @PostMapping("/clips/{sub}/addEdit/add") public String addClip(@PathVariable(required = true)String sub, @Valid Clip clip, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "addEditClipPage";
         }
