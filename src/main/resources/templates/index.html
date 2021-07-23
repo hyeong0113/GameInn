@@ -31,6 +31,8 @@
                 <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
                 <p th:text="${user.getEmail()}"></p>
                 <a th:href="@{/logout}" class="btn btn-secondary btn-sm logout-button">Log Out</a>
+
+                <p></p>
             </main>
             <script th:inline="javascript">
                 /*<![CDATA[*/

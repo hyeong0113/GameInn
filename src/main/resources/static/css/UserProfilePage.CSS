@@ -1,29 +1,21 @@
-#img {
-    border-radius: 50%;
+.Center4{
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-40%, -15%);
 }
-
-#userP {
-    position: relative;
-    top: 10px;
-    left: 300px;
-}
-
 #name {
     position: relative;
-    left: 10px;
     bottom: 45px;
-}
+} 
 
 #edit {
     position: relative;
-    box-shadow: 10px 8px 10px 2px black;
-    left: 170px;
-    bottom: 50px;
-}
-
-#about {
-    position: relative;
-    left: 100px;
+    left: 30%;
+    bottom: 40px;
+    width: 100px;
+    height: 30px;
+    background: #ffffff;
 }
 
 .fa {
@@ -75,37 +67,10 @@
     background: #00aff0;
 }
 
-#fix {
-    margin: auto;
-    width: 50%;
-    border: 1px;
-    padding: 10px;
-}
-
-#textarea {
-    position: relative;
-    left: 80px;
-}
-
-#textareatext {
+ #textareatext {
     position: relative;
     bottom: 30px;
-}
-
-#fixedE {
-    position: relative;
-    left: 110px;
-}
-
-#fixedP {
-    position: relative;
-    left: 80PX;
-}
-
-#fixedRP {
-    position: relative;
-    left: 12px;
-}
+} 
 
 .container {
     position: relative;

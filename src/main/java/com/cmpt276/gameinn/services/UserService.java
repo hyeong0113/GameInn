@@ -12,10 +12,10 @@ public class UserService {
     @Autowired
     private IUserRepository repository;
 
-    public User addUser(String sub, String name, String email, String photo, String role) {
+    public User addUser(String sub, String role) {
         sub = sub.substring(sub.lastIndexOf('|') + 1);
         if (repository.findUserBySub(sub) == null) {
-            User user = new User(sub, name, email, photo, role);
+            User user = new User(sub, role);
             repository.save(user);
             return user;
         }
@@ -40,9 +40,6 @@ public class UserService {
             throw new IllegalArgumentException("No User with " + user.getSubId());
         }
 
-        found.setName(user.getName());
-        found.setEmail(user.getEmail());
-        found.setPhoto(user.getPhoto());
         found.setRole(user.getRole());
         found.setSocialAccountsList(user.getSocialAccountsList());
 

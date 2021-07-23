@@ -10,7 +10,7 @@ import com.cmpt276.gameinn.services.UserService;
 @Controller public class UserController {
 	@Autowired private UserService service;
 
-	@GetMapping("/users") public List<User> home() {
+	@GetMapping("/users") public List<User> users() {
 		return service.getUsers();
 	}
 }
