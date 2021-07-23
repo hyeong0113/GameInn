@@ -58,17 +58,12 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		return "index";
 	}
 
-	@GetMapping("/list") public String groupFinder(Model model) {
+	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinder(@PathVariable(required = false) String sub, Model model) {
 		model.addAttribute("user", UserInfo.getWrapper());
 
-		return "list";
+		return "groupFinderList";
 	}
 
-	@GetMapping("/clips") public String addClip(Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
-
-		return "clipList";
-	}
 
 	private String getRoleFromResponse(OidcUser principal) {
 		String role = principal.getClaims().get(apiRole).toString();

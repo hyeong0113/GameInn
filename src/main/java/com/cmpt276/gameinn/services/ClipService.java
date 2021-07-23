@@ -3,26 +3,20 @@ package com.cmpt276.gameinn.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.Clip;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
-import com.cmpt276.gameinn.repositories.User.IUserRepository;
 
 @Service
 public class ClipService {
     @Autowired
     private IClipRepository clipRepository;
 
-    @Autowired
-    private IUserRepository userRepository;
-
-    public Clip addGroupFinder(String title, String gameTitle, List<String> tags, String sourceLink, Date postedTime, Long writerId) {
-        User user = userRepository.findById(writerId).orElseThrow(() -> new IllegalArgumentException("No User with " + writerId));
-        Clip groupFinder = new Clip(title, gameTitle, tags, sourceLink, postedTime, user);
-        return clipRepository.save(groupFinder);
+    public Clip addClip(Clip clip, User user) {
+        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getSourceLink(), clip.getPostedTime(), user);
+        return clipRepository.save(created);
     }
 
     public List<Clip> getClips() {
@@ -33,10 +27,10 @@ public class ClipService {
         return clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
     }
 
-    public Clip updateGroupFinder(Clip clip) throws Exception {
-        Clip found = clipRepository.findById(clip.getId()).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + clip.getId()));
+    public Clip updateClip(Clip clip) throws Exception {
+        Clip found = clipRepository.findById(clip.getId()).orElseThrow(() -> new IllegalArgumentException("No Clip with " + clip.getId()));
         if (found == null){
-            throw new IllegalArgumentException("No GroupFinder with " + clip.getId());
+            throw new IllegalArgumentException("No Clip with " + clip.getId());
         }
 
         if (clip.getUser().getId() != found.getUser().getId()) {
@@ -53,14 +47,12 @@ public class ClipService {
         return found;
     }
 
-    public void deleteGroupFinder(Long id){
-        Clip found = clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + id));
+    public void deleteClip(Long id){
+        Clip found = clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
         if (found == null){
             throw new IllegalArgumentException("No Clip with " + id);
         }
 
         clipRepository.delete(found);
     }
-
-
 }
