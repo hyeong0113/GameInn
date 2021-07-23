@@ -40,7 +40,7 @@ public class GroupFinderService {
 
     }
 
-    public void deleteGroupFinder(String sub){
+    public void deleteGroupFinder(String title){
         GroupFinder found = repository.findGroupFinderByTitle(title);
         if (found == null){
             throw new IllegalArgumentException("No GroupFinder with " + title);
