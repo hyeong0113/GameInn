@@ -13,8 +13,8 @@ public class GroupFinderService {
     @Autowired
     private IGroupFinderRepository repository;
 
-    public GroupFinder addGroupFinder(String title, RequiredLevel requiredLevel) {
-        GroupFinder groupFinder = new GroupFinder(title, requiredLevel);
+    public GroupFinder addGroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, String writerid) {
+        GroupFinder groupFinder = new GroupFinder(title, gameTitle, requiredLevel, totalPlayers, currentPlayers, description, writerid);
         return repository.save(groupFinder);
     }
 
