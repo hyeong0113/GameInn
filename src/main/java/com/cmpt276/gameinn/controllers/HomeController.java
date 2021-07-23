@@ -2,13 +2,16 @@ package com.cmpt276.gameinn.controllers;
 
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import  org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.http.HttpResponse;
@@ -79,28 +82,32 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 
 	@GetMapping("/apiTest") public String igdbTest(Model model) {
 		model.addAttribute("user", UserInfo.getWrapper());
+		return "apiTest";
+	}
+
+	@ResponseBody @PostMapping("/getGames") public List<String> getGames(
+		@RequestParam("query") String query) {
+		List<String> games = new ArrayList<String>();
 
 		try {
-			HttpResponse<String> jsonResponse = Unirest.get(
-				"https://api.twitch.tv/helix/search/categories")
-					.headers(IGDB.getTwitchHeaders())
-					.queryString("query", "Mario Party")
-					.asString();
-			JSONObject result = new JSONObject(jsonResponse.getBody());
-			JSONArray arr = result.getJSONArray("data");
-			List<String> games = new ArrayList();
+			if (!query.isEmpty()) {
+				HttpResponse<String> jsonResponse = Unirest.get(
+					"https://api.twitch.tv/helix/search/categories")
+						.headers(IGDB.getTwitchHeaders())
+						.queryString("query", query)
+						.asString();
+				JSONObject result = new JSONObject(jsonResponse.getBody());
+				JSONArray arr = result.getJSONArray("data");
 
-			for (int i = 0; i < arr.length(); i++) {
-				JSONObject game = (JSONObject)arr.get(i);
-				String name = game.getString("name");
-				games.add(name);
+				for (int i = 0; i < arr.length(); i++) {
+					JSONObject game = (JSONObject)arr.get(i);
+					String name = game.getString("name");
+					games.add(name);
+				}
 			}
-
-			System.out.println(games);
-			model.addAttribute("games", games);
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
-		return "apiTest";
+		return games;
 	}
 }

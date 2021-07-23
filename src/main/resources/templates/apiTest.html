@@ -12,11 +12,13 @@
             <div th:replace="fragments/common :: sidebar"></div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <select>
-                    <option th:each="game : ${games}" th:value="${game}" th:text="${game}">Game</option>
+                <input type="text" id="getGames" name="getGames" placeholder="search"><br><br>
+                <select id="games">
+                    <option>Game</option>
                 </select>
             </main>
         </div>
+        <script th:src="@{/js/getGames.js} "></script>
     </body>
 
 </html>
