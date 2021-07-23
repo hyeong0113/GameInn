@@ -27,23 +27,23 @@ public class GroupFinderService {
     }
 
     public GroupFinder updateGroupFinder(GroupFinder groupfinder) {
-        GroupFinder found = repository.findGroupFinderByTitle(GroupFinder.getById());
+        GroupFinder found = repository.findById(groupfinder.getId()).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + groupfinder.getId()));
         if (found == null){
-            throw new IllegalArgumentException("No GroupFinder with " + GroupFinder.getById());
+            throw new IllegalArgumentException("No GroupFinder with " + groupfinder.getId());
         }
 
-        found.setTitle(GroupFinder.getTitle());
-        found.setTitle(GroupFinder.getGameTitle());
+        found.setTitle(groupfinder.getTitle());
+        found.setTitle(groupfinder.getGameTitle());
        
         repository.save(found);
         return found;
 
     }
 
-    public void deleteGroupFinder(String title){
-        GroupFinder found = repository.findGroupFinderByTitle(title);
+    public void deleteGroupFinder(Long id){
+        GroupFinder found = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + id));
         if (found == null){
-            throw new IllegalArgumentException("No GroupFinder with " + title);
+            throw new IllegalArgumentException("No GroupFinder with " + id);
         }
 
         repository.delete(found);

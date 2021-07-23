@@ -36,23 +36,24 @@ public class GroupFinder {
     private int currentPlayers;
 
     private String description;
-    private String writerid;
+    private String writerId;
 
+    private String password;
 
+    private GameStyle GameStyle;
 
-    private com.cmpt276.gameinn.models.GroupFinder.GameStyle GameStyle;
-
+    private boolean isPrivate = false;
 
     public GroupFinder() {}
 
-    public GroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, String writerid) {
+    public GroupFinder(String title, String gameTitle, RequiredLevel requiredLevel, int totalPlayers, int currentPlayers, String description, String writerId) {
 		this.title = title;
-        tihs.gameTitle = gameTitle;
+        this.gameTitle = gameTitle;
 		this.requiredLevel = requiredLevel;
         this.totalPlayers = totalPlayers;
         this.currentPlayers = currentPlayers;
         this.description = description;
-        this.writerid = writerid;
+        this.writerId = writerId;
     }
 
     public Long getId() {
@@ -86,7 +87,6 @@ public class GroupFinder {
 	public void setRequiredLevel(RequiredLevel requiredLevel) {
 		this.requiredLevel = requiredLevel;
 	}
-    //
     
     public com.cmpt276.gameinn.models.GroupFinder.GameStyle getGameStyle() {
 		return this.GameStyle;
@@ -95,7 +95,6 @@ public class GroupFinder {
 	public void setGameStyle(GameStyle gameStyle) {
 		this.GameStyle = gameStyle;
 	}
-//
 
     public int getTotalPlayers()
     {
@@ -117,21 +116,17 @@ public class GroupFinder {
         this.currentPlayers = crnt;
     }
 
-    public String password(String password)
+    public String getPassword()
     {
-        if (isPrivate()==true)
-        {
-            return password;
-        }
+        return this.password;
     }
-    
-    public bool isPrivate()
+
+    public void setPassword(String password)
     {
-        return false;
+        this.password = password;
     }
     
 
-    ///
     public String getDescription()
     {
         return this.description;
@@ -147,10 +142,22 @@ public class GroupFinder {
         return this.writerId;
     }
 
-    public void setWriterID(String writerid)
+    public void setWriterID(String writerId)
     {
-        this.writerId = writerid;
+        this.writerId = writerId;
     }
+
+    
+    public boolean getIsPrivate()
+    {
+        return this.isPrivate;
+    }
+
+    public void setIsPrivate(boolean isPrivate)
+    {
+        this.isPrivate = isPrivate;
+    }
+
 
     @Override public int hashCode() {
 		return Objects.hash(this.title, this.gameTitle, this.totalPlayers, this.currentPlayers,
