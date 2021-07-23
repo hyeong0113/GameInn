@@ -14,15 +14,11 @@ public class UserService {
 
     public User addUser(String sub, String role, String name, String picture) {
         sub = sub.substring(sub.lastIndexOf('|') + 1);
-        System.out.println("User::AddUser");
-        System.out.println("sub::" + sub);
         if (repository.findUserBySub(sub) == null) {
-            System.out.println("User::AddUser::Create");
             User user = new User(sub, role, name, picture);
             repository.save(user);
             return user;
         }
-        System.out.println("User::AddUser::Exist");
         return repository.findUserBySub(sub);
     }
 

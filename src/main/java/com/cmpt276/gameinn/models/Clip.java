@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,6 +44,14 @@ public class Clip {
     private User RUser;
 
     public Clip() {}
+
+    public Clip(String title, String gameTitle, List<String> tags, String sourceLink, Date postedTime) {
+        this.title = title;
+        this.gameTitle = gameTitle;
+        this.tags = tags;
+        this.sourceLink = sourceLink;
+        this.postedTime = postedTime;
+    }
 
     public Clip(String title, String gameTitle, List<String> tags, String sourceLink, Date postedTime, User user) {
         this.title = title;
@@ -115,7 +124,7 @@ public class Clip {
 
     public void setUser(User user)
     {
-        this.RUser = RUser;
+        this.RUser = user;
     }
 
     @Override public int hashCode() {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,8 @@ public class ClipController {
 
 
     @GetMapping("/clips/{sub}/addEdit")
-    public String showAddEditClipPage(@PathVariable(required = true)String sub) {
+    public String showAddEditClipPage(@PathVariable(required = true)String sub, Model model) {
+        model.addAttribute("user", UserInfo.getWrapper());
         return "addEditClipPage";
     }
     
@@ -36,10 +38,11 @@ public class ClipController {
 	}
 
     // Assure User is logged in and have an authorization to create
-    @PostMapping("/clips/{sub}/addEdit/add") public String addClip(@PathVariable(required = true)String sub, @Valid Clip clip, BindingResult result) {
+    @PostMapping("/clips/{sub}/addEdit/add") public String addClip(@PathVariable(required = true)String sub, @Valid @RequestBody Clip clip, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "addEditClipPage";
         }
+		model.addAttribute("user", UserInfo.getWrapper());
 
         User user = userService.getUserBySub(sub);
         Clip temp = clipService.addClip(clip, user);
@@ -53,18 +56,21 @@ public class ClipController {
     //     return "";
     // }
 
-    @RequestMapping("/clips/{sub}/addEdit/edit/{id}") public String editClip(@PathVariable(required = true)String sub, @PathVariable Long id, @Valid Clip clip, BindingResult result) throws Exception {
+    @RequestMapping("/clips/{sub}/addEdit/edit/{id}") public String editClip(@PathVariable(required = true)String sub, @PathVariable Long id,
+                                                                            @Valid @RequestBody Clip clip, BindingResult result, Model model) throws Exception {
+        model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
             return "addEditClipPage";
         }
 
-        Clip temp = clipService.updateClip(clip);
+        Clip temp = clipService.updateClip(id, clip);
 
 		return "redirect:/clips/" + sub;
 	}
 
     @RequestMapping("/clips/{sub}/delete/{id}")
-    public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id) {
+    public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model) {
+        model.addAttribute("user", UserInfo.getWrapper());
         clipService.deleteClip(id);
         return "redirect:/";
     }

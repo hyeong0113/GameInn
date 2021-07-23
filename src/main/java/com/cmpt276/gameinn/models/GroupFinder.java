@@ -2,6 +2,7 @@ package com.cmpt276.gameinn.models;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -53,6 +54,21 @@ public class GroupFinder {
     public GroupFinder() {}
 
     public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
+            int totalPlayers, int currentPlayers, String description, String password) {
+        this.title = title;
+        this.gameTitle = gameTitle;
+        this.gameStyle = gameStyle;
+        this.requiredLevel = requiredLevel;
+        this.totalPlayers = totalPlayers;
+        this.currentPlayers = currentPlayers;
+        this.description = description;
+        this.password = password;
+        if (password.isEmpty()) {
+            this.isPrivate = true;
+        }
+    }
+
+    public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
                     int totalPlayers, int currentPlayers, String description, String password, User user) {
 		this.title = title;
         this.gameTitle = gameTitle;
@@ -63,8 +79,10 @@ public class GroupFinder {
         this.description = description;
         this.RUser = user;
         this.password = password;
-        if (password.isEmpty()) {
-            this.isPrivate = true;
+        if(password != null) {
+            if (!password.isEmpty()) {
+                this.isPrivate = true;
+            }
         }
     }
 
@@ -158,7 +176,6 @@ public class GroupFinder {
         this.RUser = user;
     }
 
-    
     public String getPassword()
     {
         return this.password;

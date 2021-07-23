@@ -6,8 +6,6 @@ import java.util.List;
 
 import com.cmpt276.gameinn.models.GroupFinder;
 import com.cmpt276.gameinn.models.User;
-import com.cmpt276.gameinn.constant.EnumCollection.GameStyle;
-import com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel;
 import com.cmpt276.gameinn.repositories.GroupFinder.IGroupFinderRepository;
 import com.cmpt276.gameinn.repositories.User.IUserRepository;
 
@@ -15,9 +13,6 @@ import com.cmpt276.gameinn.repositories.User.IUserRepository;
 public class GroupFinderService {
     @Autowired
     private IGroupFinderRepository groupFinderRepository;
-
-    @Autowired
-    private IUserRepository userRepository;
 
     public GroupFinder addGroupFinder(GroupFinder groupFinder, User user) {
         GroupFinder created = new GroupFinder(groupFinder.getTitle(), groupFinder.getGameTitle(), groupFinder.getGameStyle(),
@@ -34,14 +29,10 @@ public class GroupFinderService {
         return groupFinderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + id));
     }
 
-    public GroupFinder updateGroupFinder(GroupFinder groupFinder) throws Exception {
-        GroupFinder found = groupFinderRepository.findById(groupFinder.getId()).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + groupFinder.getId()));
+    public GroupFinder updateGroupFinder(Long id, GroupFinder groupFinder) throws Exception {
+        GroupFinder found = groupFinderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + id));
         if (found == null){
             throw new IllegalArgumentException("No GroupFinder with " + groupFinder.getId());
-        }
-
-        if (groupFinder.getUser().getId() != found.getUser().getId()) {
-            throw new Exception("You are not authorized to edit clip.");
         }
 
         found.setTitle(groupFinder.getTitle());

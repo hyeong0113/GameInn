@@ -27,14 +27,10 @@ public class ClipService {
         return clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
     }
 
-    public Clip updateClip(Clip clip) throws Exception {
-        Clip found = clipRepository.findById(clip.getId()).orElseThrow(() -> new IllegalArgumentException("No Clip with " + clip.getId()));
+    public Clip updateClip(Long id, Clip clip) throws Exception {
+        Clip found = clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
         if (found == null){
             throw new IllegalArgumentException("No Clip with " + clip.getId());
-        }
-
-        if (clip.getUser().getId() != found.getUser().getId()) {
-            throw new Exception("You are not authorized to edit clip.");
         }
 
         found.setTitle(clip.getTitle());
