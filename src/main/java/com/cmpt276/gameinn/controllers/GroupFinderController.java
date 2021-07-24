@@ -55,7 +55,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
     }
 
     @RequestMapping("/groupfinders/{sub}/addEdit/edit/{id}") public String editGroupFinder(@PathVariable(required = true)String sub, @PathVariable Long id,
-                                                                                @Valid @RequestBody GroupFinder groupFinder, BindingResult result, Model model) throws Exception {
+                                                                                @Valid GroupFinder groupFinder, BindingResult result, Model model) throws Exception {
         model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
             return "addEditGroupFinderPage";
