@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:insert="fragments/common :: mainHeader"></div>
-    <title>GameInn</title>
-    <script th:src="@{/js/auth_login.js} "></script>
-    <link rel="stylesheet" href="/css/landing_page.css">
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <title>GameInn</title>
+        <script th:src="@{/js/auth_login.js} "></script>
+        <link rel="stylesheet" href="/css/landing_page.css">
+    </head>
 
-<body>
-    <div sec:authorize="isAuthenticated()" th:object="${user}">
-        <div class="loading-container">
-            <p class="welcome-text" th:text="|Hello, ${user.getName()}|"></p>
-            <p class="welcome-admin-text" id="admin-text"></p>
+    <body>
+        <div sec:authorize="isAuthenticated()" th:object="${user}">
+            <div class="loading-container">
+                <p class="welcome-text" th:text="|Hello, ${user.getName()}|"></p>
+                <p class="welcome-admin-text" id="admin-text"></p>
+            </div>
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                var sub = /*[[${user.getSubId()}]]*/ '';
+                var role = /*[[${user.getRole()}]]*/ '';
+                load_admin_message(role);
+                load_main_page(sub);
+                /*]]>*/
+            </script>
         </div>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            var sub = /*[[${user.getSubId()}]]*/ '';
-            var role = /*[[${user.getRole()}]]*/ '';
-            load_admin_message(role);
-            load_main_page(sub);
-            /*]]>*/
-        </script>
-    </div>
-</body>
+    </body>

@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/profile.CSS">
-    <link rel="stylesheet" href="/css/link2CSS.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>User Profile Page</title>
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/profile.css">
+        <title>User Profile Page</title>
+    </head>
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+    <body>
+        <div class="row">
+            <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h1 class="ml-5 mt-4 p-5">User Profile</h1>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="content">
+                    <h1 class="mb-4 mt-5">User Profile</h1>
 
-            <form class="Center4" th:object="${user}">
-                <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
+                    <form class="Center4" th:object="${user}">
+                        <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
 
-                <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
+                        <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
 
-                <button id="edit" type="submit">Edit Profile</button>
+                        <button id="edit" type="submit">Edit Profile</button>
 
-                <div>
-                    <label id="textareatext" for="textarea">About me:</label>
-                    <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                        <div>
+                            <label id="textareatext" for="textarea">About me:</label>
+                            <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="email">Email:</label>
+                            <span id="email" th:text="${user.getEmail()}"></span>
+                        </div>
+
+                        <div>
+                            <label for="fixedP">Password:</label>
+                            <input class="ml-3 border border-dark" id='fixedP' type="password" required>
+                        </div>
+
+                        <div>
+                            <label for="fixedRP">Re-enter Password:</label>
+                            <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
+                        </div>
+
+                        <div class="col">
+                            <a href="#" class="fab fa-instagram"></a>
+                            <a href="url">https://www.instagram.com</a>
+                        </div>
+
+                        <div class="col">
+                            <a href="#" class="fab fa-skype"></a>
+                            <a href="url">https://www.skype.com/en</a>
+                        </div>
+                    </form>
                 </div>
-
-                <div>
-                    <label for="email">Email:</label>
-                    <span id="email" th:text="${user.getEmail()}"></span>
-                </div>
-
-                <div>
-                    <label for="fixedP">Password:</label>
-                    <input class="ml-3 border border-dark" id='fixedP' type="password" required>
-                </div>
-
-                <div>
-                    <label for="fixedRP">Re-enter Password:</label>
-                    <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
-                </div>
-
-                <div class="col">
-                    <a href="#" class="fab fa-instagram"></a>
-                    <a href="url">https://www.instagram.com</a>
-                </div>
-
-                <div class="col">
-                    <a href="#" class="fab fa-skype"></a>
-                    <a href="url">https://www.skype.com/en</a>
-                </div>
-            </form>
-        </main>
-    </div>
-</body>
+            </main>
+        </div>
+    </body>
 
 </html>

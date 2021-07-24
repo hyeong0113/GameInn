@@ -1,20 +1,4 @@
-.Center1 {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -25%);
-    padding: 4%;
-}
-
-#mx-auto1 {
-    position: relative;
-    left: 60%;
-    width: 100px;
-    height: 30px;
-    background: #ffffff;
-}
-
 .add-clip {
-    background-color: #7063F8;
-    color: #ffffff;
+    margin: auto;
+    width: 100%;
 }

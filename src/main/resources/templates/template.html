@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/link2CSS.css">
-    <title>form</title>
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/link2CSS.css">
+        <title>form</title>
+    </head>
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+    <body>
+        <div class="row">
+            <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-        </main>
-    </div>
-</body>
+            </main>
+        </div>
+    </body>
 
 </html>
