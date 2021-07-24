@@ -1,0 +1,67 @@
+.Center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+}
+
+#p-2 {
+    position: fixed;
+    top: -25%;
+    width: 150px;
+    height: 30px;
+    background: #ffffff;
+    margin-top: 2px;
+    margin: 2px;
+}
+
+#mx-auto {
+    position: relative;
+    left: 84%;
+    width: 100px;
+    height: 30px;
+    background: #ffffff;
+    margin-top: 2px;
+    margin: 2px;
+}
+
+.groupfinder-info {
+    height: 150%;
+    width: 55%;
+    margin-top: 5% !important;
+    margin-left: 25% !important;
+}
+
+.groupfinder-description {
+    resize: none;
+}
+
+.number-currentplayer {
+    padding-right: 23%;
+}
+
+
+/* buttons */
+
+.buttons {
+    padding-right: 23%;
+}
+
+.groupfinder-button {
+    background-color: #7063F8;
+    color: #ffffff;
+}
+
+.groupfinder-button:hover {
+    background-color: #ffffff !important;
+    color: #7063F8 !important;
+}
+
+.delete-button {
+    margin-left: 89%;
+}
+
+.back-button {
+    padding-left: 25%;
+    padding-top: 10%;
+}

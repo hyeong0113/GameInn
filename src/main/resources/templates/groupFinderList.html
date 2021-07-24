@@ -15,7 +15,6 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="buttons">
                 <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
-                <!-- <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a> -->
 
                 <form class="search" action="#">
                     <input type="text" placeholder="Search.." name="search">
@@ -48,25 +47,6 @@
                             <td th:text="${groupFinder.getTotalPlayers()}"></td>
                         </tr>
                     </tbody>
-
-
-                    <!-- <tr>
-                        <th> League of legends 5vs5 stream </th>
-                        <th> League of legends </th>
-                        <th> Thomas Johnson </th>
-                        <th> Private </th>
-                        <th> 7/10 </th>
-                    </tr>
-                    <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
-
-                    <tr>
-                        <th> Wow raid expert </th>
-                        <th> World of Warcraft </th>
-                        <th> Jeremy Yankins </th>
-                        <th> Public </th>
-                        <th> 13/20 </th>
-                    </tr> -->
-
                 </table>
 
 

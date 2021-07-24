@@ -1,31 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"></html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/BackToQueue.css">
+    <div th:insert="fragments/common :: mainHeader"></div>
+    <link rel="stylesheet" href="/css/link2CSS.css">
+    <link rel="stylesheet" href="/css/groupfinder_detail.css">
+    <title>form</title>
 </head>
+</head>
+
 <body>
-    <div class="Center">
-    <header>
-        <button id="p-2" type="button" >Back to Queues</button>
-    </header>
-    <h1>StartCraft2 1vs1</h1>
-    <div>
-    <span class="p-1 badge badge-light border">Startcraft2</span>
-    <span class="p-1 badge badge-light border">Export</span>
-    <span class="p-1 badge badge-light border">Professional</span>
-    <span class="p-1 badge badge-light border">Public</span>
-</div>
-<div>
-<i id="mx-auto" class="p-3 mx-auto fas fa-users"> 1/2</i>
-</div>
-<textarea rows="10" cols="60"></textarea>
-<div><button id="mx-auto" type="button" >Join</button></div>
-</div>
+    <div class="row">
+        <div th:replace="fragments/common :: sidebar"></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="back-button">
+                <a th:href="@{/groupfinders/{sub}(sub=${user.getSubId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Back to list</a>
+            </div>
+
+            <div class="groupfinder-info" th:switch="${groupFinder}">
+                <div class="groupfinder-title">
+                    <h1 th:text="${groupFinder.getTitle()}"></h1>
+                </div>
+
+                <div class="groupfinder-badge">
+                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameTitle()}"></span>
+                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getRequiredLevel()}"></span>
+                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameStyle()}"></span>
+                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getStatus()}"></span>
+                </div>
+
+                <div class="number-currentplayer">
+                    <i id="mx-auto" class="p-3 mx-auto fas fa-users"> 
+                        <sup th:text="${groupFinder.getCurrentPlayers()}">1</sup>&frasl;<sub th:text="${groupFinder.getTotalPlayers()}">2</sub>
+                    </i>
+                </div>
+
+                <textarea class="groupfinder-description" rows="15" cols="80" th:text="${groupFinder.getDescription()}" readonly></textarea>
+
+                <!-- Join will be availble next iteration -->
+                <div class="buttons">
+                    <!-- <div class="join-button">
+                        <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
+                    </div> -->
+                    <!-- This button is for writer of this post -->
+                    <div class="delete-button">
+                        <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
+
 </html>

@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cmpt276.gameinn.models.GroupFinder;
@@ -49,6 +48,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
 	}
 
     @GetMapping(value = {"/groupfinders/detail/{id}", "/groupfinders/{sub}/detail/{id}"}) public String getGroupFinderById(@PathVariable(required = false) String sub, @PathVariable Long id, Model model) {
+        model.addAttribute("user", UserInfo.getWrapper());
         model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
         return "groupFinderDetail";
     }

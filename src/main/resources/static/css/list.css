@@ -52,6 +52,10 @@ table {
     background: #ffffff;
 } */
 
+.buttons {
+    margin-left: 25%;
+}
+
 .search {
     display: flex;
     justify-content: center;
