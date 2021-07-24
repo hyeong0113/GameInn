@@ -70,7 +70,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
     public String deleteGroupFinder(@PathVariable(required = true)String sub, @PathVariable Long id, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         groupFinderService.deleteGroupFinder(id);
-        return "redirect:/";
+        return "redirect:/groupfinders/" + sub;
     }
 
 

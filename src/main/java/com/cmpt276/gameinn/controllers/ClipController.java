@@ -72,6 +72,6 @@ public class ClipController {
     public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         clipService.deleteClip(id);
-        return "redirect:/";
+        return "redirect:/clips/" + sub;
     }
 }
