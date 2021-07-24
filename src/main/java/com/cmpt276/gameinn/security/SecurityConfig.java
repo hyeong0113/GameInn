@@ -22,15 +22,15 @@ import com.cmpt276.gameinn.auth.LogoutHandler;
 	throws Exception {
 		// When you add more endponts for backend, add it with ".antMatchers("/controller_name/**").permitAll()" under http.authorizeRequests()
 		http.authorizeRequests()
-				.antMatchers("/groupfinders/**").permitAll()
-				.antMatchers("/favicon.ico").permitAll()
+			.antMatchers("/groupfinders/**").permitAll()
+			.antMatchers("/favicon.ico").permitAll()
 			.and()
-				.oauth2Login()
+			.oauth2Login()
 			.and()
-				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.addLogoutHandler(logoutHandler)
+			.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.addLogoutHandler(logoutHandler)
 			.and()
-				.csrf().disable();
+			.csrf().disable();
 	}
 }
