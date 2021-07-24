@@ -1,24 +1,4 @@
-.Center3{
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -25%);
-    padding: 4%;
+.add-groupfinder {
+    margin: auto;
+    width: 100%;
 }
-#gameTitle1{
-    border-radius: 10px;
-    width: 80%;
-
-
-}
-#QueueTitle {
-    width: 80%;
-
-}
-
-#createButton {
-    position: relative;
-    margin: 30px 30px 0px 550px;
-    background: #ffffff;
-}
-

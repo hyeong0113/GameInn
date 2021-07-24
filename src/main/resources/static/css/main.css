@@ -28,11 +28,63 @@ body {
     padding-bottom: 0.75rem
 }
 
+.content {
+    width: 75%;
+    margin: auto
+}
+
+.content-50 {
+    width: 50%;
+    margin: auto
+}
+
+.buttons, .post-header {
+    display: flex;
+    align-items: center;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+.search button {
+    float: right;
+    padding: 6px 10px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background: #ccc;
+}
+
+.page-num {
+    text-align: center;
+}
+
+input[type=text] {
+    padding: 6px;
+}
+
 .ui-autocomplete {
     max-height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 5px;
+}
+
+.btn {
+    background-color: #7063F8;
+    color: #ffffff;
+}
+
+.btn:hover {
+    background-color: #ffffff !important;
+    color: #7063F8 !important;
 }
 
 @media screen and (max-height: 450px) {

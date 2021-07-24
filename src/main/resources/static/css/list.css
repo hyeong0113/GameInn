@@ -1,86 +1,18 @@
 /*table */
-
-table,
-th,
-td {
+table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
 
-table {
-    width: 50%;
-}
-
 .table1 {
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     background: #ffffff;
 }
 
-.table1 th,
-.table1 td {
+.table1 th, .table1 td {
     padding: 0.5rem
 }
 
-.table1 tr:first-child {
+.table1 thead {
     background: #C0C0C0;
-}
-
-
-/* button icon */
-
-
-/* .button:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-} */
-
-
-/* For Add Queue and Search above table */
-
-
-/* .buttons {
-    display: flex;
-    align-items: center;
-    margin: 1rem;
-}
-
-.buttons #addQueue {
-    width: 100px;
-    height: 30px;
-    background: #ffffff;
-} */
-
-.search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-}
-
-.search input[type=text] {
-    padding: 6px;
-}
-
-.search button {
-    float: right;
-    padding: 6px 10px;
-    background: #ddd;
-    border: none;
-    cursor: pointer;
-}
-
-.search button:hover {
-    background: #ccc;
-}
-
-.add-groupfinder-button {
-    background-color: #7063F8;
-    color: #ffffff;
-}
-
-.add-groupfinder-button:hover {
-    background-color: #ffffff !important;
-    color: #7063F8 !important;
 }

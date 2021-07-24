@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cmpt276.gameinn.models.GroupFinder;
@@ -21,18 +20,17 @@ import com.cmpt276.gameinn.constant.UserInfo;
     @Autowired private GroupFinderService groupFinderService;
     @Autowired private UserService userService;
 
-
-    @GetMapping("/groupfinders/{sub}/addEdit")
-    public String showAddEditGroupFinderPage(@PathVariable(required = true)String sub, GroupFinder groupFinder, Model model) {
-        model.addAttribute("user", UserInfo.getWrapper());
-        return "addEditGroupFinderPage";
-    }
-
 	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinderListPage(@PathVariable(required = false)String sub, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         model.addAttribute("groupFinders", groupFinderService.getGroupFinders());
 
         return "groupFinderList";
+    }
+
+    @GetMapping("/groupfinders/{sub}/addEdit")
+    public String showAddEditGroupFinderPageForCreate(@PathVariable(required = true)String sub, GroupFinder groupFinder, Model model) {
+        model.addAttribute("user", UserInfo.getWrapper());
+        return "addEditGroupFinderPage";
     }
 
     // Assure User is logged in and have an authorization to create
@@ -50,12 +48,20 @@ import com.cmpt276.gameinn.constant.UserInfo;
 	}
 
     @GetMapping(value = {"/groupfinders/detail/{id}", "/groupfinders/{sub}/detail/{id}"}) public String getGroupFinderById(@PathVariable(required = false) String sub, @PathVariable Long id, Model model) {
+        model.addAttribute("user", UserInfo.getWrapper());
         model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
         return "groupFinderDetail";
     }
 
+    @GetMapping("/groupfinders/{sub}/addEdit/{id}")
+    public String showAddEditGroupFinderPageForEdit(@PathVariable(required = true)String sub, @PathVariable Long id, GroupFinder groupFinder, Model model) {
+        model.addAttribute("user", UserInfo.getWrapper());
+        model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
+        return "addEditGroupFinderPage";
+    }
+
     @RequestMapping("/groupfinders/{sub}/addEdit/edit/{id}") public String editGroupFinder(@PathVariable(required = true)String sub, @PathVariable Long id,
-                                                                                @Valid @RequestBody GroupFinder groupFinder, BindingResult result, Model model) throws Exception {
+                                                                                @Valid GroupFinder groupFinder, BindingResult result, Model model) throws Exception {
         model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
             return "addEditGroupFinderPage";
@@ -70,7 +76,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
     public String deleteGroupFinder(@PathVariable(required = true)String sub, @PathVariable Long id, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         groupFinderService.deleteGroupFinder(id);
-        return "redirect:/";
+        return "redirect:/groupfinders/" + sub;
     }
 
 

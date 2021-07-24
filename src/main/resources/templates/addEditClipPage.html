@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
     <head>
-        <div th:insert="fragments/common :: mainHeader"></div>
+        <div th:replace="fragments/common :: mainHeader"></div>
         <link rel="stylesheet" href="/css/addClipPage.css">
         <title>Add clip form</title>
     </head>
@@ -12,43 +12,36 @@
 
             <div th:replace="fragments/common :: sidebar"></div>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-                <div class="Center1 border border-dark">
+                <div class="content-50">
+                    <h2 class="mb-4 mt-5">Create Group</h2>
 
                     <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
-                        <div class="form-group row">
-                            <label for="gameTitle" class="col-sm-2 col-form-label">Game:</label>
-                            <div class="col-sm-10">
+                        <div class="row g-3">
+                            <div class="col-sm-10 flex-grow-1">
+                                <label for="gameTitle" class="col-sm-2 col-form-label">Game:</label>
                                 <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
                             </div>
-                        </div>
 
-
-                        <div class="form-group row">
-                            <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 flex-grow-1">
+                                <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
                                 <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
                             </div>
-                        </div>
 
-                        <!-- Tags are unavailable now -->
-                        <!-- <div class="form-group row">
-                        <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control border border-dark" id="tags">
-                        </div>
-                    </div> -->
+                            <!-- Tags are unavailable now -->
+                            <!-- <div class="col-sm-10 flex-grow-1">
+                                <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
+                                <input type="text" class="form-control border border-dark" id="tags">
+                            </div> -->
 
-                        <div class="form-group row">
-                            <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
-                            <div class="col-sm-10">
-                                <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Title" required>
+                            <div class="col-sm-10 flex-grow-1">
+                                <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
+                                <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Clip Link" required>
                             </div>
-                        </div>
 
-                        <!-- Date is unavailable now -->
-                        <div class="row">
-                            <input type="submit" class="add-clip" value="Add">
+                            <!-- Date is unavailable now -->
+                            <div class="col-sm-10 flex-grow-1">
+                                <input type="submit" class="btn add-clip" value="Add">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -57,56 +50,5 @@
         </div>
         <script th:src="@{/js/getGames.js} "></script>
     </body>
-
-    <!-- <body>
-    <div class="modal fade" id="addClipModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addClipTitle">Add Clip</h5>
-                </div>
-                <div class="modal-body">
-
-                    <form>
-                        <div class="form-group row">
-                            <label for="gameTitle" class="col-sm-2 col-form-label">Game Title:</label>
-                            <div class="col-sm-10">
-                                <input id="gameTitle" class="form-control border border-dark" type="text" placeholder="Search">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
-                            <div class="col-sm-10">
-                                <input id="clipTitle" type="text" class="form-control border border-dark">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control border border-dark" id="tags">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control border border-dark" id="inputlink">
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button id="mx-auto1" type="button">Create Clip</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</body> -->
 
 </html>

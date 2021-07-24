@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
     <head>
-        <div th:insert="fragments/common :: mainHeader"></div>
+        <div th:replace="fragments/common :: mainHeader"></div>
         <link rel="stylesheet" href="/css/list.css" />
         <title>Group Finder</title>
     </head>
@@ -12,19 +12,20 @@
             <div th:replace="fragments/common :: sidebar"></div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="buttons">
-                    <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
+                <div class="content">
+                    <h2 class="mb-4 mt-5">Group Finder</h2>
 
-                    <form class="search" action="#">
-                        <input type="text" placeholder="Search.." name="search">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
+                    <div class="buttons mb-3">
+                        <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
+
+                        <form class="search" action="#">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
 
 
-                <!--Table Content-->
-                <div>
-                    <br> <br> <br>
+                    <!--Table Content-->
                     <table class="table1">
                         <thead>
                             <tr>
@@ -38,7 +39,7 @@
                         <tbody>
                             <tr th:each="groupFinder : ${groupFinders}">
                                 <td>
-                                    <a th:href="@{/groupfinders/{sub}/{id}(sub=${groupFinder.getUser().getSubId()}, sub=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
+                                    <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
                                 </td>
                                 <td th:text="${groupFinder.getGameTitle()}"></td>
                                 <td th:text="${groupFinder.getUser().getName()}"></td>
@@ -46,35 +47,12 @@
                                 <td th:text="${groupFinder.getTotalPlayers()}"></td>
                             </tr>
                         </tbody>
-
-
-                        <!-- <tr>
-                        <th> League of legends 5vs5 stream </th>
-                        <th> League of legends </th>
-                        <th> Thomas Johnson </th>
-                        <th> Private </th>
-                        <th> 7/10 </th>
-                    </tr>
-                    <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
-
-                    <tr>
-                        <th> Wow raid expert </th>
-                        <th> World of Warcraft </th>
-                        <th> Jeremy Yankins </th>
-                        <th> Public </th>
-                        <th> 13/20 </th>
-                    </tr> -->
-
                     </table>
 
-
+                    <p class="page-num">
+                        < &nbsp; <u> 1 </u> &nbsp; >
+                    </p>
                 </div>
-
-                <p style="text-align:center;">
-                    < &nbsp; <u> 1 </u> &nbsp; >
-                </p>
-
-                <br> <br>
             </main>
         </div>
     </body>
