@@ -55,22 +55,6 @@ public class GroupFinder {
     public GroupFinder() {}
 
     public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
-            int totalPlayers, int currentPlayers, String description, String password) {
-        this.title = title;
-        this.gameTitle = gameTitle;
-        this.gameStyle = gameStyle;
-        this.requiredLevel = requiredLevel;
-        this.totalPlayers = totalPlayers;
-        this.currentPlayers = currentPlayers;
-        this.description = description;
-        this.password = password;
-        if (password.isEmpty()) {
-            this.isPrivate = true;
-            this.status = "Private";
-        }
-    }
-
-    public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
                     int totalPlayers, int currentPlayers, String description, String password, User user) {
 		this.title = title;
         this.gameTitle = gameTitle;
@@ -83,6 +67,7 @@ public class GroupFinder {
         this.password = password;
         if(password != null) {
             if (!password.isEmpty()) {
+                this.status = "Private";
                 this.isPrivate = true;
             }
         }
