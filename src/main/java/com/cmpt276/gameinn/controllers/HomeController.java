@@ -57,7 +57,7 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 		sub, Model model) {
 		model.addAttribute("user", UserInfo.getWrapper());
 
-		return "index";
+		return "profile";
 	}
 
 	private String getRoleFromResponse(OidcUser principal) {

@@ -3,7 +3,8 @@
 
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/UserProfilePage.CSS">
+    <link rel="stylesheet" href="/css/profile.CSS">
+    <link rel="stylesheet" href="/css/link2CSS.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>User Profile Page</title>
 </head>
@@ -15,20 +16,21 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <h1 class="ml-5 mt-4 p-5">User Profile</h1>
 
-            <form class="Center4">
+            <form class="Center4" th:object="${user}">
                 <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
-                <a class="ml-3 mt-5 pt-4" id='name' href="url">June Kwak</a>
+
+                <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
 
                 <button id="edit" type="submit">Edit Profile</button>
 
                 <div>
                     <label id="textareatext" for="textarea">About me:</label>
-                    <textarea class="ml-3 border border-dark" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                    <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
                 </div>
 
                 <div>
-                    <label for="fixedE">Email:</label>
-                    <input class="ml-5 border border-dark" id='fixedE' type="email" placeholder="a.a@.com" required>
+                    <label for="email">Email:</label>
+                    <span id="email" th:text="${user.getEmail()}"></span>
                 </div>
 
                 <div>
