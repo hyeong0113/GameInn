@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/list.css" />
-    <link rel="stylesheet" href="/css/link2CSS.css">
-    <title>Group Finder List Page</title>
-</head>
+    <head>
+        <div th:insert="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/list.css" />
+        <title>Group Finder</title>
+    </head>
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+    <body>
+        <div class="row">
+            <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="buttons">
-                <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="buttons">
+                    <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
 
-                <form class="search" action="#">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-
-
-            <!--Table Content-->
-            <div>
-                <br> <br> <br>
-                <table class="table1">
-                    <thead>
-                        <tr>
-                            <th> Title </th>
-                            <th> Game </th>
-                            <th> UserName </th>
-                            <th> Status </th>
-                            <th> Total number of Players </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="groupFinder : ${groupFinders}">
-                            <td>
-                                <a th:href="@{/groupfinders/{sub}/{id}(sub=${groupFinder.getUser().getSubId()}, sub=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
-                            </td>
-                            <td th:text="${groupFinder.getGameTitle()}"></td>
-                            <td th:text="${groupFinder.getUser().getName()}"></td>
-                            <td th:text="${groupFinder.getStatus()}"></td>
-                            <td th:text="${groupFinder.getTotalPlayers()}"></td>
-                        </tr>
-                    </tbody>
+                    <form class="search" action="#">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
 
 
-                    <!-- <tr>
+                <!--Table Content-->
+                <div>
+                    <br> <br> <br>
+                    <table class="table1">
+                        <thead>
+                            <tr>
+                                <th> Title </th>
+                                <th> Game </th>
+                                <th> UserName </th>
+                                <th> Status </th>
+                                <th> Total number of Players </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="groupFinder : ${groupFinders}">
+                                <td>
+                                    <a th:href="@{/groupfinders/{sub}/{id}(sub=${groupFinder.getUser().getSubId()}, sub=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
+                                </td>
+                                <td th:text="${groupFinder.getGameTitle()}"></td>
+                                <td th:text="${groupFinder.getUser().getName()}"></td>
+                                <td th:text="${groupFinder.getStatus()}"></td>
+                                <td th:text="${groupFinder.getTotalPlayers()}"></td>
+                            </tr>
+                        </tbody>
+
+
+                        <!-- <tr>
                         <th> League of legends 5vs5 stream </th>
                         <th> League of legends </th>
                         <th> Thomas Johnson </th>
@@ -66,18 +65,18 @@
                         <th> 13/20 </th>
                     </tr> -->
 
-                </table>
+                    </table>
 
 
-            </div>
+                </div>
 
-            <p style="text-align:center;">
-                < &nbsp; <u> 1 </u> &nbsp; >
-            </p>
+                <p style="text-align:center;">
+                    < &nbsp; <u> 1 </u> &nbsp; >
+                </p>
 
-            <br> <br>
-        </main>
-    </div>
-</body>
+                <br> <br>
+            </main>
+        </div>
+    </body>
 
 </html>

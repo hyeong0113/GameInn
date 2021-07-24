@@ -1,10 +1,12 @@
-$("#getGames").keyup(function() {
-    $("#games").empty();
+$("#gameTitle").keyup(function() {
+    var gameInputW = $(gameTitle).outerWidth();
+    $(".ui-autocomplete").css("max-width", gameInputW);
+
     findGames();
 })
 
 function findGames() {
-    var query = $("#getGames").val();
+    var query = $("#gameTitle").val();
     var url = "/getGames";
 
     var params = {
@@ -12,13 +14,11 @@ function findGames() {
     };
 
     $.post(url, params, function(response) {
-        // var gamesDropdown = $("#games");
         var gamesList = [];
         $.each(response, function(index, game) {
-            // $("<option>").val(game).text(game).appendTo(gamesDropdown);
             gamesList.push(game)
         });
-        $("#getGames").autocomplete({
+        $("#gameTitle").autocomplete({
             source: gamesList
         });
     }).fail(function() {

@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/link2CSS.css">
-    <link rel="stylesheet" href="/css/addClipPage.css">
-    <title>Add clip form</title>
-</head>
+    <head>
+        <div th:insert="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/addClipPage.css">
+        <title>Add clip form</title>
+    </head>
 
-<body>
-    <div class="row">
+    <body>
+        <div class="row">
 
-        <div th:replace="fragments/common :: sidebar"></div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div th:replace="fragments/common :: sidebar"></div>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-            <div class="Center1 border border-dark">
+                <div class="Center1 border border-dark">
 
-                <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
-                    <div class="form-group row">
-                        <label for="gameTitle" class="col-sm-2 col-form-label">Game Title:</label>
-                        <div class="col-sm-10">
-                            <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game Title" required>
+                    <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
+                        <div class="form-group row">
+                            <label for="gameTitle" class="col-sm-2 col-form-label">Game:</label>
+                            <div class="col-sm-10">
+                                <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="form-group row">
-                        <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
-                        <div class="col-sm-10">
-                            <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
+                        <div class="form-group row">
+                            <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
+                            <div class="col-sm-10">
+                                <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Tags are unavailable now -->
-                    <!-- <div class="form-group row">
+                        <!-- Tags are unavailable now -->
+                        <!-- <div class="form-group row">
                         <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control border border-dark" id="tags">
                         </div>
                     </div> -->
 
-                    <div class="form-group row">
-                        <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
-                        <div class="col-sm-10">
-                            <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Title" required>
+                        <div class="form-group row">
+                            <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
+                            <div class="col-sm-10">
+                                <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Title" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Date is unavailable now -->
-                    <div class="row">
-                        <input type="submit" class="add-clip" value="Add">
-                    </div>
-                </form>
-            </div>
-        </main>
+                        <!-- Date is unavailable now -->
+                        <div class="row">
+                            <input type="submit" class="add-clip" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </main>
 
-    </div>
-</body>
+        </div>
+        <script th:src="@{/js/getGames.js} "></script>
+    </body>
 
-<!-- <body>
+    <!-- <body>
     <div class="modal fade" id="addClipModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
