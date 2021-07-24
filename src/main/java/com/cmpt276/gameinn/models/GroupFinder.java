@@ -2,7 +2,6 @@ package com.cmpt276.gameinn.models;
 
 import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -46,27 +45,14 @@ public class GroupFinder {
 
     private boolean isPrivate = false;
 
+    private String status = "Public";
+
     @ManyToOne
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User RUser;
 
     public GroupFinder() {}
-
-    public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
-            int totalPlayers, int currentPlayers, String description, String password) {
-        this.title = title;
-        this.gameTitle = gameTitle;
-        this.gameStyle = gameStyle;
-        this.requiredLevel = requiredLevel;
-        this.totalPlayers = totalPlayers;
-        this.currentPlayers = currentPlayers;
-        this.description = description;
-        this.password = password;
-        if (password.isEmpty()) {
-            this.isPrivate = true;
-        }
-    }
 
     public GroupFinder(String title, String gameTitle, GameStyle gameStyle, RequiredLevel requiredLevel,
                     int totalPlayers, int currentPlayers, String description, String password, User user) {
@@ -81,6 +67,7 @@ public class GroupFinder {
         this.password = password;
         if(password != null) {
             if (!password.isEmpty()) {
+                this.status = "Private";
                 this.isPrivate = true;
             }
         }
@@ -184,6 +171,16 @@ public class GroupFinder {
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public String getStatus()
+    {
+        return this.status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
     }
 
 

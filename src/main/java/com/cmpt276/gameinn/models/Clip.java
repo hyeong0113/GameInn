@@ -45,14 +45,6 @@ public class Clip {
 
     public Clip() {}
 
-    public Clip(String title, String gameTitle, List<String> tags, String sourceLink, Date postedTime) {
-        this.title = title;
-        this.gameTitle = gameTitle;
-        this.tags = tags;
-        this.sourceLink = sourceLink;
-        this.postedTime = postedTime;
-    }
-
     public Clip(String title, String gameTitle, List<String> tags, String sourceLink, Date postedTime, User user) {
         this.title = title;
         this.gameTitle = gameTitle;
