@@ -15,6 +15,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="buttons">
                 <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
+                <!-- <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a> -->
 
                 <form class="search" action="#">
                     <input type="text" placeholder="Search.." name="search">
@@ -39,7 +40,7 @@
                     <tbody>
                         <tr th:each="groupFinder : ${groupFinders}">
                             <td>
-                                <a th:href="@{/groupfinders/{sub}/{id}(sub=${groupFinder.getUser().getSubId()}, sub=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
+                                <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
                             </td>
                             <td th:text="${groupFinder.getGameTitle()}"></td>
                             <td th:text="${groupFinder.getUser().getName()}"></td>
