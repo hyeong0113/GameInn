@@ -3,9 +3,7 @@
 
 <head>
     <div th:insert="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/link2CSS.css">
     <link rel="stylesheet" href="/css/addClipPage.css">
-    <script th:src="@{/js/add_edit_clip.js} "></script>
     <title>Add clip form</title>
 </head>
 
@@ -16,16 +14,12 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
             <div class="Center1 border border-dark">
-                <!-- <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post"> -->
-
-                <!-- "@{/clips/{sub}/addEdit/edit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}" -->
-                <!-- <form action="#" th:action="@{/clips/{sub}/addEdit/${clip != null} ? 'edit'+${clip.getId()} : 'add'(sub=${user.getSubId()})}" th:object="${clip}" method="post"> -->
 
                 <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
                     <div class="form-group row">
-                        <label for="gameTitle" class="col-sm-2 col-form-label">Game Title:</label>
+                        <label for="gameTitle" class="col-sm-2 col-form-label">Game:</label>
                         <div class="col-sm-10">
-                            <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game Title" value="${clip.getGameTitle()}" required>
+                            <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
                         </div>
                     </div>
 
@@ -33,7 +27,7 @@
                     <div class="form-group row">
                         <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
                         <div class="col-sm-10">
-                            <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" value="${clip.getTitle()}" required>
+                            <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
                         </div>
                     </div>
 
@@ -48,7 +42,7 @@
                     <div class="form-group row">
                         <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
                         <div class="col-sm-10">
-                            <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Source" value="${clip.getSourceLink()}" required>
+                            <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Title" required>
                         </div>
                     </div>
 
@@ -61,6 +55,7 @@
         </main>
 
     </div>
+    <script th:src="@{/js/getGames.js} "></script>
 </body>
 
 </html>

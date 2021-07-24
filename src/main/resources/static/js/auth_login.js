@@ -21,12 +21,12 @@ function load_main_page(sub) {
 
 function load_admin_message(role) {
     if (role == "admin") {
-        document.getElementById("admin-text").innerHTML = "You are logined as Administrator";
+        $("#admin-text").innerHTML = "You are logined as Administrator";
     }
 }
 
 function load_admin_tag(role) {
     if (role == "admin") {
-        document.getElementById("admin-tag").innerHTML = "ADMIN";
+        $("#admin-tag").innerHTML = "ADMIN";
     }
 }

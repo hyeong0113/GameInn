@@ -7,7 +7,7 @@
 
 .clip-post {
     position: relative;
-    width: 40%;
+    width: 650px;
     height: 500px;
     margin: 0 auto;
     margin-top: 50px;
@@ -17,10 +17,9 @@
 #clip-source {
     margin-right: 10%;
     margin-left: 10%;
-    margin-top: 5%;
-    width: 80%;
-    height: 50%;
-    height: 230px;
+    margin-top: 5rem;
+    width: 400px;
+    height: 250px;
 }
 
 .user-photo-section {
