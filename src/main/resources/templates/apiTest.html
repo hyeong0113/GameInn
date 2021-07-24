@@ -3,7 +3,6 @@
 
     <head>
         <div th:insert="fragments/common :: mainHeader"></div>
-        <link rel="stylesheet" href="/css/link2CSS.css">
         <title>form</title>
     </head>
 
@@ -12,9 +11,7 @@
             <div th:replace="fragments/common :: sidebar"></div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <input type="text" id="getGames" name="getGames" placeholder="search"><br><br>
-                <select id="games" size="10">
-                </select>
+                <input type="text" id="getGames" name="getGames" placeholder="search">
             </main>
         </div>
         <script th:src="@{/js/getGames.js} "></script>

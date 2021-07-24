@@ -28,6 +28,14 @@ body {
     padding-bottom: 0.75rem
 }
 
+.ui-autocomplete {
+    max-height: 250px;
+    max-width: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+
 @media screen and (max-height: 450px) {
     .sidebar {
         padding-top: 1rem;

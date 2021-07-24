@@ -12,9 +12,14 @@ function findGames() {
     };
 
     $.post(url, params, function(response) {
-        var gamesDropdown = $("#games");
+        // var gamesDropdown = $("#games");
+        var gamesList = [];
         $.each(response, function(index, game) {
-            $("<option>").val(game).text(game).appendTo(gamesDropdown);
+            // $("<option>").val(game).text(game).appendTo(gamesDropdown);
+            gamesList.push(game)
+        });
+        $("#getGames").autocomplete({
+            source: gamesList
         });
     }).fail(function() {
         alert("Get games failed");
