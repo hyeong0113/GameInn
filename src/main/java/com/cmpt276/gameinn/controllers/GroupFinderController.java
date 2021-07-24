@@ -25,7 +25,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
     @GetMapping("/groupfinders/{sub}/addEdit")
     public String showAddEditGroupFinderPage(@PathVariable(required = true)String sub, GroupFinder groupFinder, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
-        return "addEditGroupFinder";
+        return "addEditGroupFinderPage";
     }
 
 	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinderListPage(@PathVariable(required = false)String sub, Model model) {
@@ -40,7 +40,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
                                                                                 @Valid GroupFinder groupFinder, BindingResult result, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
-            return "addEditGroupFinder";
+            return "addEditGroupFinderPage";
         }
 
         User user = userService.getUserBySub(sub);
@@ -58,7 +58,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
                                                                                 @Valid @RequestBody GroupFinder groupFinder, BindingResult result, Model model) throws Exception {
         model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
-            return "addEditGroupFinder";
+            return "addEditGroupFinderPage";
         }
 
         GroupFinder temp = groupFinderService.updateGroupFinder(id, groupFinder);
