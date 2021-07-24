@@ -2,7 +2,6 @@ package com.cmpt276.gameinn.models;
 
 import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -46,6 +45,8 @@ public class GroupFinder {
 
     private boolean isPrivate = false;
 
+    private String status = "Public";
+
     @ManyToOne
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -65,6 +66,7 @@ public class GroupFinder {
         this.password = password;
         if (password.isEmpty()) {
             this.isPrivate = true;
+            this.status = "Private";
         }
     }
 
@@ -184,6 +186,16 @@ public class GroupFinder {
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public String getStatus()
+    {
+        return this.status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
     }
 
 

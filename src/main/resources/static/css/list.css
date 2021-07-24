@@ -1,5 +1,8 @@
 /*table */
-table, th, td {
+
+table,
+th,
+td {
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -14,7 +17,8 @@ table {
     background: #ffffff;
 }
 
-.table1 th, .table1 td {
+.table1 th,
+.table1 td {
     padding: 0.5rem
 }
 
@@ -22,15 +26,21 @@ table {
     background: #C0C0C0;
 }
 
+
 /* button icon */
-.button:active {
+
+
+/* .button:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-}
+} */
+
 
 /* For Add Queue and Search above table */
-.buttons {
+
+
+/* .buttons {
     display: flex;
     align-items: center;
     margin: 1rem;
@@ -40,7 +50,7 @@ table {
     width: 100px;
     height: 30px;
     background: #ffffff;
-}
+} */
 
 .search {
     display: flex;
@@ -63,4 +73,14 @@ table {
 
 .search button:hover {
     background: #ccc;
+}
+
+.add-groupfinder-button {
+    background-color: #7063F8;
+    color: #ffffff;
+}
+
+.add-groupfinder-button:hover {
+    background-color: #ffffff !important;
+    color: #7063F8 !important;
 }

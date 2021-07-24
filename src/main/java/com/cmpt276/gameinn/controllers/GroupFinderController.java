@@ -23,7 +23,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
 
 
     @GetMapping("/groupfinders/{sub}/addEdit")
-    public String showAddEditGroupFinderPage(@PathVariable(required = true)String sub, Model model) {
+    public String showAddEditGroupFinderPage(@PathVariable(required = true)String sub, GroupFinder groupFinder, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         return "addEditGroupFinder";
     }
@@ -37,7 +37,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
 
     // Assure User is logged in and have an authorization to create
     @PostMapping("/groupfinders/{sub}/addEdit/add") public String addGroupFinder(@PathVariable(required = true)String sub,
-                                                                                @Valid @RequestBody GroupFinder groupFinder, BindingResult result, Model model) {
+                                                                                @Valid GroupFinder groupFinder, BindingResult result, Model model) {
         model.addAttribute("user", UserInfo.getWrapper());
         if (result.hasErrors()) {
             return "addEditGroupFinder";
@@ -49,7 +49,7 @@ import com.cmpt276.gameinn.constant.UserInfo;
 		return "redirect:/groupfinders/" + sub;
 	}
 
-    @GetMapping(value = {"/groupfinders/{id}", "/groupfinders/{sub}/{id}"}) public String getGroupFinderById(@PathVariable(required = false) String sub, @PathVariable Long id, Model model) {
+    @GetMapping(value = {"/groupfinders/detail/{id}", "/groupfinders/{sub}/detail/{id}"}) public String getGroupFinderById(@PathVariable(required = false) String sub, @PathVariable Long id, Model model) {
         model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
         return "groupFinderDetail";
     }

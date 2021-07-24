@@ -2,7 +2,7 @@ package com.cmpt276.gameinn.constant;
 
 public class EnumCollection {
     public enum RequiredLevel {
-        EXPERT, BEGINNER, INTERMEDIATE, ANY
+        ANY, BEGINNER, INTERMEDIATE, EXPERT
     }
 
     public enum GameStyle {
