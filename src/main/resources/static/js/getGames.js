@@ -1,9 +1,11 @@
-$("#gameTitle").keyup(function() {
-    var gameInputW = $(gameTitle).outerWidth();
-    $(".ui-autocomplete").css("max-width", gameInputW);
+$(function() {
+    $("#gameTitle").keyup(function() {
+        var gameInputW = $(gameTitle).outerWidth();
+        $(".ui-autocomplete").css("max-width", gameInputW);
 
-    findGames();
-})
+        findGames();
+    })
+});
 
 function findGames() {
     var query = $("#gameTitle").val();
