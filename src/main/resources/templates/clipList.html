@@ -41,7 +41,7 @@
                                         </svg>
                                     </button>
                                     <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${user.getSubId()}, id=${clip.getId()})}">Edit</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
                                         <li><a class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
                                     </ul>
                                 </div>
