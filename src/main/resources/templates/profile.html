@@ -15,7 +15,7 @@
                 <div class="content">
                     <h1 class="mb-4 mt-5">User Profile</h1>
 
-                    <form class="Center4" th:object="${user}">
+                    <form th:object="${user}">
                         <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
 
                         <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
