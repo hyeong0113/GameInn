@@ -139,6 +139,6 @@ import javax.persistence.Table;
 	}
 
 	@Override public String toString() {
-		return "Employee{" + "id=" + this.id + ", subId='" + this.sub + ", role='" + this.role + '\'' + '}';
+		return "{" + "id=" + this.id + ", subId='" + this.sub + ", role='" + this.role + '\'' + '}';
 	}
 }

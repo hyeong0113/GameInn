@@ -3,6 +3,7 @@ package com.cmpt276.gameinn.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.repositories.User.IUserRepository;
@@ -31,6 +32,9 @@ public class UserService {
     }
 
     public User getUserBySub(String sub) {
+        if (sub == null) {
+            throw new IllegalArgumentException("No User with " + sub);
+        }
         return repository.findUserBySub(sub);
     }
 

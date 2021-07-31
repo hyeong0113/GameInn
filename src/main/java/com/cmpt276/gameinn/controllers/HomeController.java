@@ -1,8 +1,9 @@
 package com.cmpt276.gameinn.controllers;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
@@ -18,18 +19,21 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.*;
 
-import com.cmpt276.gameinn.constant.UserInfo;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import com.cmpt276.gameinn.auth.Payload;
+import com.cmpt276.gameinn.auth.HandleCookie;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
-import com.cmpt276.gameinn.wrapper.UserWrapper;
 
 @Controller public class HomeController {
 	@Autowired private UserService service;
 	@Autowired private IGDBService IGDB;
 
 	private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
+	private Payload payload;
 
 	private String getRoleFromResponse(OidcUser principal) {
 		String role = principal.getClaims().get(apiRole).toString();
@@ -41,7 +45,7 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 
 	// Move to landing page
 	@GetMapping("/") public String home(@AuthenticationPrincipal OidcUser
-		principal, HttpServletResponse response, Model model) {
+		principal, HttpServletResponse response, HttpServletRequest request, Model model) {
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
 			String role = getRoleFromResponse(principal);
@@ -49,15 +53,10 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 			String picture = principal.getClaims().get("picture").toString();
 			User user = service.addUser(sub, role, name, picture);
 
-			UserInfo.setSub(user.getSubId());
-			UserWrapper userWrapper = new UserWrapper(principal);
-			userWrapper.setSubId(user.getSubId());
-			userWrapper.setRole(role);
-			userWrapper.setAbout(user.getAbout());
-			UserInfo.setWrapper(userWrapper);
-
-			model.addAttribute("user", UserInfo.getWrapper());
-
+			payload = new Payload(principal, sub, role);
+			Cookie cookie = new Cookie(HandleCookie.COOKIE_NAME, payload.getSubId());
+			response.addCookie(cookie);
+			model.addAttribute("user", service.getUserBySub(payload.getSubId()));
 			return "landing_page";
 		}
 
@@ -66,22 +65,22 @@ import com.cmpt276.gameinn.wrapper.UserWrapper;
 
 	// Move to main page (in our app, it will be clip list page) - June Kwak
 	@GetMapping("/main/{sub}") public String main(@PathVariable String sub,
-		Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
+		Model model, HttpServletRequest request) {
+		model.addAttribute("user", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
 
 		return "index";
 	}
 
 	// Move to profile page
 	@GetMapping("/profile/{sub}") public String profile(@PathVariable String
-		sub, Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
+		sub, Model model, HttpServletRequest request) {
+			model.addAttribute("user", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
 
 		return "profile";
 	}
 
-	@GetMapping("/apiTest") public String igdbTest(Model model) {
-		model.addAttribute("user", UserInfo.getWrapper());
+	@GetMapping("/apiTest") public String igdbTest(Model model, HttpServletRequest request) {
+		model.addAttribute("user", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
 		return "apiTest";
 	}
 
