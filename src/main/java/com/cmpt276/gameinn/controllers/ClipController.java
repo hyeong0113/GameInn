@@ -25,10 +25,19 @@ public class ClipController {
     @Autowired private ClipService clipService;
     @Autowired private UserService userService;
 
+    private boolean alert = false;
+
 	@GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipListPage(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
                                                                                                                         @AuthenticationPrincipal OidcUser principal) {
         String url="";
         if (principal != null) {
+            if (alert) {
+                model.addAttribute("alert", true);
+                alert = false;
+            }
+            else {
+                model.addAttribute("alert", false);
+            }
             model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
             url=String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
         }
@@ -92,9 +101,10 @@ public class ClipController {
         String role = userService.getRoleFromResponse(principal);
 
         if (!role.equals("admin") && HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
+            alert = true;
             return "redirect:/clips/" + sub;
         }
-
+        alert = false;
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         clipService.deleteClip(id);
         return "redirect:/clips/" + sub;

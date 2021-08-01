@@ -5,6 +5,7 @@
     <div th:replace="fragments/common :: mainHeader"></div>
     <title>Clips</title>
     <script th:src="@{/js/clip_list.js} "></script>
+    <script th:src="@{/js/alert.js} "></script>
     <link rel="stylesheet" href="/css/clipList.css">
 </head>
 
@@ -13,6 +14,15 @@
         <div th:replace="fragments/common :: sidebar"></div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="alert alert-danger" role="alert" id="unauthorized-delete">
+                You cannot delete others' post.
+            </div>
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                var show_alert = /*[[${alert}]]*/ '';
+                display_alert(show_alert)
+                    /*]]>*/
+            </script>
             <div class="content-50">
                 <h2 class="mb-4 mt-5">Clips </h2>
 
