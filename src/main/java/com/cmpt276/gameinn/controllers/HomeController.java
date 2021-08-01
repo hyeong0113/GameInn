@@ -52,10 +52,8 @@ import com.cmpt276.gameinn.services.*;
 			String email = principal.getClaims().get("email").toString();
 			User user = service.addUser(sub, role, name, picture, email);
 
-			if (HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) == null) {
-				Cookie cookie = new Cookie(HandleCookie.COOKIE_NAME, user.getSubId());
-				response.addCookie(cookie);
-			}
+			HandleCookie.setCookie(request, response, user.getSubId());
+
 			model.addAttribute("user", service.getUserBySub(user.getSubId()));
 			return "landing_page";
 		}
