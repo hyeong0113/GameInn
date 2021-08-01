@@ -58,7 +58,7 @@ import com.cmpt276.gameinn.services.*;
 			return "landing_page";
 		}
 
-		return "index";
+		return "redirect:/clips";
 	}
 
 	// Move to main page (in our app, it will be clip list page) - June Kwak

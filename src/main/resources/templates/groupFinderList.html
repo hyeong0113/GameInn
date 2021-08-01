@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-    <head>
-        <div th:replace="fragments/common :: mainHeader"></div>
-        <link rel="stylesheet" href="/css/list.css" />
-        <title>Group Finder</title>
-    </head>
+<head>
+    <div th:replace="fragments/common :: mainHeader"></div>
+    <link rel="stylesheet" href="/css/list.css" />
+    <title>Group Finder</title>
+</head>
 
-    <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+<body>
+    <div class="row">
+        <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content">
-                    <h2 class="mb-4 mt-5">Group Finder</h2>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="content">
+                <h2 class="mb-4 mt-5">Group Finder</h2>
 
-                    <div class="buttons mb-3">
-                        <a th:href="@{/groupfinders/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
+                <div class="buttons mb-3">
+                    <a th:href="${url}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
 
-                        <form class="search" action="#">
-                            <input type="text" placeholder="Search.." name="search">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
-
-
-                    <!--Table Content-->
-                    <table class="table1">
-                        <thead>
-                            <tr>
-                                <th> Title </th>
-                                <th> Game </th>
-                                <th> UserName </th>
-                                <th> Status </th>
-                                <th> Total number of Players </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="groupFinder : ${groupFinders}">
-                                <td>
-                                    <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
-                                </td>
-                                <td th:text="${groupFinder.getGameTitle()}"></td>
-                                <td th:text="${groupFinder.getUser().getName()}"></td>
-                                <td th:text="${groupFinder.getStatus()}"></td>
-                                <td th:text="${groupFinder.getTotalPlayers()}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p class="page-num">
-                        < &nbsp; <u> 1 </u> &nbsp; >
-                    </p>
+                    <form class="search" action="#">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
-            </main>
-        </div>
-    </body>
+
+
+                <!--Table Content-->
+                <table class="table1">
+                    <thead>
+                        <tr>
+                            <th> Title </th>
+                            <th> Game </th>
+                            <th> UserName </th>
+                            <th> Status </th>
+                            <th> Total number of Players </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="groupFinder : ${groupFinders}">
+                            <td sec:authorize="!isAnonymous()">
+                                <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
+                            </td>
+                            <td class="nav-item" sec:authorize="isAnonymous()">
+                                <a href="/oauth2/authorization/auth0" th:text="${groupFinder.getTitle()}"></a>
+                            </td>
+                            <td th:text="${groupFinder.getGameTitle()}"></td>
+                            <td th:text="${groupFinder.getUser().getName()}"></td>
+                            <td th:text="${groupFinder.getStatus()}"></td>
+                            <td th:text="${groupFinder.getTotalPlayers()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="page-num">
+                    < &nbsp; <u> 1 </u> &nbsp; >
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
 
 </html>

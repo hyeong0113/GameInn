@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +24,16 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     @Autowired private UserService userService;
 
 	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinderListPage(@PathVariable(required = false)String sub,
-                                                                                                        Model model, HttpServletRequest request) {
-        model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+                                                                    Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal) {
+        String url="";
+        if (principal != null) {
+            model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+            url=String.format("/groupfinders/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+        }
+        else {
+            url="/oauth2/authorization/auth0";
+        }
+        model.addAttribute("url", url);
         model.addAttribute("groupFinders", groupFinderService.getGroupFinders());
 
         return "groupFinderList";

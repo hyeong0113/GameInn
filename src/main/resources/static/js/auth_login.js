@@ -16,7 +16,6 @@ function load_main_page(sub) {
             window.location.href = "/clips";
         }, 3000);
     }
-
 }
 
 function load_admin_message(role) {
