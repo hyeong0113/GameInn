@@ -60,6 +60,8 @@ import javax.servlet.http.HttpServletResponse;
 				.buildAndExpand(clientId, returnTo)
 				.toUriString();
 
+		HandleCookie.deleteCookie(httpServletResponse, HandleCookie.COOKIE_NAME);
+
 		try {
 			httpServletResponse.sendRedirect(logoutUrl);
 		} catch (IOException ioe) {

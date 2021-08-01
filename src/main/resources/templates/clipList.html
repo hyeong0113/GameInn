@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-    <head>
-        <div th:replace="fragments/common :: mainHeader"></div>
-        <title>Clips</title>
-        <script th:src="@{/js/clip_list.js} "></script>
-        <link rel="stylesheet" href="/css/clipList.css">
-    </head>
+<head>
+    <div th:replace="fragments/common :: mainHeader"></div>
+    <title>Clips</title>
+    <script th:src="@{/js/clip_list.js} "></script>
+    <link rel="stylesheet" href="/css/clipList.css">
+</head>
 
-    <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+<body>
+    <div class="row">
+        <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content-50">
-                    <h2 class="mb-4 mt-5">Clips </h2>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="content-50">
+                <h2 class="mb-4 mt-5">Clips </h2>
 
-                    <div class="buttons mb-3">
-                        <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
+                <div class="buttons mb-3">
+                    <a th:href="@{/clips/{sub}/addEdit(sub=${user.getSubId()})}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
 
-                        <form class="search" action="#">
-                            <input type="text" placeholder="Search.." name="search">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
+                    <form class="search" action="#">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
 
-                    <div th:each="clip : ${clip_list}">
-                        <div class="shadow-sm p-4 mb-5 bg-body rounded">
+                <div th:each="clip : ${clip_list}">
+                    <div class="shadow-sm p-4 mb-5 bg-body rounded">
 
-                            <div class="post-header">
-                                <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />
-                                <p>
-                                    <span th:text="${clip.getUser().getName()}" th:remove="tag">Name</span> | <span>6 hrs ago</span>
-                                </p>
+                        <div class="post-header">
+                            <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />
+                            <p>
+                                <span th:text="${clip.getUser().getName()}" th:remove="tag">Name</span> | <span>6 hrs ago</span>
+                            </p>
 
-                                <div class="dropdown ms-auto">
-                                    <button class="btn button-option btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="dropdown ms-auto">
+                                <button class="btn button-option btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
                                             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                                         </svg>
                                     </button>
-                                    <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
-                                        <li><a class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
-                                    </ul>
-                                </div>
+                                <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
+                                </ul>
                             </div>
+                        </div>
 
-                            <div class="post-body my-3">
-                                <p th:text="${clip.getTitle()}"></p>
-                                <div class="post-clip mt-3">
-                                    <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen>
+                        <div class="post-body my-3">
+                            <p th:text="${clip.getTitle()}"></p>
+                            <div class="post-clip mt-3">
+                                <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     </iframe>
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="post-footer">
-                                <p class="m-0">
-                                    Game: <span th:text="${clip.getGameTitle()}" th:remove="tag">(game)</span>
-                                </p>
-                            </div>
+                        <div class="post-footer">
+                            <p class="m-0">
+                                Game: <span th:text="${clip.getGameTitle()}" th:remove="tag">(game)</span>
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </main>
-        </div>
-    </body>
+        </main>
+    </div>
+</body>
 
 </html>

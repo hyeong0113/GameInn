@@ -3,6 +3,7 @@ package com.cmpt276.gameinn.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.repositories.User.IUserRepository;
@@ -12,10 +13,10 @@ public class UserService {
     @Autowired
     private IUserRepository repository;
 
-    public User addUser(String sub, String role, String name, String picture) {
+    public User addUser(String sub, String role, String name, String picture, String email) {
         sub = sub.substring(sub.lastIndexOf('|') + 1);
         if (repository.findUserBySub(sub) == null) {
-            User user = new User(sub, role, name, picture);
+            User user = new User(sub, role, name, picture, email);
             repository.save(user);
             return user;
         }
@@ -31,6 +32,9 @@ public class UserService {
     }
 
     public User getUserBySub(String sub) {
+        if (sub == null) {
+            throw new IllegalArgumentException("No User with " + sub);
+        }
         return repository.findUserBySub(sub);
     }
 
