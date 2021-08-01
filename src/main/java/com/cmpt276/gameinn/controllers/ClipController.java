@@ -89,6 +89,10 @@ public class ClipController {
 
     @RequestMapping("/clips/{sub}/delete/{id}")
     public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request) {
+        if (HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
+            return "redirect:/clips/" + sub;
+        }
+
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         clipService.deleteClip(id);
         return "redirect:/clips/" + sub;

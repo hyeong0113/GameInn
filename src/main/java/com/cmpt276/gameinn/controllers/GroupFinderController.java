@@ -90,6 +90,10 @@ import com.cmpt276.gameinn.auth.HandleCookie;
 
     @RequestMapping("/groupfinders/{sub}/delete/{id}")
     public String deleteGroupFinder(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request) {
+        if (HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
+            return "redirect:/groupfinders/" + sub;
+        }
+
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         groupFinderService.deleteGroupFinder(id);
         return "redirect:/groupfinders/" + sub;
