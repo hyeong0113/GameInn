@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.cmpt276.gameinn.models.GroupFinder;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
-import com.cmpt276.gameinn.constant.UserInfo;
 import com.cmpt276.gameinn.auth.HandleCookie;
 
 @Controller public class GroupFinderController {

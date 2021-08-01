@@ -16,7 +16,6 @@ import com.cmpt276.gameinn.models.Clip;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.ClipService;
 import com.cmpt276.gameinn.services.UserService;
-import com.cmpt276.gameinn.constant.UserInfo;
 import com.cmpt276.gameinn.auth.HandleCookie;
 
 @Controller
