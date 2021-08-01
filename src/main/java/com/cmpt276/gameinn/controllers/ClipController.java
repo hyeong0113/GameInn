@@ -88,8 +88,10 @@ public class ClipController {
 	}
 
     @RequestMapping("/clips/{sub}/delete/{id}")
-    public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request) {
-        if (HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
+    public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal) {
+        String role = userService.getRoleFromResponse(principal);
+
+        if (!role.equals("admin") && HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
             return "redirect:/clips/" + sub;
         }
 

@@ -31,22 +31,12 @@ import com.cmpt276.gameinn.services.*;
 	@Autowired private UserService service;
 	@Autowired private IGDBService IGDB;
 
-	private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
-
-	private String getRoleFromResponse(OidcUser principal) {
-		String role = principal.getClaims().get(apiRole).toString();
-		StringBuilder role_refined = new StringBuilder(role);
-		role_refined.deleteCharAt(role.length() - 1);
-		role_refined.deleteCharAt(0);
-		return role_refined.toString();
-	}
-
 	// Move to landing page
 	@GetMapping("/") public String home(@AuthenticationPrincipal OidcUser
 		principal, HttpServletResponse response, HttpServletRequest request, Model model) {
 		if (principal != null) {
 			String sub = principal.getClaims().get("sub").toString();
-			String role = getRoleFromResponse(principal);
+			String role = service.getRoleFromResponse(principal);
 			String name = principal.getClaims().get("name").toString();
 			String picture = principal.getClaims().get("picture").toString();
 			String email = principal.getClaims().get("email").toString();
