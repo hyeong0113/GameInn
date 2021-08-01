@@ -13,10 +13,10 @@ public class UserService {
     @Autowired
     private IUserRepository repository;
 
-    public User addUser(String sub, String role, String name, String picture) {
+    public User addUser(String sub, String role, String name, String picture, String email) {
         sub = sub.substring(sub.lastIndexOf('|') + 1);
         if (repository.findUserBySub(sub) == null) {
-            User user = new User(sub, role, name, picture);
+            User user = new User(sub, role, name, picture, email);
             repository.save(user);
             return user;
         }

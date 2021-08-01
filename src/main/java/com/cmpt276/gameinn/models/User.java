@@ -23,6 +23,8 @@ import javax.persistence.Table;
 
 	@NotNull private String picture;
 
+	@NotNull private String email;
+
 	private String about;
 
 	private String role;
@@ -39,12 +41,13 @@ import javax.persistence.Table;
 
 	public User() {}
 
-	public User(String sub, String role, String name, String picture) {
+	public User(String sub, String role, String name, String picture, String email) {
 		this.sub = sub;
 		this.about = "";
 		this.role = role;
 		this.name = name;
 		this.picture = picture;
+		this.email = email;
 		this.socialAccountsList = new ArrayList<String>();
 	}
 
@@ -86,6 +89,14 @@ import javax.persistence.Table;
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getAbout() {
@@ -139,6 +150,7 @@ import javax.persistence.Table;
 	}
 
 	@Override public String toString() {
-		return "{" + "id=" + this.id + ", subId='" + this.sub + ", role='" + this.role + '\'' + '}';
+		return "{" + "id=" + this.id + ", subId='" + this.sub + ", role='" + this.role
+					+ ", email='" + this.email + ", picture='" + this.picture + '\'' + '}';
 	}
 }

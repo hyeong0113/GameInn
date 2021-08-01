@@ -23,7 +23,6 @@ import java.util.List;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-import com.cmpt276.gameinn.auth.Payload;
 import com.cmpt276.gameinn.auth.HandleCookie;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
@@ -33,7 +32,6 @@ import com.cmpt276.gameinn.services.*;
 	@Autowired private IGDBService IGDB;
 
 	private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
-	private Payload payload;
 
 	private String getRoleFromResponse(OidcUser principal) {
 		String role = principal.getClaims().get(apiRole).toString();
@@ -51,12 +49,14 @@ import com.cmpt276.gameinn.services.*;
 			String role = getRoleFromResponse(principal);
 			String name = principal.getClaims().get("name").toString();
 			String picture = principal.getClaims().get("picture").toString();
-			User user = service.addUser(sub, role, name, picture);
+			String email = principal.getClaims().get("email").toString();
+			User user = service.addUser(sub, role, name, picture, email);
 
-			payload = new Payload(principal, sub, role);
-			Cookie cookie = new Cookie(HandleCookie.COOKIE_NAME, payload.getSubId());
-			response.addCookie(cookie);
-			model.addAttribute("user", service.getUserBySub(payload.getSubId()));
+			if (HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) == null) {
+				Cookie cookie = new Cookie(HandleCookie.COOKIE_NAME, user.getSubId());
+				response.addCookie(cookie);
+			}
+			model.addAttribute("user", service.getUserBySub(user.getSubId()));
 			return "landing_page";
 		}
 
@@ -66,7 +66,7 @@ import com.cmpt276.gameinn.services.*;
 	// Move to main page (in our app, it will be clip list page) - June Kwak
 	@GetMapping("/main/{sub}") public String main(@PathVariable String sub,
 		Model model, HttpServletRequest request) {
-		model.addAttribute("user", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+		model.addAttribute("user", service.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 
 		return "index";
 	}
@@ -74,13 +74,13 @@ import com.cmpt276.gameinn.services.*;
 	// Move to profile page
 	@GetMapping("/profile/{sub}") public String profile(@PathVariable String
 		sub, Model model, HttpServletRequest request) {
-			model.addAttribute("user", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+			model.addAttribute("user", service.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 
 		return "profile";
 	}
 
 	@GetMapping("/apiTest") public String igdbTest(Model model, HttpServletRequest request) {
-		model.addAttribute("user", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+		model.addAttribute("user", service.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 		return "apiTest";
 	}
 
