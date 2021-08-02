@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.cmpt276.gameinn.constant.EnumCollection.Platform;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -33,6 +35,9 @@ public class Clip {
     private List<String> tags;
 
     @NotNull
+    private Platform platform;
+
+    @NotNull
     private String sourceLink;
 
     @NotNull
@@ -45,10 +50,11 @@ public class Clip {
 
     public Clip() {}
 
-    public Clip(String title, String gameTitle, List<String> tags, String sourceLink, Date postedTime, User user) {
+    public Clip(String title, String gameTitle, List<String> tags, Platform platform, String sourceLink, Date postedTime, User user) {
         this.title = title;
         this.gameTitle = gameTitle;
         this.tags = tags;
+        this.platform = platform;
         this.sourceLink = sourceLink;
         this.postedTime = postedTime;
         this.RUser = user;
@@ -88,6 +94,16 @@ public class Clip {
     {
         this.tags = tags;
     }
+
+    public Platform getPlatform()
+    {
+        return this.platform;
+    }
+
+    public void setPlatform(Platform platform)
+    {
+        this.platform = platform;
+    }
     
     public String getSourceLink()
     {
@@ -125,7 +141,7 @@ public class Clip {
 
 	@Override public String toString() {
 		return "Employee{" + "title=" + this.title + ", gametiitle='" + this.gameTitle +
-			 ", tags='" + this.tags + ", sourceLink='" + this.sourceLink + ", postedTime='" +
+			 ", tags='" + this.tags + ", platform='" + this.platform.toString() + ", sourceLink='" + this.sourceLink + ", postedTime='" +
 			   this.postedTime + '\'' + '}';
 	}
 }

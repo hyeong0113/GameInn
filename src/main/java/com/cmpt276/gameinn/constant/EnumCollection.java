@@ -8,4 +8,21 @@ public class EnumCollection {
     public enum GameStyle {
         CASUAL, PROFESSIONAL;
     }
+
+    public enum Platform {
+        TWITCH("Twitch"),
+        YOUTUBE("Youtube"),
+        NINEGAG("9Gag"),
+        TWITTER("Twitter");
+
+        private final String platformName;
+
+        Platform(String platformName) {
+            this.platformName = platformName;
+        }
+
+        public String getPlatformName() {
+            return this.platformName;
+        }
+    }
 }

@@ -29,33 +29,19 @@
                         </div>
 
                         <div class="col-sm-10 flex-grow-1">
-                            <!-- <label for="RequiredLevel">Required Level:</label>
-                        <select id="RequiredLevel" class="form-control border border-dark" th:field="*{requiredLevel}" placeholder="Title" required>
-                            <option value="select">Select</option>
-                            <option value="0">Any</option>
-                            <option value="1">Beginner</option>
-                            <option value="2">Intermediate</option>
-                            <option value="3">Expert</option>
-                        </select> -->
-                            <label for="RequiredLevel">Required Level:</label>
+                            <label for="requiredLevel">Required Level:</label>
                             <select name="requiredLevel">
                                     <option th:each="level : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level}" th:text="${level}">
                                     </option>
-                                </select>
+                            </select>
                         </div>
-
 
                         <div class="col-sm-10 flex-grow-1">
                             <label for="gameStyle">Game Style:</label>
-                            <!-- <select id="gameStyle" class="border border-dark p-1">
-                            <option value="Select">Select</option>
-                            <option value="Casual">Casual</option>
-                            <option value="Profesional">Profesional</option>
-                        </select> -->
                             <select name="gameStyle">
                                     <option th:each="style : ${T(com.cmpt276.gameinn.constant.EnumCollection.GameStyle).values()}" th:value="${style}" th:text="${style}">
                                     </option>
-                                </select>
+                            </select>
                         </div>
 
                         <div class="col-sm-10 flex-grow-1">
