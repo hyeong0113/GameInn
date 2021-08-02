@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +25,18 @@ public class ClipController {
     @Autowired private ClipService clipService;
     @Autowired private UserService userService;
 
-	@GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipListPage(@PathVariable(required = false)String sub, Model model, HttpServletRequest request) {
-        model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
-		model.addAttribute("clip_list", clipService.getClips());
+	@GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipListPage(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
+                                                                                                                        @AuthenticationPrincipal OidcUser principal) {
+        String url="";
+        if (principal != null) {
+            model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+            url=String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+        }
+        else {
+            url="/oauth2/authorization/auth0";
+        }
+        model.addAttribute("url", url);
+        model.addAttribute("clip_list", clipService.getClips());
 
 		return "clipList";
 	}
@@ -77,7 +88,7 @@ public class ClipController {
 	}
 
     @RequestMapping("/clips/{sub}/delete/{id}")
-    public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request) {
+    public String deleteClip(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         clipService.deleteClip(id);
         return "redirect:/clips/" + sub;

@@ -1,41 +1,44 @@
 <html>
 
-    <body>
-        <div th:fragment="mainHeader">
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
-            <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="https://kit.fontawesome.com/fd77361902.js" crossorigin="anonymous"></script>
+<body>
+    <div th:fragment="mainHeader">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+        <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/fd77361902.js" crossorigin="anonymous"></script>
 
-            <script src="/webjars/jquery/jquery.min.js"></script>
-            <link rel="stylesheet" href="/webjars/jquery-ui/jquery-ui.css">
-            <script src="/webjars/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" href="/webjars/jquery-ui/jquery-ui.css">
+        <script src="/webjars/jquery-ui/jquery-ui.min.js"></script>
 
-            <link rel="stylesheet" href="/css/main.css">
-            <script th:src="@{/js/getGames.js} "></script>
+        <link rel="stylesheet" href="/css/main.css">
+        <script th:src="@{/js/getGames.js} "></script>
+    </div>
+
+    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 collapse" th:fragment="sidebar">
+        <div class="position-sticky">
+            <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
+            <ul class="nav flex-column">
+                <li class="nav-item" sec:authorize="!isAnonymous()">
+                    <a class="nav-link px-0 py-2" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fas fa-home"></i> Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-0 py-2" th:href="@{/groupfinders}"><i class="fas fa-users"></i></i> Group Finder</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-0 py-2" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAnonymous()">
+                    <a class="nav-link px-0 py-2" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link px-0 py-2" href="/oauth2/authorization/auth0"><i class="fas fa-sign-out-alt"></i> LogIn</a>
+                </li>
+            </ul>
         </div>
-
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 collapse" th:fragment="sidebar">
-            <div class="position-sticky">
-                <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link px-0 py-2" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fas fa-home"></i> Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 py-2" th:href="@{/groupfinders}"><i class="fas fa-users"></i></i> Group Finder</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 py-2" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 py-2" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </li>
-                </ul>
-            </div>
-            <small class="footer">Copyright &copy; 2021 GameInn</small>
-        </nav>
-    </body>
+        <small class="footer">Copyright &copy; 2021 GameInn</small>
+    </nav>
+</body>
 
 </html>

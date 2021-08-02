@@ -1,6 +1,7 @@
 package com.cmpt276.gameinn.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,8 @@ import com.cmpt276.gameinn.repositories.User.IUserRepository;
 public class UserService {
     @Autowired
     private IUserRepository repository;
+
+    private String apiRole = "https://gameinn:us:auth0:com/api/v2/roles";
 
     public User addUser(String sub, String role, String name, String picture, String email) {
         sub = sub.substring(sub.lastIndexOf('|') + 1);
@@ -59,4 +62,12 @@ public class UserService {
 
         repository.delete(found);
     }
+
+    public String getRoleFromResponse(OidcUser principal) {
+		String role = principal.getClaims().get(apiRole).toString();
+		StringBuilder role_refined = new StringBuilder(role);
+		role_refined.deleteCharAt(role.length() - 1);
+		role_refined.deleteCharAt(0);
+		return role_refined.toString();
+	}
 }
