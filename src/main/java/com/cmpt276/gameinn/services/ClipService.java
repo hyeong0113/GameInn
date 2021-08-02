@@ -15,7 +15,7 @@ public class ClipService {
     private IClipRepository clipRepository;
 
     public Clip addClip(Clip clip, User user) {
-        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getSourceLink(), clip.getPostedTime(), user);
+        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getPlatform(), clip.getSourceLink(), clip.getPostedTime(), user);
         return clipRepository.save(created);
     }
 
@@ -36,6 +36,7 @@ public class ClipService {
         found.setTitle(clip.getTitle());
         found.setGameTitle(clip.getGameTitle());
         found.setTags(clip.getTags());
+        found.setPlatform(clip.getPlatform());
         found.setSourceLink(clip.getSourceLink());
         found.setPostedTime(clip.getPostedTime());
 
