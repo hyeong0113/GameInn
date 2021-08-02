@@ -15,17 +15,13 @@ public class EnumCollection {
         NINEGAG("9Gag"),
         TWITTER("Twitter");
 
-        public final String platformName;
+        private final String platformName;
 
         Platform(String platformName) {
             this.platformName = platformName;
         }
 
         public String getPlatformName() {
-            return this.platformName;
-        }
-
-        public String toString() {
             return this.platformName;
         }
     }

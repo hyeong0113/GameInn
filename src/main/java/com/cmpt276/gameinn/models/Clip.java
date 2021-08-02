@@ -54,6 +54,7 @@ public class Clip {
         this.title = title;
         this.gameTitle = gameTitle;
         this.tags = tags;
+        this.platform = platform;
         this.sourceLink = sourceLink;
         this.postedTime = postedTime;
         this.RUser = user;
@@ -140,7 +141,7 @@ public class Clip {
 
 	@Override public String toString() {
 		return "Employee{" + "title=" + this.title + ", gametiitle='" + this.gameTitle +
-			 ", tags='" + this.tags + ", sourceLink='" + this.sourceLink + ", postedTime='" +
+			 ", tags='" + this.tags + ", platform='" + this.platform.toString() + ", sourceLink='" + this.sourceLink + ", postedTime='" +
 			   this.postedTime + '\'' + '}';
 	}
 }
