@@ -23,18 +23,17 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     @Autowired private GroupFinderService groupFinderService;
     @Autowired private UserService userService;
 
-    private boolean alert = false;
-
 	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinderListPage(@PathVariable(required = false)String sub,
                                                                     Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal) {
+        
         String url="";
         if (principal != null) {
-            if (alert) {
-                model.addAttribute("alert", true);
-                alert = false;
+            String role = userService.getRoleFromResponse(principal);
+            if (!role.equals("admin") && HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
+                model.addAttribute("show", false);
             }
             else {
-                model.addAttribute("alert", false);
+                model.addAttribute("show", true);
             }
             model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
             url=String.format("/groupfinders/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
@@ -99,14 +98,6 @@ import com.cmpt276.gameinn.auth.HandleCookie;
 
     @RequestMapping("/groupfinders/{sub}/delete/{id}")
     public String deleteGroupFinder(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal) {
-        String role = userService.getRoleFromResponse(principal);
-
-        if (!role.equals("admin") && HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
-            alert = true;
-            return "redirect:/groupfinders/" + sub;
-        }
-
-        model.addAttribute("alert", "false");
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         groupFinderService.deleteGroupFinder(id);
         return "redirect:/groupfinders/" + sub;

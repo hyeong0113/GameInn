@@ -4,6 +4,7 @@
 <head>
     <div th:replace="fragments/common :: mainHeader"></div>
     <link rel="stylesheet" href="/css/groupfinder_detail.css">
+    <script th:src="@{/js/option_button.js} "></script>
     <title>form</title>
 </head>
 </head>
@@ -43,9 +44,18 @@
                         <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
                     </div> -->
                     <!-- This button is for writer of this post -->
-                    <div class="delete-button">
+                    <div class="delete-button" id="deleteButton">
                         <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
                     </div>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        var sub = /*[[${user.getSubId()}]]*/ '';
+                        var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
+                        var role = /*[[${user.getRole()}]]*/ '';
+                        var id = '#deleteButton';
+                        display_button(id, sub, groupFinder_sub, role)
+                            /*]]>*/
+                    </script>
                 </div>
             </div>
         </main>
