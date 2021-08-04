@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.apache.commons.validator.routines.UrlValidator;
 import javax.servlet.http.HttpServletRequest;
 
 import com.cmpt276.gameinn.models.Clip;
@@ -24,6 +25,23 @@ import com.cmpt276.gameinn.auth.HandleCookie;
 public class ClipController {
     @Autowired private ClipService clipService;
     @Autowired private UserService userService;
+
+    private boolean sourceURLError = false;
+    private String errorMessage = "";
+    private String urlError = "Source URL is not valid";
+    private String emptyURL = "";
+
+    private boolean isValidateURL(String url) {
+        String[] schemes = {"http","https"};
+        UrlValidator urlValidator = new UrlValidator(schemes);
+
+        if (urlValidator.isValid(url)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 	@GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipListPage(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
                                                                                                                         @AuthenticationPrincipal OidcUser principal) {
@@ -44,6 +62,8 @@ public class ClipController {
     @GetMapping("/clips/{sub}/addEdit")
     public String showAddEditClipPageForCreate(@PathVariable(required = true)String sub, Clip clip, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        model.addAttribute("showAlert", sourceURLError);
+        model.addAttribute("errorMessage", errorMessage);
         return "addEditClipPage";
     }
     
@@ -51,10 +71,15 @@ public class ClipController {
     @PostMapping("/clips/{sub}/addEdit/add") public String addClip(@PathVariable(required = true)String sub, @Valid Clip clip, BindingResult result, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 
-        if (result.hasErrors()) {
-            return "addEditClipPage";
+        if (result.hasErrors() || !isValidateURL(clip.getSourceLink())) {
+            sourceURLError = true;
+            errorMessage = urlError;
+            String url = String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+            return "redirect:" + url;
         }
-
+        
+        sourceURLError = false;
+        errorMessage = emptyURL;
         User user = userService.getUserBySub(sub);
         Clip temp = clipService.addClip(clip, user);
 

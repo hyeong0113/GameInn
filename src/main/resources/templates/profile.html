@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-    <head>
-        <div th:replace="fragments/common :: mainHeader"></div>
-        <link rel="stylesheet" href="/css/profile.css">
-        <title>User Profile Page</title>
-    </head>
+<head>
+    <div th:replace="fragments/common :: mainHeader"></div>
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>User Profile Page</title>
+</head>
 
-    <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+<body>
+    <div class="row">
+        <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content">
-                    <h1 class="mb-4 mt-5">User Profile</h1>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="content">
+                <h1 class="mb-4 mt-5">User Profile</h1>
 
-                    <form th:object="${user}">
-                        <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
+                <form th:object="${user}">
+                    <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
 
-                        <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
+                    <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
 
-                        <button id="edit" type="submit">Edit Profile</button>
+                    <button id="edit" type="submit">Edit Profile</button>
 
-                        <div>
-                            <label id="textareatext" for="textarea">About me:</label>
-                            <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
-                        </div>
+                    <div>
+                        <label id="textareatext" for="textarea">About me:</label>
+                        <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                    </div>
 
-                        <div>
-                            <label for="email">Email:</label>
-                            <span id="email" th:text="${user.getEmail()}"></span>
-                        </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <span id="email" th:text="${user.getEmail()}"></span>
+                    </div>
 
-                        <div>
-                            <label for="fixedP">Password:</label>
-                            <input class="ml-3 border border-dark" id='fixedP' type="password" required>
-                        </div>
+                    <div>
+                        <label for="fixedP">Password:</label>
+                        <input class="ml-3 border border-dark" id='fixedP' type="password" required>
+                    </div>
 
-                        <div>
-                            <label for="fixedRP">Re-enter Password:</label>
-                            <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
-                        </div>
+                    <div>
+                        <label for="fixedRP">Re-enter Password:</label>
+                        <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
+                    </div>
 
-                        <div class="col">
-                            <a href="#" class="fab fa-instagram"></a>
-                            <a href="url">https://www.instagram.com</a>
-                        </div>
+                    <div class="col">
+                        <a href="#" class="fab fa-instagram"></a>
+                        <a href="url">https://www.instagram.com</a>
+                    </div>
 
-                        <div class="col">
-                            <a href="#" class="fab fa-skype"></a>
-                            <a href="url">https://www.skype.com/en</a>
-                        </div>
-                    </form>
-                </div>
-            </main>
-        </div>
-    </body>
+                    <div class="col">
+                        <a href="#" class="fab fa-skype"></a>
+                        <a href="url">https://www.skype.com/en</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
 
 </html>
