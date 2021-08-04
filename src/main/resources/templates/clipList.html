@@ -32,9 +32,16 @@
                         <div class="post-header">
                             <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />
                             <p>
-                                <span th:text="${clip.getUser().getName()}" th:remove="tag">Name</span> | <span>6 hrs ago</span>
+                                <span th:text="${clip.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${clip.getId()}"></span>
                             </p>
-
+                            <script th:inline="javascript">
+                                /*<![CDATA[*/
+                                var posted_time = /*[[${clip.getPostedTime().getTime()}]]*/ '';
+                                var content_id = /*[[${clip.getId()}]]*/ '';
+                                var id = 'time' + content_id;
+                                document.getElementById(id).innerHTML = display_diff_time(posted_time);
+                                /*]]>*/
+                            </script>
                             <div class="dropdown ms-auto" sec:authorize="!isAnonymous()">
                                 <button class="btn button-option btn-sm dropdownMenuButton" type="button" iz data-bs-toggle="dropdown" aria-expanded="false" th:id="${clip.getId()}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
