@@ -24,16 +24,18 @@ public class GroupFinderService {
     }
 
     public Page<GroupFinder> getGroupFindersPaginated(Pageable pageable) {
-        int pageSize = pageable.getPageSize(); //5
-        int currentPage = pageable.getPageNumber(); // 0
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<GroupFinder> groupFinders = groupFinderRepository.findAll();
+        
         groupFinders.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
 
         List<GroupFinder> temp = groupFinders;
-        if (groupFinders.size() >= startItem) {
-            int toIndex = Math.min(startItem + pageSize, groupFinders.size());
-            groupFinders = groupFinders.subList(startItem, toIndex);
+
+        if (temp.size() >= startItem) {
+            int toIndex = Math.min(startItem + pageSize, temp.size());
+            groupFinders = temp.subList(startItem, toIndex);
         }
         Page<GroupFinder> groupFinderPage = new PageImpl<GroupFinder>(groupFinders, PageRequest.of(currentPage, pageSize), temp.size());
         return groupFinderPage;
