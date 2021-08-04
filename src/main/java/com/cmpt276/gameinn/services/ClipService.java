@@ -15,7 +15,7 @@ public class ClipService {
     private IClipRepository clipRepository;
 
     public Clip addClip(Clip clip, User user) {
-        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getPlatform(), clip.getSourceLink(), clip.getPostedTime(), user);
+        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getPlatform(), clip.getSourceLink(), user);
         return clipRepository.save(created);
     }
 
