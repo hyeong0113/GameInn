@@ -3,6 +3,7 @@ package com.cmpt276.gameinn.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.Clip;
@@ -20,7 +21,9 @@ public class ClipService {
     }
 
     public List<Clip> getClips() {
-        return clipRepository.findAll();
+        List<Clip> clips = clipRepository.findAll();
+        clips.sort(Comparator.comparing(Clip::getPostedTime).reversed());
+        return clips;
     }
 
     public Clip getClipByID (Long id){
