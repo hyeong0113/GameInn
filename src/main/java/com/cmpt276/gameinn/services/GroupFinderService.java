@@ -2,6 +2,8 @@ package com.cmpt276.gameinn.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.GroupFinder;
@@ -22,7 +24,9 @@ public class GroupFinderService {
     }
 
     public List<GroupFinder> getGroupFinders() {
-        return groupFinderRepository.findAll();
+        List<GroupFinder> groupFinders = groupFinderRepository.findAll();
+        groupFinders.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
+        return groupFinders;
     }
 
     public GroupFinder getGroupFinderByID(Long id){
