@@ -3,6 +3,7 @@ package com.cmpt276.gameinn.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.Clip;
@@ -15,12 +16,14 @@ public class ClipService {
     private IClipRepository clipRepository;
 
     public Clip addClip(Clip clip, User user) {
-        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getPlatform(), clip.getSourceLink(), clip.getPostedTime(), user);
+        Clip created = new Clip(clip.getTitle(), clip.getGameTitle(), clip.getTags(), clip.getPlatform(), clip.getSourceLink(), user);
         return clipRepository.save(created);
     }
 
     public List<Clip> getClips() {
-        return clipRepository.findAll();
+        List<Clip> clips = clipRepository.findAll();
+        clips.sort(Comparator.comparing(Clip::getPostedTime).reversed());
+        return clips;
     }
 
     public Clip getClipByID (Long id){
