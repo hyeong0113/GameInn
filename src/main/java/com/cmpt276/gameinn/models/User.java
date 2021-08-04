@@ -55,7 +55,6 @@ import javax.persistence.Table;
 		this.name = name;
 		this.picture = picture;
 		this.email = email;
-		this.socialAccountsList = new ArrayList<String>();
 	}
 
 	public Long getId() {
