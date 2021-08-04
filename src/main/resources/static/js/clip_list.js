@@ -40,10 +40,43 @@ function formatDate(time) {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2)
-        month = '0' + month;
-    if (day.length < 2)
-        day = '0' + day;
+    switch (month) {
+        case '1':
+            month = 'Jan'
+            break;
+        case '2':
+            month = 'Feb'
+            break;
+        case '3':
+            month = 'Mar'
+            break;
+        case '4':
+            month = 'Apr'
+            break;
+        case '5':
+            month = 'May'
+            break;
+        case '6':
+            month = 'Jun'
+        case '7':
+            month = 'Jul'
+            break;
+        case '8':
+            month = 'Aug'
+            break;
+        case '9':
+            month = 'Sep'
+            break;
+        case '10':
+            month = 'Oct'
+            break;
+        case '11':
+            month = 'Nov'
+            break;
+        case '12':
+            month = 'Dec'
+            break;
+    }
 
-    return [year, month, day].join('.');
+    return month + " " + day + ", " + year;
 }
