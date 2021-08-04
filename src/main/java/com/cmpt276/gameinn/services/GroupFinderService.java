@@ -2,12 +2,14 @@ package com.cmpt276.gameinn.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.*;
+
+import java.util.Comparator;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.GroupFinder;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.repositories.GroupFinder.IGroupFinderRepository;
-import com.cmpt276.gameinn.repositories.User.IUserRepository;
 
 @Service
 public class GroupFinderService {
@@ -21,8 +23,22 @@ public class GroupFinderService {
         return groupFinderRepository.save(created);
     }
 
-    public List<GroupFinder> getGroupFinders() {
-        return groupFinderRepository.findAll();
+    public Page<GroupFinder> getGroupFindersPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<GroupFinder> groupFinders = groupFinderRepository.findAll();
+        
+        groupFinders.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
+
+        List<GroupFinder> temp = groupFinders;
+
+        if (temp.size() >= startItem) {
+            int toIndex = Math.min(startItem + pageSize, temp.size());
+            groupFinders = temp.subList(startItem, toIndex);
+        }
+        Page<GroupFinder> groupFinderPage = new PageImpl<GroupFinder>(groupFinders, PageRequest.of(currentPage, pageSize), temp.size());
+        return groupFinderPage;
     }
 
     public GroupFinder getGroupFinderByID(Long id){
