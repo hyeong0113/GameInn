@@ -26,6 +26,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql:+'
+    implementation group: 'commons-validator', name: 'commons-validator', version: '1.4.0'
 
     implementation 'org.webjars:webjars-locator:+'
 	implementation 'org.webjars:jquery:+'
