@@ -26,9 +26,7 @@ public class ClipController {
     @Autowired private ClipService clipService;
     @Autowired private UserService userService;
 
-    private boolean sourceURLError = false;
-    private String errorMessage = "";
-    private String urlError = "Source URL is not valid";
+    private String urlError = "Source URL is not valid. Note: You should add http:// or https://";
     private String emptyURL = "";
 
     private boolean isValidateURL(String url) {
@@ -41,7 +39,6 @@ public class ClipController {
 
         return false;
     }
-
 
 	@GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipListPage(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
                                                                                                                         @AuthenticationPrincipal OidcUser principal) {
@@ -62,8 +59,8 @@ public class ClipController {
     @GetMapping("/clips/{sub}/addEdit")
     public String showAddEditClipPageForCreate(@PathVariable(required = true)String sub, Clip clip, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
-        model.addAttribute("showAlert", sourceURLError);
-        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("showAlert", false);
+        model.addAttribute("errorMessage", emptyURL);
         return "addEditClipPage";
     }
     
@@ -72,14 +69,11 @@ public class ClipController {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 
         if (result.hasErrors() || !isValidateURL(clip.getSourceLink())) {
-            sourceURLError = true;
-            errorMessage = urlError;
-            String url = String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
-            return "redirect:" + url;
+            model.addAttribute("showAlert", true);
+            model.addAttribute("errorMessage", urlError);
+            return "addEditClipPage";
         }
-        
-        sourceURLError = false;
-        errorMessage = emptyURL;
+
         User user = userService.getUserBySub(sub);
         Clip temp = clipService.addClip(clip, user);
 
