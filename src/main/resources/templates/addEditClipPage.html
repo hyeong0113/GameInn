@@ -17,23 +17,23 @@
 
                 <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
                     <div class="row g-3">
-                        <div class="col-sm-10 flex-grow-1">
+                        <div class="col-sm flex-grow-1">
                             <label for="gameTitle" class="col-sm-2 col-form-label">Game:</label>
                             <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
                         </div>
 
-                        <div class="col-sm-10 flex-grow-1">
+                        <div class="col-sm flex-grow-1">
                             <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
                             <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
                         </div>
 
                         <!-- Tags are unavailable now -->
-                        <!-- <div class="col-sm-10 flex-grow-1">
+                        <!-- <div class="col-sm flex-grow-1">
                                 <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
                                 <input type="text" class="form-control border border-dark" id="tags">
                             </div> -->
 
-                        <div class="col-sm-10 flex-grow-1">
+                        <div class="col-sm flex-grow-1">
                             <label for="platform" class="col-sm-2 col-form-label">Platform:</label>
                             <select class="form-select border border-dark" name="platform" th:field="*{platform}">
                                     <option th:each="platform : ${T(com.cmpt276.gameinn.constant.EnumCollection.Platform).values()}" th:value="${platform}" th:text="${platform.getPlatformName()}">
@@ -41,13 +41,13 @@
                             </select>
                         </div>
 
-                        <div class="col-sm-10 flex-grow-1">
+                        <div class="col-sm flex-grow-1">
                             <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
                             <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Clip Link" required>
                         </div>
 
                         <!-- Date is unavailable now -->
-                        <div class="col-sm-10 flex-grow-1">
+                        <div class="col-sm flex-grow-1">
                             <input type="submit" class="btn add-clip" value="Add">
                         </div>
                     </div>

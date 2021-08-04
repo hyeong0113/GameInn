@@ -66,10 +66,6 @@ body {
     text-align: center;
 }
 
-input[type=text] {
-    padding: 6px;
-}
-
 .ui-autocomplete {
     max-height: 250px;
     overflow-y: auto;

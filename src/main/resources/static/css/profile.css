@@ -28,7 +28,7 @@
     text-decoration: none;
 }
 
-.fa-facebook {
+/* .fa-facebook {
     background: #3B5998;
     color: white;
 }
@@ -66,17 +66,10 @@
 .fa-skype {
     color: white;
     background: #00aff0;
-}
-
+} */
 #textareatext {
     position: relative;
     bottom: 30px;
-}
-
-.container {
-    position: relative;
-    right: 15px;
-    padding: 2px;
 }
 
 .user-description {
