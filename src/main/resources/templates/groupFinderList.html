@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="groupFinder : ${groupFinders}">
+                        <tr th:each="groupFinder, iStat : ${groupFinders.content}" th:alt-title="${iStat.even}? 'even' : 'odd'">
                             <td sec:authorize="!isAnonymous()">
                                 <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
                             </td>
@@ -51,10 +51,9 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <p class="page-num">
-                    < &nbsp; <u> 1 </u> &nbsp; >
-                </p>
+                <div th:if="${groupFinders.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+                    <a th:href="@{/groupFinders(size=${groupFinders.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==groupFinders.number + 1} ? active"></a>
+                </div>
             </div>
         </main>
     </div>
