@@ -3,6 +3,7 @@
 
 <head>
     <div th:replace="fragments/common :: mainHeader"></div>
+    <script th:src="@{/js/alert.js} "></script>
     <link rel="stylesheet" href="/css/addClipPage.css">
     <title>Add clip form</title>
 </head>
@@ -12,6 +13,15 @@
 
         <div th:replace="fragments/common :: sidebar"></div>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="alert alert-danger" role="alert" id="alert-display" th:text="${errorMessage}">
+                You cannot delete others' post.
+            </div>
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                var show_alert = /*[[${showAlert}]]*/ '';
+                display_alert(show_alert);
+                /*]]>*/
+            </script>
             <div class="content-50">
                 <h2 class="mb-4 mt-5">Create Group</h2>
 
