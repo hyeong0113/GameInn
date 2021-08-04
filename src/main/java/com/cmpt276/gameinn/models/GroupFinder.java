@@ -1,5 +1,6 @@
 package com.cmpt276.gameinn.models;
 
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,9 @@ public class GroupFinder {
     @NotNull
     private GameStyle gameStyle;
 
+    @NotNull
+    private Date postedTime;
+
     private String description;
 
     private String password;
@@ -62,6 +66,7 @@ public class GroupFinder {
 		this.requiredLevel = requiredLevel;
         this.totalPlayers = totalPlayers;
         this.currentPlayers = currentPlayers;
+        this.postedTime = new Date();
         this.description = description;
         this.RUser = user;
         this.password = password;
@@ -112,6 +117,16 @@ public class GroupFinder {
 	public void setGameStyle(GameStyle gameStyle) {
 		this.gameStyle = gameStyle;
 	}
+
+    public Date getPostedTime()
+    {
+        return this.postedTime;
+    }
+
+    public void setPostedTime(Date postedTime)
+    {
+        this.postedTime = postedTime;
+    }
 
     public int getTotalPlayers()
     {

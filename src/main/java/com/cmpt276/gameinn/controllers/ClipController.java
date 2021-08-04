@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.apache.commons.validator.routines.UrlValidator;
+
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.cmpt276.gameinn.models.Clip;
@@ -51,6 +54,7 @@ public class ClipController {
             url="/oauth2/authorization/auth0";
         }
         model.addAttribute("url", url);
+        model.addAttribute("current_time", new Date());
         model.addAttribute("clip_list", clipService.getClips());
 
 		return "clipList";

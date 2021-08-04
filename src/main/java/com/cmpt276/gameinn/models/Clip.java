@@ -50,13 +50,13 @@ public class Clip {
 
     public Clip() {}
 
-    public Clip(String title, String gameTitle, List<String> tags, Platform platform, String sourceLink, Date postedTime, User user) {
+    public Clip(String title, String gameTitle, List<String> tags, Platform platform, String sourceLink, User user) {
         this.title = title;
         this.gameTitle = gameTitle;
         this.tags = tags;
         this.platform = platform;
         this.sourceLink = sourceLink;
-        this.postedTime = postedTime;
+        this.postedTime = new Date();
         this.RUser = user;
     }
 
