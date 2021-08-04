@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.cmpt276.gameinn.auth.HandleCookie;
 import com.cmpt276.gameinn.models.GroupFinder;
@@ -24,9 +33,13 @@ import com.cmpt276.gameinn.services.*;
 	@Autowired private UserService userService;
 
 	@GetMapping(value = { "/groupfinders", "/groupfinders/{sub}" }) public
-	String groupFinderListPage(@PathVariable(required = false) String sub, Model
-		model, HttpServletRequest request, @AuthenticationPrincipal OidcUser
+	String groupFinderListPage(@PathVariable(required = false) String sub,
+		@RequestParam("page") Optional<Integer> page,
+		@RequestParam("size") Optional<Integer> size, Model model,
+		HttpServletRequest request, @AuthenticationPrincipal OidcUser
 		principal) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(5);
 		String url = "";
 
 		if (principal != null) {
@@ -47,8 +60,19 @@ import com.cmpt276.gameinn.services.*;
 		}
 
 		model.addAttribute("url", url);
-		model.addAttribute("groupFinders",
-			groupFinderService.getGroupFinders());
+		Page<GroupFinder> groupFinderPage =
+			groupFinderService.getGroupFindersPaginated(PageRequest.of(
+			currentPage - 1, pageSize));
+		model.addAttribute("groupFinders", groupFinderPage);
+
+		int totalPages = groupFinderPage.getTotalPages();
+
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+					.boxed()
+					.collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
 
 		return "groupFinderList";
 	}
