@@ -13,23 +13,37 @@ function display_diff_time(posted_time) {
     var interval = seconds / 31536000;
 
     if (interval > 1) {
-        return Math.floor(interval) + " years ago";
+        return formatDate(posted_time);
     }
     interval = seconds / 2592000;
     if (interval > 1) {
-        return Math.floor(interval) + " months ago";
+        return formatDate(posted_time);
     }
     interval = seconds / 86400;
     if (interval > 1) {
-        return Math.floor(interval) + " days ago";
+        return formatDate(posted_time);
     }
     interval = seconds / 3600;
     if (interval > 1) {
-        return Math.floor(interval) + " hours ago";
+        return Math.floor(interval) + "h";
     }
     interval = seconds / 60;
     if (interval > 1) {
-        return Math.floor(interval) + " minutes ago";
+        return Math.floor(interval) + "m";
     }
     return "few seconds ago";
+}
+
+function formatDate(time) {
+    var d = new Date(time),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('.');
 }
