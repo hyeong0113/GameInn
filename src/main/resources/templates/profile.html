@@ -8,98 +8,96 @@
     </head>
 
     <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content">
-                    <h1 class="mb-4 mt-5">User Profile</h1>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content">
+                        <h1 class="mb-4 mt-5">User Profile</h1>
 
-                    <form th:object="${user}">
-                        <input type="image" id="img" src="http://via.placeholder.com/110x110" alt="file" class="rounded-circle" />
+                        <form th:object="${user}">
+                            <input type="image" id="img" th:src="${user.getPicture()}" alt="file" class="rounded-circle" />
 
-                        <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
+                            <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
 
-                        <button id="edit" type="submit">Edit Profile</button>
+                            <button id="edit" type="submit">Edit Profile</button>
 
-                        <div>
-                            <label id="textareatext" for="textarea">About me:</label>
-                            <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
-                        </div>
+                            <div>
+                                <label id="textareatext" for="textarea">About me:</label>
+                                <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                            </div>
 
-                        <div>
-                            <label for="email">Email:</label>
-                            <span id="email" th:text="${user.getEmail()}"></span>
-                        </div>
+                            <div>
+                                <label for="email">Email:</label>
+                                <span id="email" th:text="${user.getEmail()}"></span>
+                            </div>
 
-                        <!-- <div>
+                            <!-- <div>
                             <label for="fixedP">Password:</label>
                             <input class="ml-3 border border-dark" id='fixedP' type="password" required>
                         </div> -->
 
-                        <!-- <div>
+                            <!-- <div>
                             <label for="fixedRP">Re-enter Password:</label>
                             <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
                         </div> -->
 
-                        <div class="row">
-                            <div class="col-sm">
-                                <i class="fab fa-facebook"></i>
-                                <a href="#">Facebook</a>
-                            </div>
+                            <div class="row row-cols-2 g-3">
+                                <div class="col">
+                                    <i class="fab fa-facebook"></i>
+                                    <a href="#">Facebook</a>
+                                </div>
 
-                            <div class="col-sm">
-                                <i class="fab fa-twitter"></i>
-                                <a href="#">Twitter</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <i class="fab fa-discord"></i>
-                                <a href="#">Discord</a>
-                            </div>
+                                <div class="col">
+                                    <i class="fab fa-twitter"></i>
+                                    <a href="#">Twitter</a>
+                                </div>
 
-                            <div class="col-sm">
-                                <i class="fab fa-guilded"></i>
-                                <a href="#">Guilded</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <i class="fab fa-twitch"></i>
-                                <a href="#">Twitch</a>
-                            </div>
+                                <div class="col">
+                                    <i class="fab fa-discord"></i>
+                                    <a href="#">Discord</a>
+                                </div>
 
-                            <div class="col-sm">
-                                <i class="fab fa-youtube"></i>
-                                <a href="#">YouTube</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <i class="fab fa-steam"></i>
-                                <a href="#">Steam</a>
-                            </div>
+                                <div class="col">
+                                    <i class="fab fa-guilded"></i>
+                                    <a href="#">Guilded</a>
+                                </div>
 
-                            <div class="col-sm">
-                                <i class="fab fa-xbox"></i>
-                                <a href="#">Xbox</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <i class="fab fa-playstation"></i>
-                                <a href="#">PSN</a>
-                            </div>
+                                <div class="col">
+                                    <i class="fab fa-twitch"></i>
+                                    <a href="#">Twitch</a>
+                                </div>
 
-                            <div class="col-sm">
-                                <i class="fab fa-battle-net"></i>
-                                <a href="#">Battle.net</a>
+                                <div class="col">
+                                    <i class="fab fa-youtube"></i>
+                                    <a href="#">YouTube</a>
+                                </div>
+
+                                <div class="col">
+                                    <i class="fab fa-steam"></i>
+                                    <a href="#">Steam</a>
+                                </div>
+
+                                <div class="col">
+                                    <i class="fab fa-xbox"></i>
+                                    <a href="#">Xbox</a>
+                                </div>
+
+                                <div class="col">
+                                    <i class="fab fa-playstation"></i>
+                                    <a href="#">PSN</a>
+                                </div>
+
+                                <div class="col">
+                                    <i class="fab fa-battle-net"></i>
+                                    <a href="#">Battle.net</a>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </main>
+                        </form>
+                    </div>
+                </main>
+            </div>
         </div>
     </body>
 

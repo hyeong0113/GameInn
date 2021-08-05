@@ -8,67 +8,68 @@
     </head>
 
     <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content-50">
-                    <h2 class=" mb-4 mt-5">Create Group</h2>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content">
+                        <h2 class=" mb-4 mt-5">Create Group</h2>
 
-                    <form action="#" th:action="@{/groupfinders/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${groupFinder}" method="post">
-                        <div class="row g-3">
-                            <div class="col-sm flex-grow-1">
-                                <label for="gameTitle">Game:</label>
-                                <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
+                        <form action="#" th:action="@{/groupfinders/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${groupFinder}" method="post">
+                            <div class="row row-cols-1 g-3">
+                                <div class="col">
+                                    <label for="gameTitle" class="form-label">Game:</label>
+                                    <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
+                                </div>
+
+                                <div class="col">
+                                    <label for="title" class="form-label">Post title:</label>
+                                    <input id="title" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
+                                </div>
+
+                                <div class="col">
+                                    <label for="requiredLevel" class="form-label">Required Level:</label>
+                                    <select name="requiredLevel">
+                                        <option th:each="level : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level}" th:text="${level}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col">
+                                    <label for="gameStyle" class="form-label">Game Style:</label>
+                                    <select name="gameStyle">
+                                        <option th:each="style : ${T(com.cmpt276.gameinn.constant.EnumCollection.GameStyle).values()}" th:value="${style}" th:text="${style}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col">
+                                    <label for="totalPlayers" class="form-label">Total number of players:</label>
+                                    <input type="number" min="2" value="2" th:name="*{totalPlayers}" class="form-control" id="totalPlayers" placeholder="Total players" required>
+                                </div>
+
+                                <div class="col">
+                                    <label for="password" class="form-label">Password:</label>
+                                    <!-- <input type="password" id="ip5" class="border border-dark p-1"> -->
+
+                                    <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Password">
+                                </div>
+
+                                <div class="col">
+                                    <label id="des" for="description" class="form-label">Description:</label>
+                                    <textarea type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description" cols="60" rows="7" required></textarea>
+                                </div>
+
+
+                                <div class="col">
+                                    <input id="createButton" type="submit" class="btn add-groupfinder" value="Add">
+                                </div>
                             </div>
-
-                            <div class="col-sm flex-grow-1">
-                                <label for="title">Post title:</label>
-
-                                <input id="title" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
-                            </div>
-
-                            <div class="col-sm flex-grow-1">
-                                <label for="requiredLevel">Required Level:</label>
-                                <select name="requiredLevel">
-                                    <option th:each="level : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level}" th:text="${level}">
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm flex-grow-1">
-                                <label for="gameStyle">Game Style:</label>
-                                <select name="gameStyle">
-                                    <option th:each="style : ${T(com.cmpt276.gameinn.constant.EnumCollection.GameStyle).values()}" th:value="${style}" th:text="${style}">
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm flex-grow-1">
-                                <label for="totalPlayers">Total number of players:</label>
-                                <input type="number" min="2" value="2" th:name="*{totalPlayers}" class="form-control" id="totalPlayers" placeholder="Total players" required>
-                            </div>
-
-                            <div class="col-sm flex-grow-1">
-                                <label for="password" class="ml-3">Password:</label>
-                                <!-- <input type="password" id="ip5" class="border border-dark p-1"> -->
-
-                                <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Password">
-                            </div>
-
-                            <div class="col-sm flex-grow-1">
-                                <label id="des" for="description">Description:</label>
-                                <textarea type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description" cols="60" rows="7" required></textarea>
-                            </div>
-
-
-                            <div class="col-sm flex-grow-1">
-                                <input id="createButton" type="submit" class="btn add-groupfinder" value="Add">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </main>
+                        </form>
+                    </div>
+                </main>
+            </div>
         </div>
     </body>
 

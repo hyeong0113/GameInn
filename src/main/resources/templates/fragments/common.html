@@ -16,28 +16,41 @@
             <script th:src="@{/js/getGames.js} "></script>
         </div>
 
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 collapse" th:fragment="sidebar">
-            <div class="position-sticky">
-                <img class="pb-3" src="/img/Logo.svg" alt="GameInn logo">
-                <ul class="nav flex-column">
-                    <li class="nav-item" sec:authorize="!isAnonymous()">
-                        <a class="nav-link px-0 py-2" th:href="@{/profile/{sub}(sub=${user.getSubId()})}"><i class="fas fa-home"></i> Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 py-2" th:href="@{/groupfinders}"><i class="fas fa-users"></i></i> Group Finder</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 py-2" th:href="@{/clips}"><i class="far fa-play-circle"></i> Clips</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="!isAnonymous()">
-                        <a class="nav-link px-0 py-2" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </li>
-                    <li class="nav-item" sec:authorize="isAnonymous()">
-                        <a class="nav-link px-0 py-2" href="/oauth2/authorization/auth0"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    </li>
-                </ul>
+        <nav class="col-auto col-sm-3 col-lg-2 bg-light p-3" th:fragment="sidebar">
+            <div class="row flex-nowrap min-vh-100">
+                <div class="d-flex flex-column h-100">
+                    <img class="d-none d-sm-inline pb-3" src="/img/Logo.svg" alt="GameInn logo">
+                    <img class="d-inline d-sm-none pb-3" src="/img/favicon.svg" alt="GameInn logo">
+                    <ul class="nav flex-column">
+                        <li class="nav-item" sec:authorize="!isAnonymous()">
+                            <a class="nav-link px-0 py-2" th:href="@{/profile/{sub}(sub=${user.getSubId()})}">
+                                <i class="fas fa-home"></i></i> <span class="ms-1 d-none d-sm-inline">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-0 py-2" th:href="@{/groupfinders}">
+                                <i class="fas fa-users"></i></i> <span class="ms-1 d-none d-sm-inline">Group Finder</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-0 py-2" th:href="@{/clips}">
+                                <i class="far fa-play-circle"></i> <span class="ms-1 d-none d-sm-inline">Clips</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!isAnonymous()">
+                            <a class="nav-link px-0 py-2" th:href="@{/logout}">
+                                <i class="fas fa-sign-out-alt"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAnonymous()">
+                            <a class="nav-link px-0 py-2" href="/oauth2/authorization/auth0">
+                                <i class="fas fa-sign-in-alt"></i> <span class="ms-1 d-none d-sm-inline">Login</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <small class="d-none d-sm-inline mt-auto">Copyright &copy; 2021 GameInn</small>
             </div>
-            <small class="footer">Copyright &copy; 2021 GameInn</small>
         </nav>
     </body>
 

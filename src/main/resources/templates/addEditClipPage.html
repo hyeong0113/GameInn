@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:replace="fragments/common :: mainHeader"></div>
-    <script th:src="@{/js/alert.js} "></script>
-    <link rel="stylesheet" href="/css/addClipPage.css">
-    <title>Add clip form</title>
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <script th:src="@{/js/alert.js} "></script>
+        <link rel="stylesheet" href="/css/addClipPage.css">
+        <title>Add clip form</title>
+    </head>
 
-<body>
-    <div class="row">
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-        <div th:replace="fragments/common :: sidebar"></div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="alert alert-danger" role="alert" id="alert-display" th:text="${errorMessage}">
-                You cannot delete others' post.
-            </div>
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                var show_alert = /*[[${showAlert}]]*/ '';
-                display_alert(show_alert);
-                /*]]>*/
-            </script>
-            <div class="content-50">
-                <h2 class="mb-4 mt-5">Create Group</h2>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="alert alert-danger" role="alert" id="alert-display" th:text="${errorMessage}">
+                        You cannot delete others' post.
+                    </div>
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        var show_alert = /*[[${showAlert}]]*/ '';
+                        display_alert(show_alert);
+                        /*]]>*/
+                    </script>
+                    <div class="content">
+                        <h2 class="mb-4 mt-5">Create Group</h2>
 
-                <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
-                    <div class="row g-3">
-                        <div class="col-sm flex-grow-1">
-                            <label for="gameTitle" class="col-sm-2 col-form-label">Game:</label>
-                            <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
-                        </div>
+                        <form action="#" th:action="@{/clips/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${clip}" method="post">
+                            <div class="row row-cols-1 g-3">
+                                <div class="col">
+                                    <label for="gameTitle" class="form-label">Game:</label>
+                                    <input id="gameTitle" type="text" class="form-control border border-dark" th:field="*{gameTitle}" placeholder="Game" required>
+                                </div>
 
-                        <div class="col-sm flex-grow-1">
-                            <label for="clipTitle" class="col-sm-2 col-form-label">Clip Title:</label>
-                            <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
-                        </div>
+                                <div class="col">
+                                    <label for="clipTitle" class="col-form-label">Clip Title:</label>
+                                    <input id="clipTitle" type="text" class="form-control border border-dark" th:field="*{title}" placeholder="Title" required>
+                                </div>
 
-                        <!-- Tags are unavailable now -->
-                        <!-- <div class="col-sm flex-grow-1">
-                                <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
+                                <!-- Tags are unavailable now -->
+                                <!-- <div class="col">
+                                <label for="tags" class="form-label">Tags:</label>
                                 <input type="text" class="form-control border border-dark" id="tags">
                             </div> -->
 
-                        <div class="col-sm flex-grow-1">
-                            <label for="platform" class="col-sm-2 col-form-label">Platform:</label>
-                            <select class="form-select border border-dark" name="platform" th:field="*{platform}">
-                                    <option th:each="platform : ${T(com.cmpt276.gameinn.constant.EnumCollection.Platform).values()}" th:value="${platform}" th:text="${platform.getPlatformName()}">
-                                    </option>
-                            </select>
-                        </div>
+                                <div class="col">
+                                    <label for="platform" class="form-label">Platform:</label>
+                                    <select class="form-select border border-dark" name="platform" th:field="*{platform}">
+                                        <option th:each="platform : ${T(com.cmpt276.gameinn.constant.EnumCollection.Platform).values()}" th:value="${platform}" th:text="${platform.getPlatformName()}">
+                                        </option>
+                                    </select>
+                                </div>
 
-                        <div class="col-sm flex-grow-1">
-                            <label for="inputlink" class="col-sm-2 col-form-label">Link:</label>
-                            <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Clip Link" required>
-                        </div>
+                                <div class="col">
+                                    <label for="inputlink" class="form-label">Link:</label>
+                                    <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Clip Link" required>
+                                </div>
 
-                        <!-- Date is unavailable now -->
-                        <div class="col-sm flex-grow-1">
-                            <input type="submit" class="btn add-clip" value="Add">
-                        </div>
+                                <!-- Date is unavailable now -->
+                                <div class="col">
+                                    <input type="submit" class="btn add-clip" value="Add">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </main>
             </div>
-        </main>
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>

@@ -1,65 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:replace="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/groupfinder_detail.css">
-    <script th:src="@{/js/option_button.js} "></script>
-    <title>form</title>
-</head>
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/groupfinder_detail.css">
+        <script th:src="@{/js/option_button.js} "></script>
+        <title>form</title>
+    </head>
+    </head>
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="back-button">
-                <a th:href="@{/groupfinders/{sub}(sub=${user.getSubId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Back to list</a>
-            </div>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content">
+                        <div class="back-button">
+                            <a th:href="@{/groupfinders/{sub}(sub=${user.getSubId()})}" class="btn groupfinder-button float-start me-3" role="button" aria-pressed="true">Back to list</a>
+                        </div>
 
-            <div class="groupfinder-info" th:switch="${groupFinder}">
-                <div class="groupfinder-title">
-                    <h1 th:text="${groupFinder.getTitle()}"></h1>
-                </div>
+                        <div class="groupfinder-info" th:switch="${groupFinder}">
+                            <div class="groupfinder-title">
+                                <h1 th:text="${groupFinder.getTitle()}"></h1>
+                            </div>
 
-                <div class="groupfinder-badge">
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameTitle()}"></span>
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getRequiredLevel()}"></span>
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameStyle()}"></span>
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getStatus()}"></span>
-                </div>
+                            <div class="groupfinder-badge">
+                                <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameTitle()}"></span>
+                                <span class="p-1 badge badge-light border" th:text="${groupFinder.getRequiredLevel()}"></span>
+                                <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameStyle()}"></span>
+                                <span class="p-1 badge badge-light border" th:text="${groupFinder.getStatus()}"></span>
+                            </div>
 
-                <div class="number-currentplayer">
-                    <i id="mx-auto" class="p-3 mx-auto fas fa-users">
-                            <sup th:text="${groupFinder.getCurrentPlayers()}">1</sup>&frasl;<sub th:text="${groupFinder.getTotalPlayers()}">2</sub>
-                        </i>
-                </div>
+                            <div class="number-currentplayer">
+                                <i id="mx-auto" class="p-3 mx-auto fas fa-users">
+                                    <sup th:text="${groupFinder.getCurrentPlayers()}">1</sup>&frasl;<sub th:text="${groupFinder.getTotalPlayers()}">2</sub>
+                                </i>
+                            </div>
 
-                <textarea class="groupfinder-description" rows="15" cols="80" th:text="${groupFinder.getDescription()}" readonly></textarea>
+                            <textarea class="groupfinder-description" rows="15" cols="80" th:text="${groupFinder.getDescription()}" readonly></textarea>
 
-                <!-- Join will be availble next iteration -->
-                <div class="buttons">
-                    <!-- <div class="join-button">
-                        <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
+                            <!-- Join will be availble next iteration -->
+                            <div class="buttons flex-nowrap">
+                                <!-- <div class="join-button">
+                        <a th:href="#" class="btn groupfinder-button float-start me-3" role="button" aria-pressed="true">Join</a>
                     </div> -->
-                    <!-- This button is for writer of this post -->
-                    <div class="delete-button" id="deleteButton">
-                        <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
+                                <!-- This button is for writer of this post -->
+                                <div class="delete-button" id="deleteButton">
+                                    <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start me-3" role="button" aria-pressed="true">Delete</a>
+                                </div>
+                                <script th:inline="javascript">
+                                    /*<![CDATA[*/
+                                    var sub = /*[[${user.getSubId()}]]*/ '';
+                                    var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
+                                    var role = /*[[${user.getRole()}]]*/ '';
+                                    var id = '#deleteButton';
+                                    display_button(id, sub, groupFinder_sub, role)
+                                    /*]]>*/
+                                </script>
+                            </div>
+                        </div>
                     </div>
-                    <script th:inline="javascript">
-                        /*<![CDATA[*/
-                        var sub = /*[[${user.getSubId()}]]*/ '';
-                        var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
-                        var role = /*[[${user.getRole()}]]*/ '';
-                        var id = '#deleteButton';
-                        display_button(id, sub, groupFinder_sub, role)
-                            /*]]>*/
-                    </script>
-                </div>
+                </main>
             </div>
-        </main>
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>
