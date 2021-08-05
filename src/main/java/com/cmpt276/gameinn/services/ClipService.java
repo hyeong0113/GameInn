@@ -32,10 +32,7 @@ public class ClipService {
 
     public Clip updateClip(Long id, Clip clip) throws Exception {
         Clip found = clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
-        if (found == null){
-            throw new IllegalArgumentException("No Clip with " + clip.getId());
-        }
-
+        
         found.setTitle(clip.getTitle());
         found.setGameTitle(clip.getGameTitle());
         found.setTags(clip.getTags());

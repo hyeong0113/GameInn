@@ -22,6 +22,7 @@ import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cmpt276.gameinn.models.Comment;
 import com.cmpt276.gameinn.models.GroupFinder;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
@@ -29,6 +30,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
 
 @Controller public class GroupFinderController {
     @Autowired private GroupFinderService groupFinderService;
+    @Autowired private CommentService commentService;
     @Autowired private UserService userService;
 
 	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinderListPage(@PathVariable(required = false)String sub, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
@@ -91,7 +93,11 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     @GetMapping(value = {"/groupfinders/detail/{id}", "/groupfinders/{sub}/detail/{id}"}) public String getGroupFinderById(@PathVariable(required = false) String sub,
                                                                                                         @PathVariable Long id, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
-        model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
+        GroupFinder found = groupFinderService.getGroupFinderByID(id);
+        model.addAttribute("groupFinder", found);
+        model.addAttribute("commentCreate", new Comment());
+        model.addAttribute("comments", commentService.getCommentsWithGroupfinderId(found));
+
         return "groupFinderDetail";
     }
 

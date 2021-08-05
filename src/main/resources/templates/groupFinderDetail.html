@@ -5,6 +5,7 @@
     <div th:replace="fragments/common :: mainHeader"></div>
     <link rel="stylesheet" href="/css/groupfinder_detail.css">
     <script th:src="@{/js/option_button.js} "></script>
+    <script th:src="@{/js/comment.js} "></script>
     <title>form</title>
 </head>
 </head>
@@ -58,6 +59,41 @@
                     </script>
                 </div>
             </div>
+
+            <form id="create_comment_form" action="#" th:action="@{/comments/{sub}/{groupfinderId}/add(sub=${user.getSubId()}, groupfinderId=${groupFinder.getId()})}" th:object="${commentCreate}" method="post">
+                <div>
+                    <label for="level">Select your Level:</label>
+                    <select name="level">
+                            <option th:each="level_option : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level_option}" th:text="${level_option}">
+                            </option>
+                    </select>
+                </div>
+                <div>
+                    <label id="content" for="content">Comments:</label>
+                    <textarea type="text" th:field="*{content}" class="form-control" id="description" placeholder="Description" cols="58" rows="3" required></textarea>
+                </div>
+                <input id="addComment" type="submit" value="Submit" />
+            </form>
+
+            <div th:each="comment_content : ${comments}">
+                <img class="user-photo rounded-circle me-2" th:src="${comment_content.getUser().getPicture()}" />
+                <p>
+                    <span th:text="${comment_content.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${comment_content.getId()}"></span>
+                </p>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var posted_time = /*[[${comment_content.getPostedTime().getTime()}]]*/ '';
+                    var content_id = /*[[${comment_content.getId()}]]*/ '';
+                    var id = 'time' + content_id;
+                    document.getElementById(id).innerHTML = display_diff_time(posted_time);
+                    /*]]>*/
+                </script>
+                <div>
+                    <p th:text="${comment_content.getLevel()}"></p>
+                    <p th:text="${comment_content.getContent()}"></p>
+                </div>
+            </div>
+
         </main>
     </div>
 </body>
