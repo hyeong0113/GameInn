@@ -209,4 +209,15 @@ public class GroupFinder {
 			 ", totalPlayers='" + this.totalPlayers + ", currentPlayers='" + this.currentPlayers + ", required level='" +
 			   this.requiredLevel + ", gameStyle='" + this.gameStyle + '\'' + '}';
 	}
+
+    @Override
+    public boolean equals(Object o) {
+
+    if (this == o)
+        return true;
+    if (!(o instanceof GroupFinder))
+        return false;
+    GroupFinder groupFinder = (GroupFinder) o;
+    return Objects.equals(this.title, groupFinder.gameTitle) && Objects.equals(this.title, groupFinder.gameTitle);
+    }
 }

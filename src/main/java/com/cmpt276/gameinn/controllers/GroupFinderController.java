@@ -70,6 +70,9 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     @GetMapping("/groupfinders/{sub}/addEdit")
     public String showAddEditGroupFinderPageForCreate(@PathVariable(required = true)String sub, GroupFinder groupFinder, Model model, HttpServletRequest request) {
 		model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        model.addAttribute("gametitle", GroupFinderService.getGameTitle(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        model.addAttribute("title",GroupFinderService.getTitle(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        model.addAttribute("currentplayer", GroupFinderService.getCurrentPlayers(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         return "addEditGroupFinderPage";
     }
 
@@ -100,6 +103,10 @@ import com.cmpt276.gameinn.auth.HandleCookie;
                                                                                 GroupFinder groupFinder, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
+        model.addAttribute("gametitle", GroupFinderService.getGameTitle(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        model.addAttribute("title",GroupFinderService.getTitle(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        model.addAttribute("currentplayer", GroupFinderService.getCurrentPlayers(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+
         return "addEditGroupFinderPage";
     }
 

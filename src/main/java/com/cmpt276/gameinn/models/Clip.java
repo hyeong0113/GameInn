@@ -144,4 +144,19 @@ public class Clip {
 			 ", tags='" + this.tags + ", platform='" + this.platform.toString() + ", sourceLink='" + this.sourceLink + ", postedTime='" +
 			   this.postedTime + '\'' + '}';
 	}
+
+
+
+        @Override
+        public boolean equals(Object o) {
+
+        if (this == o)
+            return true;
+        if (!(o instanceof Clip))
+            return false;
+        Clip clip = (Clip) o;
+        return Objects.equals(this.title, clip.gameTitle) && Objects.equals(this.title, clip.gameTitle)
+            && Objects.equals(this.title, clip.gameTitle) && Objects.equals(this.title, clip.gameTitle);
+        }
+
 }
