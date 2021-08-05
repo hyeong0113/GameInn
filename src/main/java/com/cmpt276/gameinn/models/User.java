@@ -177,19 +177,19 @@ import javax.persistence.Table;
 		this.xbox = xbox;
 	}
 
-	public String getPSN() {
+	public String getPsn() {
 		return this.psn;
 	}
 
-	public void setPSN(String psn) {
+	public void setPsn(String psn) {
 		this.psn = psn;
 	}
 
-	public String getBattleNet() {
+	public String getBattle_net() {
 		return this.battle_net;
 	}
 
-	public void setBattleNet(String battle_net) {
+	public void setBattle_net(String battle_net) {
 		this.battle_net = battle_net;
 	}
 

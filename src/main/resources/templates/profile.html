@@ -17,18 +17,20 @@
                         <h1 class="mb-4 mt-5">User Profile</h1>
 
                         <form th:object="${user}">
-                            <input type="image" id="img" th:src="${user.getPicture()}" alt="file" class="rounded-circle" />
+                            <div class="mb-4">
+                                <input type="image" id="img" th:src="${user.getPicture()}" alt="file" class="rounded-circle" />
 
-                            <a class="ml-3 mt-5 pt-4" id='name' href="url" th:text="${user.getName()}"></a>
+                                <span class="ml-3 mt-5 pt-4" id='name' th:text="${user.getName()}"></span>
 
-                            <button id="edit" type="submit">Edit Profile</button>
+                                <button class="btn">Edit Profile</button>
+                            </div>
 
-                            <div>
+                            <div class="mb-4">
                                 <label id="textareatext" for="textarea">About me:</label>
                                 <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
                             </div>
 
-                            <div>
+                            <div class="mb-4">
                                 <label for="email">Email:</label>
                                 <span id="email" th:text="${user.getEmail()}"></span>
                             </div>
@@ -43,55 +45,65 @@
                             <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
                         </div> -->
 
-                            <div class="row row-cols-2 g-3">
-                                <div class="col">
-                                    <i class="fab fa-facebook"></i>
-                                    <a href="#">Facebook</a>
+                            <div class="row row-cols-sm-2 g-3">
+                                <div class="col-sm">
+                                    <i class="fab fa-facebook fa-2x"></i>
+                                    <a href="#" th:text="${user.getFacebook()}">Facebook</a>
+                                    <input type="text" class="d-none" th:field="*{facebook}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-twitter"></i>
-                                    <a href="#">Twitter</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                    <a href="#" th:text="${user.getTwitter()}">Twitter</a>
+                                    <input type="text" class="d-none" th:field="*{twitter}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-discord"></i>
-                                    <a href="#">Discord</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-discord fa-2x"></i>
+                                    <a href="#" th:text="${user.getDiscord()}">Discord</a>
+                                    <input type="text" class="d-none" th:field="*{discord}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-guilded"></i>
-                                    <a href="#">Guilded</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-guilded fa-2x"></i>
+                                    <a href="#" th:text="${user.getGuilded()}">Guilded</a>
+                                    <input type="text" class="d-none" th:field="*{guilded}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-twitch"></i>
-                                    <a href="#">Twitch</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-twitch fa-2x"></i>
+                                    <a href="#" th:text="${user.getTwitch()}">Twitch</a>
+                                    <input type="text" class="d-none" th:field="*{twitch}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-youtube"></i>
-                                    <a href="#">YouTube</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-youtube fa-2x"></i>
+                                    <a href="#" th:text="${user.getYoutube()}">YouTube</a>
+                                    <input type="text" class="d-none" th:field="*{youtube}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-steam"></i>
-                                    <a href="#">Steam</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-steam fa-2x"></i>
+                                    <a href="#" th:text="${user.getSteam()}">Steam</a>
+                                    <input type="text" class="d-none" th:field="*{steam}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-xbox"></i>
-                                    <a href="#">Xbox</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-xbox fa-2x"></i>
+                                    <a href="#" th:text="${user.getXbox()}">Xbox</a>
+                                    <input type="text" class="d-none" th:field="*{xbox}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-playstation"></i>
-                                    <a href="#">PSN</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-playstation fa-2x"></i>
+                                    <a href="#" th:text="${user.getPsn()}">PSN</a>
+                                    <input type="text" class="d-none" th:field="*{psn}">
                                 </div>
 
-                                <div class="col">
-                                    <i class="fab fa-battle-net"></i>
-                                    <a href="#">Battle.net</a>
+                                <div class="col-sm">
+                                    <i class="fab fa-battle-net fa-2x"></i>
+                                    <a href="#" th:text="${user.getBattle_net()}">Battle.net</a>
+                                    <input type="text" class="d-none" th:field="*{battle_net}">
                                 </div>
                             </div>
                         </form>

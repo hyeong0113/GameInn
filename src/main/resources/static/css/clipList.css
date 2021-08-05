@@ -19,7 +19,6 @@
     color: #E5E5E5;
 }
 
-
 /* .clip-title {
     display: inline-block;
 }
@@ -67,10 +66,7 @@ p {
     margin-left: 415px;
     padding-top: 100px;
 } */
-
-
 /* Dropdown-button */
-
 .btn-check:focus+.btn,
 .btn:focus {
     outline: 0;
