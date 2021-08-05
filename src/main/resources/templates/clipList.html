@@ -52,8 +52,8 @@
                                             </svg>
                                         </button>
                                         <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
-                                            <li><a class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
+                                            <li><a th:id="'edit' + ${clip.getId()}" class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
+                                            <li><a th:id="'delete' + ${clip.getId()}" class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
                                         </ul>
                                         <script th:inline="javascript">
                                             /*<![CDATA[*/
@@ -62,7 +62,8 @@
                                             var role = /*[[${user.getRole()}]]*/ '';
                                             var content_id = /*[[${clip.getId()}]]*/ '';
                                             var id = '#' + content_id;
-                                            display_button(id, sub, clip_sub, role)
+                                            var edit_id = '#edit' + content_id
+                                            display_button(id, sub, clip_sub, role, edit_id)
                                             /*]]>*/
                                         </script>
                                     </div>
