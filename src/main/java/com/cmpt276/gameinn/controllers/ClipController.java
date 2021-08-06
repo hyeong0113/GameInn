@@ -74,6 +74,7 @@ import com.cmpt276.gameinn.services.UserService;
 
 		String addUrl = "/clips/" + sub + "/addEdit/add";
 		model.addAttribute("url", addUrl);
+		model.addAttribute("addEdit", "Create");
 
 		return "addEditClipPage";
 	}
@@ -112,6 +113,7 @@ import com.cmpt276.gameinn.services.UserService;
 
 		String editUrl = "/clips/" + sub + "/addEdit/edit/" + id;
 		model.addAttribute("url", editUrl);
+		model.addAttribute("addEdit", "Edit");
 
 		return "addEditClipPage";
 	}

@@ -14,6 +14,7 @@
             <div class="row flex-nowrap">
                 <div th:replace="fragments/common :: sidebar"></div>
 
+                <div th:replace="fragments/common :: sidebar"></div>
                 <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
                     <div class="alert alert-danger" role="alert" id="alert-display" th:text="${errorMessage}">
                         You cannot delete others' post.
@@ -25,7 +26,7 @@
                         /*]]>*/
                     </script>
                     <div class="content mt-5 mb-4">
-                        <h2 class="mb-4">Create Group</h2>
+                        <h2 class="mb-4 mt-5" th:text="${addEdit} + ' Clip'"></h2>
 
                         <form action="#" th:action="${url}" th:object="${clip}" method="post">
                             <div class="row row-cols-1 g-3">
@@ -60,7 +61,7 @@
 
                                 <!-- Date is unavailable now -->
                                 <div class="col">
-                                    <input type="submit" class="btn add-clip" value="Add">
+                                    <input type="submit" class="btn add-clip" th:value="${addEdit}">
                                 </div>
                             </div>
                         </form>

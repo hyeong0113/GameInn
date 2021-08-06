@@ -104,6 +104,9 @@ import com.cmpt276.gameinn.services.*;
 
 		User user = userService.getUserBySub(sub);
 		GroupFinder temp = groupFinderService.addGroupFinder(groupFinder, user);
+		String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
+		model.addAttribute("url", editUrl);
+		model.addAttribute("addEdit", "Edit");
 
 		return "redirect:/groupfinders/" + sub;
 	}
