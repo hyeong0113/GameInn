@@ -41,6 +41,35 @@ public class GroupFinderService {
         return groupFinderPage;
     }
 
+    /////
+    public List<GroupFinder> searchGroupFinders(Pageable pageable, String query) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<GroupFinder> groupFinders = groupFinderRepository.findAll();
+        
+        groupFinders.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
+
+        List<GroupFinder> temp = groupFinders;
+
+        if (temp.size() >= startItem) {
+            int toIndex = Math.min(startItem + pageSize, temp.size());
+            groupFinders = temp.subList(startItem, toIndex);
+        }
+
+        List<GroupFinder> filteredGroupFinder = new ArrayList();
+        for (GroupFinder groupfinder : groupFinders){
+            if (groupfinder.getTitle() == query || groupfinder.getGameTitle() == query){
+                filteredClips.add(groupfinder);
+            }
+        }
+
+        //Page<GroupFinder> groupFinderPage = new PageImpl<GroupFinder>(groupFinders, PageRequest.of(currentPage, pageSize), temp.size());
+        return filteredGroupFinder;
+    }
+
+
+    ////////
     public GroupFinder getGroupFinderByID(Long id){
         return groupFinderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No GroupFinder with " + id));
     }

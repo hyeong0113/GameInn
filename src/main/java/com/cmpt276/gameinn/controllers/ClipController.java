@@ -124,4 +124,24 @@ public class ClipController {
         clipService.deleteClip(id);
         return "redirect:/clips/" + sub;
     }
+
+////
+
+
+    @GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipSearch(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
+    @AuthenticationPrincipal OidcUser principal, @RequestParam("query") String query) {
+        String url="";
+        if (principal != null) {
+            model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+            url=String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+        }
+        else {
+        url="/oauth2/authorization/auth0";
+        }
+        model.addAttribute("url", url);
+        model.addAttribute("current_time", new Date());
+        model.addAttribute("clip_list", clipService.searchClips(query));
+
+        return "clipList";
+    }
 }

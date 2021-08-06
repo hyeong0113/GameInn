@@ -27,6 +27,20 @@ public class ClipService {
         return clips;
     }
 
+
+    public List<Clip> searchClips(String query) {
+        List<Clip> clips = clipRepository.findAll();
+        clips.sort(Comparator.comparing(Clip::getPostedTime).reversed());
+        
+        List<Clip> filteredClips = new ArrayList();
+        for (Clip clip : clips){
+            if (clip.getTitle() == query || clip.getGameTitle() == query){
+                filteredClips.add(clips);
+            }
+        }
+        return filteredClips;
+    }
+
     public Clip getClipByID (Long id){
         return clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
     }

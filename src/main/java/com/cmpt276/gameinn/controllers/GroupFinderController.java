@@ -138,5 +138,44 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     }
 
 
+    //////////////////////////////
+    @GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String searchGroupFinder(@PathVariable(required = false)String sub, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
+                                                                    Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal, @RequestParam("query") String query) {
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+        String url="";
+        if (principal != null) {
+            String role = userService.getRoleFromResponse(principal);
+            if (!role.equals("admin") && HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME) != sub) {
+                model.addAttribute("show", false);
+            }
+            else {
+                model.addAttribute("show", true);
+            }
+            model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+            url=String.format("/groupfinders/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+        }
+        else {
+            url="/oauth2/authorization/auth0";
+        }
+        model.addAttribute("url", url);
+        Page<GroupFinder> groupFinderPage = groupFinderService.getGroupFindersPaginated(PageRequest.of(currentPage - 1, pageSize));
+        model.addAttribute("groupFinders", groupFinderPage);
+
+        int totalPages = groupFinderPage.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("groupfinder_list", groupFinderService.searchGroupFinders(pageable, query));
+
+        return "groupFinderList";
+    }
+
  }
 
