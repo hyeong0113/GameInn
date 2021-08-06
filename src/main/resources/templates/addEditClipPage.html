@@ -5,6 +5,7 @@
         <div th:replace="fragments/common :: mainHeader"></div>
         <script th:src="@{/js/alert.js} "></script>
         <script th:src="@{/js/getGames.js} "></script>
+        <script th:src="@{/js/check_link.js} "></script>
         <link rel="stylesheet" href="/css/addClipPage.css">
         <title>Add clip form</title>
     </head>
@@ -14,7 +15,6 @@
             <div class="row flex-nowrap">
                 <div th:replace="fragments/common :: sidebar"></div>
 
-                <div th:replace="fragments/common :: sidebar"></div>
                 <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
                     <div class="alert alert-danger" role="alert" id="alert-display" th:text="${errorMessage}">
                         You cannot delete others' post.
@@ -57,6 +57,9 @@
                                 <div class="col">
                                     <label for="inputlink" class="form-label">Link:</label>
                                     <input id="inputlink" type="text" class="form-control border border-dark" th:field="*{sourceLink}" placeholder="Clip Link" required>
+                                    <div id="linkError" class="invalid-feedback">
+                                        Not a valid link.
+                                    </div>
                                 </div>
 
                                 <!-- Date is unavailable now -->

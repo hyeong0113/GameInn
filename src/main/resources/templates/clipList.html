@@ -7,6 +7,8 @@
         <script th:src="@{/js/clip_list.js} "></script>
         <script th:src="@{/js/option_button.js} "></script>
         <link rel="stylesheet" href="/css/clipList.css">
+
+        <meta name="twitter:widgets:theme" content="light">
     </head>
 
     <body>
@@ -71,9 +73,9 @@
 
                                 <div class="post-body my-3">
                                     <p th:text="${clip.getTitle()}"></p>
-                                    <div class="post-clip mt-3">
-                                        <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                    <div class="post-clip mt-3 ratio ratio-16x9">
+                                        <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
                                         </iframe>
                                     </div>
                                 </div>

@@ -87,6 +87,7 @@ import com.cmpt276.gameinn.services.*;
 
 		String addUrl = "/groupfinders/" + sub + "/addEdit/add";
 		model.addAttribute("url", addUrl);
+		model.addAttribute("addEdit", "Create");
 
 		return "addEditGroupFinderPage";
 	}
@@ -104,9 +105,6 @@ import com.cmpt276.gameinn.services.*;
 
 		User user = userService.getUserBySub(sub);
 		GroupFinder temp = groupFinderService.addGroupFinder(groupFinder, user);
-		String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
-		model.addAttribute("url", editUrl);
-		model.addAttribute("addEdit", "Edit");
 
 		return "redirect:/groupfinders/" + sub;
 	}
@@ -137,6 +135,7 @@ import com.cmpt276.gameinn.services.*;
 
 		String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
 		model.addAttribute("url", editUrl);
+		model.addAttribute("addEdit", "Edit");
 
 		return "addEditGroupFinderPage";
 	}
