@@ -46,16 +46,18 @@
                         <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
                     </div> -->
                     <!-- This button is for writer of this post -->
-                    <div class="delete-button" id="deleteButton">
-                        <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
+                    <div class="button-group" id="buttons">
+                        <a id="editButton" th:href="@{/groupfinders/{sub}/addEdit/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Edit</a>
+                        <a id="deleteButton" th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
                     </div>
                     <script th:inline="javascript">
                         /*<![CDATA[*/
                         var sub = /*[[${user.getSubId()}]]*/ '';
                         var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
                         var role = /*[[${user.getRole()}]]*/ '';
-                        var id = '#deleteButton';
-                        display_button(id, sub, groupFinder_sub, role)
+                        var id = '#buttons';
+                        var edit_id = '#editButton';
+                        display_button(id, sub, groupFinder_sub, role, edit_id)
                             /*]]>*/
                     </script>
                 </div>

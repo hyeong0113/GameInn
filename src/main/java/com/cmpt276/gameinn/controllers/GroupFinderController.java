@@ -72,6 +72,10 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     @GetMapping("/groupfinders/{sub}/addEdit")
     public String showAddEditGroupFinderPageForCreate(@PathVariable(required = true)String sub, GroupFinder groupFinder, Model model, HttpServletRequest request) {
 		model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+        
+        String addUrl = "/groupfinders/" + sub + "/addEdit/add";
+        model.addAttribute("url", addUrl);
+
         return "addEditGroupFinderPage";
     }
 
@@ -106,6 +110,10 @@ import com.cmpt276.gameinn.auth.HandleCookie;
                                                                                 GroupFinder groupFinder, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(id));
+
+        String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
+        model.addAttribute("url", editUrl);
+
         return "addEditGroupFinderPage";
     }
 
