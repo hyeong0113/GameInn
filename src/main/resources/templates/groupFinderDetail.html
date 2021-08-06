@@ -4,9 +4,10 @@
     <head>
         <div th:replace="fragments/common :: mainHeader"></div>
         <link rel="stylesheet" href="/css/groupfinder_detail.css">
+        <link rel="stylesheet" href="/css/comment.css">
         <script th:src="@{/js/option_button.js} "></script>
+        <script th:src="@{/js/comment.js} "></script>
         <title>form</title>
-    </head>
     </head>
 
     <body>
@@ -41,23 +42,85 @@
                             <textarea class="groupfinder-description" rows="15" cols="80" th:text="${groupFinder.getDescription()}" readonly></textarea>
 
                             <!-- Join will be availble next iteration -->
-                            <div class="buttons flex-nowrap">
+                            <div class="buttons" id="buttons">
                                 <!-- <div class="join-button">
-                        <a th:href="#" class="btn groupfinder-button float-start me-3" role="button" aria-pressed="true">Join</a>
-                    </div> -->
+                                    <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
+                                </div> -->
+
                                 <!-- This button is for writer of this post -->
-                                <div class="delete-button" id="deleteButton">
-                                    <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start me-3" role="button" aria-pressed="true">Delete</a>
+                                <a id="editButton" th:href="@{/groupfinders/{sub}/addEdit/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Edit</a>
+                                <a id="deleteButton" th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
+                            </div>
+                            <script th:inline="javascript">
+                                /*<![CDATA[*/
+                                var sub = /*[[${user.getSubId()}]]*/ '';
+                                var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
+                                var role = /*[[${user.getRole()}]]*/ '';
+                                var id = '#buttons';
+                                var edit_id = '#editButton';
+                                display_button(id, sub, groupFinder_sub, role, edit_id)
+                                /*]]>*/
+                            </script>
+
+                            <form id="create-comment-form" action="#" th:action="@{/comments/{sub}/{groupfinderId}/add(sub=${user.getSubId()}, groupfinderId=${groupFinder.getId()})}" th:object="${commentCreate}" method="post">
+                                <div>
+                                    <label for="level">Select your Level:</label>
+                                    <select name="level">
+                                        <option th:each="level_option : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level_option}" th:text="${level_option}">
+                                        </option>
+                                    </select>
                                 </div>
-                                <script th:inline="javascript">
-                                    /*<![CDATA[*/
-                                    var sub = /*[[${user.getSubId()}]]*/ '';
-                                    var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
-                                    var role = /*[[${user.getRole()}]]*/ '';
-                                    var id = '#deleteButton';
-                                    display_button(id, sub, groupFinder_sub, role)
-                                    /*]]>*/
-                                </script>
+                                <div>
+                                    <label id="content" for="content">Comments:</label>
+                                    <textarea type="text" th:field="*{content}" class="form-control" id="description" placeholder="Description" cols="58" rows="3" required></textarea>
+                                </div>
+                                <input id="addComment" class="btn" type="submit" value="Submit" />
+                            </form>
+
+                            <div id="comment-list" th:each="comment_content : ${comments}">
+                                <div class="post-header">
+                                    <img class="user-photo rounded-circle me-2" th:src="${comment_content.getUser().getPicture()}" />
+                                    <p>
+                                        <span th:text="${comment_content.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${comment_content.getId()}"></span>
+                                    </p>
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        var posted_time = /*[[${comment_content.getPostedTime().getTime()}]]*/ '';
+                                        var content_id = /*[[${comment_content.getId()}]]*/ '';
+                                        var id = 'time' + content_id;
+                                        document.getElementById(id).innerHTML = display_diff_time(posted_time);
+                                        /*]]>*/
+                                    </script>
+                                    <div class="dropdown ms-auto" sec:authorize="!isAnonymous()">
+                                        <button class="btn button-option btn-sm dropdownMenuButton" type="button" iz data-bs-toggle="dropdown" aria-expanded="false" th:id="${comment_content.getId()}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                            </svg>
+                                        </button>
+                                        <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                            <!-- <li><a th:id="'edit' + ${comment_content.getId()}" class="dropdown-item" th:href="@{/comments/{sub}/edit/{id}(sub=${comment_content.getUser().getSubId()}, id=${comment_content.getId()})}">Edit</a></li> -->
+                                            <li><a th:id="'delete' + ${comment_content.getId()}" class="dropdown-item"
+                                                    th:href="@{/comments/{sub}/{groupfinderId}/delete/{id}(sub=${comment_content.getUser().getSubId()}, groupfinderId=${comment_content.getGroupFinder().getId()}, id=${comment_content.getId()})}">Delete</a>
+                                            </li>
+                                        </ul>
+                                        <script th:inline="javascript">
+                                            /*<![CDATA[*/
+                                            var sub = /*[[${user.getSubId()}]]*/ '';
+                                            var clip_sub = /*[[${comment_content.getUser().getSubId()}]]*/ '';
+                                            var role = /*[[${user.getRole()}]]*/ '';
+                                            var content_id = /*[[${comment_content.getId()}]]*/ '';
+                                            var id = '#' + content_id;
+                                            var edit_id = '#edit' + content_id
+                                            display_button(id, sub, clip_sub, role, edit_id)
+                                            /*]]>*/
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p th:text="'User level:    ' + ${comment_content.getLevel()}"></p>
+                                    <p th:text="'Comments:      ' + ${comment_content.getContent()}"></p>
+                                </div>
                             </div>
                         </div>
                     </div>

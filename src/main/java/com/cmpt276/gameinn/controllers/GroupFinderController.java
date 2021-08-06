@@ -2,7 +2,6 @@ package com.cmpt276.gameinn.controllers;
 
 import javax.validation.Valid;
 
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,12 +23,14 @@ import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 
 import com.cmpt276.gameinn.auth.HandleCookie;
+import com.cmpt276.gameinn.models.Comment;
 import com.cmpt276.gameinn.models.GroupFinder;
 import com.cmpt276.gameinn.models.User;
 import com.cmpt276.gameinn.services.*;
 
 @Controller public class GroupFinderController {
 	@Autowired private GroupFinderService groupFinderService;
+	@Autowired private CommentService commentService;
 	@Autowired private UserService userService;
 
 	@GetMapping(value = { "/groupfinders", "/groupfinders/{sub}" }) public
@@ -83,6 +84,10 @@ import com.cmpt276.gameinn.services.*;
 		HttpServletRequest request) {
 		model.addAttribute("user", userService.getUserBySub(
 			HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+
+		String addUrl = "/groupfinders/" + sub + "/addEdit/add";
+		model.addAttribute("url", addUrl);
+
 		return "addEditGroupFinderPage";
 	}
 
@@ -109,8 +114,12 @@ import com.cmpt276.gameinn.services.*;
 		sub, @PathVariable Long id, Model model, HttpServletRequest request) {
 		model.addAttribute("user", userService.getUserBySub(
 			HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
-		model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(
-			id));
+		GroupFinder found = groupFinderService.getGroupFinderByID(id);
+		model.addAttribute("groupFinder", found);
+		model.addAttribute("commentCreate", new Comment());
+		model.addAttribute("comments",
+			commentService.getCommentsWithGroupfinderId(found));
+
 		return "groupFinderDetail";
 	}
 
@@ -122,6 +131,10 @@ import com.cmpt276.gameinn.services.*;
 			HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 		model.addAttribute("groupFinder", groupFinderService.getGroupFinderByID(
 			id));
+
+		String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
+		model.addAttribute("url", editUrl);
+
 		return "addEditGroupFinderPage";
 	}
 

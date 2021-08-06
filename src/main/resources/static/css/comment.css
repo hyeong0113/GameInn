@@ -1,0 +1,57 @@
+.dropdownMenuButton {
+    background: none;
+    color: Black;
+}
+
+.btn-check:focus+.btn,
+.btn:focus {
+    outline: 0;
+    box-shadow: none !important;
+}
+
+.btn-group>.btn-group:not(:last-child)>.btn,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-radius: 5px !important;
+}
+
+#create-comment-form {
+    position: relative;
+    width: 603px;
+    top: 10px;
+    border: 1px solid rgb(110, 110, 110);
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 30px;
+}
+
+#comment-list {
+    position: relative;
+    display: block;
+    width: 610px;
+    border: 1px solid rgb(110, 110, 110);
+    top: 10px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+}
+
+#addComment {
+    margin-left: 89%;
+    background-color: #7063F8;
+    color: #ffffff;
+    border-radius: 3px;
+}
+
+#addComment:hover {
+    background-color: #ffffff !important;
+    color: #7063F8 !important;
+}
+
+.user-photo {
+    width: 60px;
+    height: 60px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+}

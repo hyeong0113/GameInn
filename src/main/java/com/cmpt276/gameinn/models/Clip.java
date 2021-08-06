@@ -104,8 +104,8 @@ import javax.persistence.Table;
 		return this.postedTime;
 	}
 
-	public void setPostedTime(Date postedTime) {
-		this.postedTime = postedTime;
+	public void setPostedTime(Long postedTime) {
+		this.postedTime = new Date(postedTime);
 	}
 
 	public User getUser() {

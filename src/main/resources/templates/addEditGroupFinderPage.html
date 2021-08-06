@@ -16,7 +16,7 @@
                     <div class="content">
                         <h2 class=" mb-4 mt-5">Create Group</h2>
 
-                        <form action="#" th:action="@{/groupfinders/{sub}/addEdit/add(sub=${user.getSubId()})}" th:object="${groupFinder}" method="post">
+                        <form action="#" th:action="${url}" th:object="${groupFinder}" method="post">
                             <div class="row row-cols-1 g-3">
                                 <div class="col">
                                     <label for="gameTitle" class="form-label">Game:</label>
@@ -30,7 +30,7 @@
 
                                 <div class="col">
                                     <label for="requiredLevel" class="form-label">Required Level:</label>
-                                    <select name="requiredLevel">
+                                    <select class="form-control border border-dark" name="requiredLevel">
                                         <option th:each="level : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level}" th:text="${level}">
                                         </option>
                                     </select>
@@ -38,7 +38,7 @@
 
                                 <div class="col">
                                     <label for="gameStyle" class="form-label">Game Style:</label>
-                                    <select name="gameStyle">
+                                    <select class="form-control border border-dark" name="gameStyle">
                                         <option th:each="style : ${T(com.cmpt276.gameinn.constant.EnumCollection.GameStyle).values()}" th:value="${style}" th:text="${style}">
                                         </option>
                                     </select>
@@ -46,21 +46,19 @@
 
                                 <div class="col">
                                     <label for="totalPlayers" class="form-label">Total number of players:</label>
-                                    <input type="number" min="2" value="2" th:name="*{totalPlayers}" class="form-control" id="totalPlayers" placeholder="Total players" required>
+                                    <input type="number" min="2" value="2" th:name="*{totalPlayers}" class="form-control border border-dark" id="totalPlayers" placeholder="Total players" required>
                                 </div>
 
-                                <div class="col">
+
+                                <!-- <div class="col">
                                     <label for="password" class="form-label">Password:</label>
-                                    <!-- <input type="password" id="ip5" class="border border-dark p-1"> -->
-
-                                    <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Password">
-                                </div>
+                                    <input type="text" th:field="*{password}" class="form-control border border-dark" id="password" placeholder="Password">
+                                </div> -->
 
                                 <div class="col">
                                     <label id="des" for="description" class="form-label">Description:</label>
-                                    <textarea type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description" cols="60" rows="7" required></textarea>
+                                    <textarea type="text" th:field="*{description}" class="form-control border border-dark" id="description" placeholder="Description" cols="60" rows="7" required></textarea>
                                 </div>
-
 
                                 <div class="col">
                                     <input id="createButton" type="submit" class="btn add-groupfinder" value="Add">

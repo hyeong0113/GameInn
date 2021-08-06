@@ -71,6 +71,10 @@ import com.cmpt276.gameinn.services.UserService;
 			HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 		model.addAttribute("showAlert", false);
 		model.addAttribute("errorMessage", emptyURL);
+
+		String addUrl = "/clips/" + sub + "/addEdit/add";
+		model.addAttribute("url", addUrl);
+
 		return "addEditClipPage";
 	}
 
@@ -105,6 +109,10 @@ import com.cmpt276.gameinn.services.UserService;
 		model.addAttribute("user", userService.getUserBySub(
 			HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
 		model.addAttribute("clip", clipService.getClipByID(id));
+
+		String editUrl = "/clips/" + sub + "/addEdit/edit/" + id;
+		model.addAttribute("url", editUrl);
+
 		return "addEditClipPage";
 	}
 

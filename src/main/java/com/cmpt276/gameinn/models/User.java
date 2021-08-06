@@ -45,6 +45,8 @@ import javax.persistence.Table;
 
 	@OneToMany(mappedBy = "RUser") private List<Clip> clips;
 
+	@OneToMany(mappedBy = "groupFinder") private List<Comment> comments;
+
 	public User() {}
 
 	public User(String sub, String role, String name, String picture, String
