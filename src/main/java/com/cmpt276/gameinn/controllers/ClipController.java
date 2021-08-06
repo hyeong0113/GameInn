@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.apache.commons.validator.routines.UrlValidator;
@@ -44,8 +45,10 @@ public class ClipController {
     }
 
 	@GetMapping(value = {"/clips", "/clips/{sub}"}) public String clipListPage(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
-                                                                                                                        @AuthenticationPrincipal OidcUser principal) {
+                                                                                @AuthenticationPrincipal OidcUser principal,
+                                                                                @RequestParam(value = "query", required=false) String query) {
         String url="";
+        System.out.println("Controller:  " + query);
         if (principal != null) {
             model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
             url=String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
@@ -55,7 +58,7 @@ public class ClipController {
         }
         model.addAttribute("url", url);
         model.addAttribute("current_time", new Date());
-        model.addAttribute("clip_list", clipService.getClips());
+        model.addAttribute("clip_list", clipService.getClips(query));
 
 		return "clipList";
 	}
@@ -126,4 +129,21 @@ public class ClipController {
         clipService.deleteClip(id);
         return "redirect:/clips/" + sub;
     }
+
+    // @GetMapping(value = {"/clips/search", "/clips/search/{sub}"}) public String clipSearch(@PathVariable(required = false)String sub, Model model, HttpServletRequest request,
+    // @AuthenticationPrincipal OidcUser principal, @RequestParam("query") String query) {
+    //     String url="";
+    //     if (principal != null) {
+    //         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+    //         url=String.format("/clips/%s/addEdit", HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME));
+    //     }
+    //     else {
+    //         url="/oauth2/authorization/auth0";
+    //     }
+    //     model.addAttribute("url", url);
+    //     model.addAttribute("current_time", new Date());
+    //     model.addAttribute("clip_list", clipService.searchClips(query));
+
+    //     return "clipList";
+    // }
 }
