@@ -58,7 +58,8 @@ public class GroupFinderService {
         found.setTotalPlayers(groupFinder.getTotalPlayers());
         found.setCurrentPlayers(groupFinder.getCurrentPlayers());
         found.setDescription(groupFinder.getDescription());
-        found.setPassword(groupFinder.getPassword());
+        // found.setPassword(groupFinder.getPassword());
+        found.setPostedTime(found.getPostedTime());
 
         groupFinderRepository.save(found);
         return found;

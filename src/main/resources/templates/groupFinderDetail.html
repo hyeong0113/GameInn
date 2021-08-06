@@ -41,24 +41,24 @@
                 <textarea class="groupfinder-description" rows="15" cols="80" th:text="${groupFinder.getDescription()}" readonly></textarea>
 
                 <!-- Join will be availble next iteration -->
-                <div class="buttons">
+                <div class="buttons" id="buttons">
                     <!-- <div class="join-button">
                         <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
                     </div> -->
                     <!-- This button is for writer of this post -->
-                    <div class="delete-button" id="deleteButton">
-                        <a th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
-                    </div>
-                    <script th:inline="javascript">
-                        /*<![CDATA[*/
-                        var sub = /*[[${user.getSubId()}]]*/ '';
-                        var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
-                        var role = /*[[${user.getRole()}]]*/ '';
-                        var id = '#deleteButton';
-                        display_button(id, sub, groupFinder_sub, role)
-                            /*]]>*/
-                    </script>
+                    <a id="editButton" th:href="@{/groupfinders/{sub}/addEdit/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Edit</a>
+                    <a id="deleteButton" th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
                 </div>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var sub = /*[[${user.getSubId()}]]*/ '';
+                    var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
+                    var role = /*[[${user.getRole()}]]*/ '';
+                    var id = '#buttons';
+                    var edit_id = '#editButton';
+                    display_button(id, sub, groupFinder_sub, role, edit_id)
+                        /*]]>*/
+                </script>
 
                 <form id="create-comment-form" action="#" th:action="@{/comments/{sub}/{groupfinderId}/add(sub=${user.getSubId()}, groupfinderId=${groupFinder.getId()})}" th:object="${commentCreate}" method="post">
                     <div>

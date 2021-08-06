@@ -65,6 +65,10 @@ public class ClipController {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         model.addAttribute("showAlert", false);
         model.addAttribute("errorMessage", emptyURL);
+
+        String addUrl = "/clips/" + sub + "/addEdit/add";
+        model.addAttribute("url", addUrl);
+
         return "addEditClipPage";
     }
     
@@ -94,6 +98,10 @@ public class ClipController {
     public String showAddEditClipPageForEdit(@PathVariable(required = true)String sub, @PathVariable Long id, Model model, HttpServletRequest request) {
         model.addAttribute("user", userService.getUserBySub(HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
         model.addAttribute("clip", clipService.getClipByID(id));
+
+        String editUrl = "/clips/" + sub + "/addEdit/edit/" + id;
+        model.addAttribute("url", editUrl);
+        
         return "addEditClipPage";
     }
 
