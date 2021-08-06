@@ -44,7 +44,7 @@
 /* buttons */
 
 .buttons {
-    padding-right: 23%;
+    padding-left: 60%;
 }
 
 .groupfinder-button {
@@ -57,11 +57,11 @@
     color: #7063F8 !important;
 }
 
-.button-group {
-    margin-left: 89%;
-}
-
 .back-button {
     padding-left: 25%;
     padding-top: 10%;
+}
+
+#editButton {
+    margin-right: 10px;
 }
