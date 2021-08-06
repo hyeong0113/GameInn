@@ -49,12 +49,15 @@ import com.cmpt276.gameinn.repositories.User.IUserRepository;
 			throw new IllegalArgumentException("No User with " +
 				user.getSubId());
 
+		found.setAbout(user.getAbout());
+
 		found.setFacebook(user.getFacebook());
 		found.setTwitter(user.getTwitter());
 		found.setDiscord(user.getDiscord());
 		found.setGuilded(user.getGuilded());
 		found.setTwitch(user.getTwitch());
 		found.setYoutube(user.getYoutube());
+		found.setYoutube_name(user.getYoutube_name());
 		found.setSteam(user.getSteam());
 		found.setXbox(user.getXbox());
 		found.setPsn(user.getPsn());

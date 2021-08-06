@@ -2,13 +2,8 @@ body {
     background-color: #E5E5E5;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+#favicon {
+    min-width: 32px;
 }
 
 .nav-link {

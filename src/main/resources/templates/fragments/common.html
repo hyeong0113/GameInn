@@ -16,12 +16,12 @@
             <script th:src="@{/js/getGames.js} "></script>
         </div>
 
-        <nav class="col-auto col-sm-3 col-lg-2 bg-light p-3" th:fragment="sidebar">
-            <div class="row flex-nowrap min-vh-100">
-                <div class="d-flex flex-column h-100">
+        <nav class="col-auto col-sm-3 col-lg-2 bg-light p-0" th:fragment="sidebar">
+            <div class="row flex-column sticky-top vh-100 p-3">
+                <div class="col">
                     <img class="d-none d-sm-inline pb-3" src="/img/Logo.svg" alt="GameInn logo">
-                    <img class="d-inline d-sm-none pb-3" src="/img/favicon.svg" alt="GameInn logo">
-                    <ul class="nav flex-column">
+                    <img class="d-inline d-sm-none align-items-center pb-3" id="favicon" src="/img/favicon.svg" alt="GameInn logo">
+                    <ul class="nav flex-column align-items-center align-items-sm-stretch">
                         <li class="nav-item" sec:authorize="!isAnonymous()">
                             <a class="nav-link px-0 py-2" th:href="@{/profile/{sub}(sub=${user.getSubId()})}">
                                 <i class="fas fa-home"></i></i> <span class="ms-1 d-none d-sm-inline">Profile</span>
@@ -49,7 +49,7 @@
                         </li>
                     </ul>
                 </div>
-                <small class="d-none d-sm-inline mt-auto">Copyright &copy; 2021 GameInn</small>
+                <small class="d-none d-sm-inline col-auto mt-auto">Copyright &copy; 2021 GameInn</small>
             </div>
         </nav>
     </body>

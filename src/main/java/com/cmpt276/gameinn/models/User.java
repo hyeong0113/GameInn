@@ -36,6 +36,7 @@ import javax.persistence.Table;
 	private String guilded;
 	private String twitch;
 	private String youtube;
+	private String youtube_name;
 	private String steam;
 	private String xbox;
 	private String psn;
@@ -161,6 +162,14 @@ import javax.persistence.Table;
 
 	public void setYoutube(String youtube) {
 		this.youtube = youtube;
+	}
+
+	public String getYoutube_name() {
+		return this.youtube_name;
+	}
+
+	public void setYoutube_name(String youtube_name) {
+		this.youtube_name = youtube_name;
 	}
 
 	public String getSteam() {

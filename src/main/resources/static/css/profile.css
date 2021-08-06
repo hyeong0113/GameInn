@@ -1,78 +1,8 @@
-.Center4 {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-40%, -15%);
-}
-
-/*
-#name {
-    position: relative;
-    bottom: 45px;
-}
-
-#edit {
-    position: relative;
-    left: 30%;
-    bottom: 40px;
-    width: 100px;
-    height: 30px;
-    background: #ffffff;
-} */
-.fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    text-decoration: none;
-}
-
-/* .fa-facebook {
-    background: #3B5998;
-    color: white;
-}
-
-.fa-twitter {
-    background: #55ACEE;
-    color: white;
-}
-
-.fa-twitch {
-    background: #6441A4;
-    color: white;
-}
-
-.fa-steam {
-    background: rgb(206, 206, 206);
-    color: #9cbbc7;
-}
-
-.fa-youtube {
-    background: red;
-    color: white;
-}
-
-.fa-reddit {
-    background: #FF5700;
-    color: white;
-}
-
-.fa-instagram {
-    color: #fff;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-}
-
-.fa-skype {
-    color: white;
-    background: #00aff0;
-} */
-/* #textareatext {
-    position: relative;
-    bottom: 30px;
-} */
 .user-description {
-    width: 300px;
     height: 150px;
-    resize: both;
+    resize: vertical;
+}
+
+.form-floating>label {
+    left: auto;
 }

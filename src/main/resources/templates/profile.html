@@ -13,34 +13,34 @@
                 <div th:replace="fragments/common :: sidebar"></div>
 
                 <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
-                    <div class="content">
-                        <h1 class="mb-4 mt-5">User Profile</h1>
+                    <div class="content mt-5 mb-4">
+                        <h1 class="mb-4">User Profile</h1>
 
-                        <form th:object="${user}">
-                            <div class="row row-nowrap mb-4">
-                                <div class="col">
-                                    <input type="image" id="img" th:src="${profile.getPicture()}" alt="file" class="rounded-circle" />
+                        <form action="#" th:action="${url}" th:object="${profile}">
+                            <div class="row flex-column align-items-center mb-4 g-3">
+                                <div class="col-auto">
+                                    <input type="image" id="img" th:src="*{picture}" alt="file" class="rounded-circle d-block" />
                                 </div>
 
-                                <div class="col">
-                                    <span class="ml-3 mt-5 pt-4" id='name' th:text="${profile.getName()}"></span>
+                                <div class="col-auto">
+                                    <span class="ml-3 mt-5 pt-4" id='name' th:text="*{name}"></span>
                                 </div>
 
-                                <div class="col ms-auto">
-                                    <button class="btn">Edit Profile</button>
+                                <div class="col-auto align-self-end ms-auto g-3" sec:authorize="!isAnonymous()" th:if="${profile.getSubId() == user.getSubId()}">
+                                    <button type="submit" class="btn" id="editProfile">Edit Profile</button>
                                 </div>
                             </div>
 
-                            <div class="mb-4">
-                                <label id="textareatext" for="textarea">About me:</label>
-                                <textarea class="ml-3 border border-dark user-description" id='textarea' name="desc" cols="25" rows="3"></textarea>
+                            <div class="row row-cols-1 g-3 mb-4">
+                                <div class="col">
+                                    <label cid="textareatext" for="about" class="form-label">About me:</label>
+                                    <textarea class="form-control border border-dark user-description" id='about' th:field="*{about}" readonly></textarea>
+                                </div>
                             </div>
 
-                            <div class="mb-4" sec:authorize="!isAnonymous()">
-                                <div th:if="${profile.getSubId() == user.getSubId()}">
-                                    <label for="email">Email:</label>
-                                    <span id="email" th:text="${profile.getEmail()}"></span>
-                                </div>
+                            <div class="mb-4" sec:authorize="!isAnonymous()" th:if="${profile.getSubId() == user.getSubId()}">
+                                <label for="email">Email:</label>
+                                <span id="email" th:text="*{email}"></span>
                             </div>
 
                             <!-- <div>
@@ -53,65 +53,55 @@
                             <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
                         </div> -->
 
-                            <div class="row row-cols-sm-2 g-3">
-                                <div class="col-sm">
-                                    <i class="fab fa-facebook fa-2x"></i>
-                                    <a href="#" th:text="${profile.getFacebook()}">Facebook</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{facebook}">
+                            <div class="row row-cols-md-2 g-3">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-facebook fa-2x pe-2"></i>
+                                    <a class="social facebook" th:href="@{https://www.facebook.com/{facebook}(facebook=${profile.getFacebook()})}" th:text="*{facebook}">Facebook</a>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-twitter fa-2x"></i>
-                                    <a href="#" th:text="${profile.getTwitter()}">Twitter</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{twitter}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-twitter fa-2x pe-2"></i>
+                                    <a class="social twitter" th:href="@{https://twitter.com/{twitter}(twitter=${profile.getTwitter()})}" th:text="*{twitter}">Twitter</a>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-discord fa-2x"></i>
-                                    <a href="#" th:text="${profile.getDiscord()}">Discord</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{discord}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-discord fa-2x pe-2"></i>
+                                    <span class="social discord" th:text="*{discord}">Discord</span>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-guilded fa-2x"></i>
-                                    <a href="#" th:text="${profile.getGuilded()}">Guilded</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{guilded}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-guilded fa-2x pe-2"></i>
+                                    <span class="social guilded" th:text="*{guilded}">Guilded</span>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-twitch fa-2x"></i>
-                                    <a href="#" th:text="${profile.getTwitch()}">Twitch</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{twitch}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-twitch fa-2x pe-2"></i>
+                                    <a class="social twitch" th:href="@{https://www.twitch.tv/{twitch}(twitch=${profile.getTwitch()})}" th:text="*{twitch}">Twitch</a>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-youtube fa-2x"></i>
-                                    <a href="#" th:text="${profile.getYoutube()}">YouTube</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{youtube}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-youtube fa-2x pe-2"></i>
+                                    <a class="social youtube" th:href="@{{youtube}(youtube=${profile.getYoutube()})}" th:text="*{youtube_name}">YouTube</a>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-steam fa-2x"></i>
-                                    <a href="#" th:text="${profile.getSteam()}">Steam</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{steam}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-steam fa-2x pe-2"></i>
+                                    <span class="social steam" th:text="*{steam}">Steam</span>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-xbox fa-2x"></i>
-                                    <a href="#" th:text="${profile.getXbox()}">Xbox</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{xbox}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-xbox fa-2x pe-2"></i>
+                                    <span class="social xbox" th:text="*{xbox}">Xbox</span>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-playstation fa-2x"></i>
-                                    <a href="#" th:text="${profile.getPsn()}">PSN</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{psn}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-playstation fa-2x pe-2"></i>
+                                    <span class="social psn" th:text="*{psn}">PSN</span>
                                 </div>
 
-                                <div class="col-sm">
-                                    <i class="fab fa-battle-net fa-2x"></i>
-                                    <a href="#" th:text="${profile.getBattle_net()}">Battle.net</a>
-                                    <input type="text" class="form-control border border-dark d-none" th:field="*{battle_net}">
+                                <div class="col-md d-flex align-items-center">
+                                    <i class="fab fa-battle-net fa-2x pe-2"></i>
+                                    <span class="social battle_net" th:text="*{battle_net}">Battle.net</span>
                                 </div>
                             </div>
                         </form>

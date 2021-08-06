@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -63,12 +64,52 @@ import com.cmpt276.gameinn.services.*;
 
 	// Move to profile page
 	@GetMapping("/profile/{sub}") public String profile(@PathVariable String
-		sub, Model model, HttpServletRequest request) {
-		model.addAttribute("user", service.getUserBySub(HandleCookie.readCookie(
-			request, HandleCookie.COOKIE_NAME)));
+		sub, Model model, HttpServletRequest request,
+		@AuthenticationPrincipal OidcUser principal) {
+		if (principal != null)
+			model.addAttribute("user", service.getUserBySub(
+				HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+
 		model.addAttribute("profile", service.getUserBySub(sub));
 
+		String url = String.format("/profile/%s/edit", sub);
+		model.addAttribute("url", url);
+
 		return "profile";
+	}
+
+	@GetMapping("/profile/{sub}/edit") public String editProfile(
+		@PathVariable String sub, Model model, HttpServletRequest request,
+		@AuthenticationPrincipal OidcUser principal) {
+		if (principal != null)
+			model.addAttribute("user", service.getUserBySub(
+				HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+		else return "redirect:/oauth2/authorization/auth0";
+
+		model.addAttribute("profile", service.getUserBySub(sub));
+
+		String url = String.format("/profile/%s/update", sub);
+		model.addAttribute("url", url);
+
+		String backurl = String.format("/profile/%s", sub);
+		model.addAttribute("backurl", backurl);
+
+		return "profileEdit";
+	}
+
+	@RequestMapping("/profile/{sub}/update") public String updateProfile(
+		@PathVariable(required = true) String sub, User profile, Model model,
+		HttpServletRequest request, @AuthenticationPrincipal OidcUser
+		principal) {
+		if (principal != null)
+			model.addAttribute("user", service.getUserBySub(
+				HandleCookie.readCookie(request, HandleCookie.COOKIE_NAME)));
+
+		model.addAttribute("profile", service.getUserBySub(sub));
+
+		User temp = service.updateUser(sub, profile);
+
+		return "redirect:/profile/" + sub;
 	}
 
 	@GetMapping("/apiTest") public String igdbTest(Model model,

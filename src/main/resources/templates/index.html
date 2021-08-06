@@ -26,13 +26,15 @@
                     <div th:replace="fragments/common :: sidebar"></div>
 
                     <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
-                        <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
+                        <div class="content mt-5 mb-4">
+                            <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
 
-                        <img th:src="${user.getPhoto()}" />
-                        <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
-                        <p th:text="${user.getEmail()}"></p>
+                            <img th:src="${user.getPhoto()}" />
+                            <a th:href="@{/profile/{sub}(sub=${user.getSubId()})}" th:text="${user.getName()}"></a>
+                            <p th:text="${user.getEmail()}"></p>
 
-                        <p></p>
+                            <p></p>
+                        </div>
                     </main>
                     <script th:inline="javascript">
                         /*<![CDATA[*/
