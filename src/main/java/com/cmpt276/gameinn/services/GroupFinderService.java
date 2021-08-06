@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -23,21 +24,23 @@ public class GroupFinderService {
         return groupFinderRepository.save(created);
     }
 
-    public Page<GroupFinder> getGroupFindersPaginated(Pageable pageable) {
+    public Page<GroupFinder> getGroupFindersPaginated(Pageable pageable, String query) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<GroupFinder> groupFinders = groupFinderRepository.findAll();
         
-        groupFinders.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
+        List<GroupFinder> filteredGroupFinders = search(query, groupFinders);
 
-        List<GroupFinder> temp = groupFinders;
+        filteredGroupFinders.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
+
+        List<GroupFinder> temp = filteredGroupFinders;
 
         if (temp.size() >= startItem) {
             int toIndex = Math.min(startItem + pageSize, temp.size());
-            groupFinders = temp.subList(startItem, toIndex);
+            filteredGroupFinders = temp.subList(startItem, toIndex);
         }
-        Page<GroupFinder> groupFinderPage = new PageImpl<GroupFinder>(groupFinders, PageRequest.of(currentPage, pageSize), temp.size());
+        Page<GroupFinder> groupFinderPage = new PageImpl<GroupFinder>(filteredGroupFinders, PageRequest.of(currentPage, pageSize), temp.size());
         return groupFinderPage;
     }
 
@@ -104,4 +107,43 @@ public class GroupFinderService {
         groupFinderRepository.delete(found);
     }
 
+    public Page<GroupFinder> searchGroupFinders(Pageable pageable, String query) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<GroupFinder> groupFinders = groupFinderRepository.findAll();
+
+        List<GroupFinder> filteredGroupFinder = new ArrayList<GroupFinder>();
+        for (GroupFinder groupfinder : groupFinders){
+            if (groupfinder.getTitle() == query || groupfinder.getGameTitle() == query){
+                filteredGroupFinder.add(groupfinder);
+            }
+        }
+
+        List<GroupFinder> temp = filteredGroupFinder;
+        filteredGroupFinder.sort(Comparator.comparing(GroupFinder::getPostedTime).reversed());
+
+        if (temp.size() >= startItem) {
+            int toIndex = Math.min(startItem + pageSize, temp.size());
+            filteredGroupFinder = temp.subList(startItem, toIndex);
+        }
+
+
+        Page<GroupFinder> filteredGroupFinderPage = new PageImpl<GroupFinder>(filteredGroupFinder, PageRequest.of(currentPage, pageSize), temp.size());
+
+        return filteredGroupFinderPage;
+    }
+
+    private List<GroupFinder> search(String query, List<GroupFinder> list) {
+        if (query != null && !query.isEmpty()) {
+            List<GroupFinder> filteredList = new ArrayList<GroupFinder>();
+            for (GroupFinder element : list){
+                if (element.getTitle().toLowerCase().contains(query.toLowerCase()) || element.getGameTitle().toLowerCase().contains(query.toLowerCase())){
+                    filteredList.add(element);
+                }
+            }
+            return filteredList;
+        }
+        return list;
+    }
 }

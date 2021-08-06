@@ -20,14 +20,14 @@
                 <div class="buttons mb-3">
                     <a th:href="${url}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
 
-                    <form class="search" action="#">
-                        <input type="text" placeholder="Search.." name="search">
+                    <form class="search" th:action="@{/clips}" method="get">
+                        <input type="text" placeholder="Search.." name="query" id="query" th:value="${query}">
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
 
                 <div th:each="clip : ${clip_list}">
-                    <div class="shadow-sm p-4 mb-5 bg-body rounded">
+                    <div class="shadow-sm p-4 mb-5 bg-body rounded card-content">
 
                         <div class="post-header">
                             <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />

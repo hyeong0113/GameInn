@@ -13,7 +13,7 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="content-50">
-                <h2 class=" mb-4 mt-5">Create Group</h2>
+                <h2 class="mb-4 mt-5" th:text="${addEdit} + ' Group Finder'"></h2>
 
                 <form action="#" th:action="${url}" th:object="${groupFinder}" method="post">
                     <div class="row g-3">
@@ -61,7 +61,7 @@
 
 
                         <div class="col-sm-10 flex-grow-1">
-                            <input id="createButton" type="submit" class="btn add-groupfinder" value="Add">
+                            <input id="createButton" type="submit" class="btn add-groupfinder" th:value="${addEdit}">
                         </div>
                     </div>
                 </form>

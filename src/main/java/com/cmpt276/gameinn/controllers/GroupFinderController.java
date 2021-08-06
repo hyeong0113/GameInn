@@ -34,7 +34,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
     @Autowired private UserService userService;
 
 	@GetMapping(value = {"/groupfinders", "/groupfinders/{sub}"}) public String groupFinderListPage(@PathVariable(required = false)String sub, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
-                                                                    Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal) {
+                                                                    Model model, HttpServletRequest request, @AuthenticationPrincipal OidcUser principal,  @RequestParam(value = "query", required=false) String query) {
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
@@ -54,7 +54,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
             url="/oauth2/authorization/auth0";
         }
         model.addAttribute("url", url);
-        Page<GroupFinder> groupFinderPage = groupFinderService.getGroupFindersPaginated(PageRequest.of(currentPage - 1, pageSize));
+        Page<GroupFinder> groupFinderPage = groupFinderService.getGroupFindersPaginated(PageRequest.of(currentPage - 1, pageSize), query);
         model.addAttribute("groupFinders", groupFinderPage);
 
         int totalPages = groupFinderPage.getTotalPages();
@@ -75,6 +75,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
         
         String addUrl = "/groupfinders/" + sub + "/addEdit/add";
         model.addAttribute("url", addUrl);
+        model.addAttribute("addEdit", "Create");
 
         return "addEditGroupFinderPage";
     }
@@ -113,6 +114,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
 
         String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
         model.addAttribute("url", editUrl);
+        model.addAttribute("addEdit", "Edit");
 
         return "addEditGroupFinderPage";
     }
@@ -136,6 +138,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
         groupFinderService.deleteGroupFinder(id);
         return "redirect:/groupfinders/" + sub;
     }
+<<<<<<< HEAD
 
 
     //////////////////////////////
@@ -177,5 +180,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
         return "groupFinderList";
     }
 
+=======
+>>>>>>> 841d375dd851146100d2d6ed029913e712130b47
  }
 
