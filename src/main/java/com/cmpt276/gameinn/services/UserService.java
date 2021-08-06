@@ -42,14 +42,23 @@ import com.cmpt276.gameinn.repositories.User.IUserRepository;
 		return repository.findUserBySub(sub);
 	}
 
-	public User updateUser(User user) {
-		User found = repository.findUserBySub(user.getSubId());
+	public User updateUser(String sub, User user) {
+		User found = repository.findUserBySub(sub);
 
 		if (found == null)
 			throw new IllegalArgumentException("No User with " +
 				user.getSubId());
 
-		found.setRole(user.getRole());
+		found.setFacebook(user.getFacebook());
+		found.setTwitter(user.getTwitter());
+		found.setDiscord(user.getDiscord());
+		found.setGuilded(user.getGuilded());
+		found.setTwitch(user.getTwitch());
+		found.setYoutube(user.getYoutube());
+		found.setSteam(user.getSteam());
+		found.setXbox(user.getXbox());
+		found.setPsn(user.getPsn());
+		found.setBattle_net(user.getBattle_net());
 
 		repository.save(found);
 		return found;

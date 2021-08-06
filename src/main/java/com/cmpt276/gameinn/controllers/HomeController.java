@@ -66,6 +66,7 @@ import com.cmpt276.gameinn.services.*;
 		sub, Model model, HttpServletRequest request) {
 		model.addAttribute("user", service.getUserBySub(HandleCookie.readCookie(
 			request, HandleCookie.COOKIE_NAME)));
+		model.addAttribute("profile", service.getUserBySub(sub));
 
 		return "profile";
 	}
