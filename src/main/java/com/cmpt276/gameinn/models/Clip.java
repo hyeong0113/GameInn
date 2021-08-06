@@ -120,9 +120,9 @@ public class Clip {
         return this.postedTime;
     }
 
-    public void setPostedTime(Date postedTime)
+    public void setPostedTime(Long postedTime)
     {
-        this.postedTime = postedTime;
+        this.postedTime = new Date(postedTime);
     }
 
     public User getUser()

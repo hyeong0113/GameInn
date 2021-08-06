@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import com.cmpt276.gameinn.models.Clip;
@@ -32,13 +33,16 @@ public class ClipService {
 
     public Clip updateClip(Long id, Clip clip) throws Exception {
         Clip found = clipRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Clip with " + id));
+    
         
         found.setTitle(clip.getTitle());
         found.setGameTitle(clip.getGameTitle());
         found.setTags(clip.getTags());
         found.setPlatform(clip.getPlatform());
         found.setSourceLink(clip.getSourceLink());
-        found.setPostedTime(clip.getPostedTime());
+        // found.setPostedTime(new Date().getTime());
+        found.setPostedTime(found.getPostedTime().getTime());
+
 
         clipRepository.save(found);
         return found;
