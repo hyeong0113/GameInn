@@ -75,6 +75,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
         
         String addUrl = "/groupfinders/" + sub + "/addEdit/add";
         model.addAttribute("url", addUrl);
+        model.addAttribute("addEdit", "Create");
 
         return "addEditGroupFinderPage";
     }
@@ -113,6 +114,7 @@ import com.cmpt276.gameinn.auth.HandleCookie;
 
         String editUrl = "/groupfinders/" + sub + "/addEdit/edit/" + id;
         model.addAttribute("url", editUrl);
+        model.addAttribute("addEdit", "Edit");
 
         return "addEditGroupFinderPage";
     }
