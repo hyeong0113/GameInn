@@ -27,7 +27,7 @@
                 </div>
 
                 <div th:each="clip : ${clip_list}">
-                    <div class="shadow-sm p-4 mb-5 bg-body rounded">
+                    <div class="shadow-sm p-4 mb-5 bg-body rounded card-content">
 
                         <div class="post-header">
                             <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />
