@@ -13,6 +13,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.cmpt276.gameinn.constant.EnumCollection.Platform;
 import com.cmpt276.gameinn.models.Clip;
 import com.cmpt276.gameinn.models.User;
@@ -164,6 +170,21 @@ import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
 		}
 	}
 
+	public static String twitterEmbed(String link) {
+		String embed = "";
+
+		try {
+			HttpResponse<String> jsonResponse = Unirest.get(
+				"https://publish.twitter.com/oembed?url=" + link)
+					.asString();
+			JSONObject tweet = new JSONObject(jsonResponse.getBody());
+			embed = tweet.getString("html");
+		} catch (UnirestException e) {
+			e.printStackTrace();
+		}
+		return embed;
+	}
+
 	public static String getEmbed(Platform p, String link) {
 		String embed = "";
 
@@ -174,6 +195,8 @@ import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
 			embed = twitchEmbed(link);
 		} else if (p.getPlatformName() == "Reddit") {
 			embed = redditEmbed(link);
+		} else if (p.getPlatformName() == "Twitter") {
+			embed = twitterEmbed(link);
 		}
 
 		return embed;
