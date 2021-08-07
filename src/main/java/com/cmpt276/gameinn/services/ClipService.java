@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +27,13 @@ import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
 		return clipRepository.save(created);
 	}
 
-	public List<Clip> getClips() {
+	public List<Clip> getClips(String query) {
 		List<Clip> clips = clipRepository.findAll();
-		clips.sort(Comparator.comparing(Clip::getPostedTime).reversed());
-		return clips;
+		List<Clip> filteredClips = search(query, clips);
+
+		filteredClips.sort(Comparator.comparing(
+			Clip::getPostedTime).reversed());
+		return filteredClips;
 	}
 
 	public Clip getClipByID(Long id) {
@@ -64,6 +68,24 @@ import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
 			throw new IllegalArgumentException("No Clip with " + id);
 
 		clipRepository.delete(found);
+	}
+
+	private List<Clip> search(String query, List<Clip> list) {
+		if (query != null && !query.isEmpty()) {
+			List<Clip> filteredList = new ArrayList<Clip>();
+
+			for (Clip element : list) {
+				if (element.getTitle().toLowerCase().contains(
+					query.toLowerCase()) ||
+					element.getGameTitle().toLowerCase().contains(
+					query.toLowerCase()))
+					filteredList.add(element);
+			}
+
+			return filteredList;
+		}
+
+		return list;
 	}
 
 	public static String getYTID(String ytUrl) {
