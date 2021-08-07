@@ -25,7 +25,7 @@
                                 <a th:href="${url}" class="btn add-clip-button float-start me-3" role="button" aria-pressed="true">Add Clip</a>
                             </div>
 
-                            <form class="col search" action="#">
+                            <form class="col-auto search" action="#">
                                 <input type="text" placeholder="Search.." name="search">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
@@ -73,9 +73,13 @@
 
                                 <div class="post-body my-3">
                                     <p th:text="${clip.getTitle()}"></p>
-                                    <div class="post-clip mt-3 ratio ratio-16x9">
-                                        <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen>
+                                    <div class="post-clip mt-3 ratio ratio-16x9" th:if="${clip.getPlatform().getPlatformName() == 'YouTube'}">
+                                        <iframe id="clip-source" th:src="${clip.getEmbed()}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
+
+                                    <div class="post-clip mt-3 ratio ratio-16x9" th:if="${clip.getPlatform().getPlatformName() == 'Twitch'}">
+                                        <iframe id="clip-source" th:src="${clip.getEmbed()}" allowfullscreen="true">
                                         </iframe>
                                     </div>
                                 </div>

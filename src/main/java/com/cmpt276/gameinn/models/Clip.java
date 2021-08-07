@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,8 @@ import javax.persistence.Table;
 
 	@NotNull private String sourceLink;
 
+	@Column(columnDefinition = "TEXT") private String embed;
+
 	@NotNull private Date postedTime;
 
 	@ManyToOne @JoinColumn(name = "user_id") @OnDelete(action =
@@ -42,12 +45,13 @@ import javax.persistence.Table;
 	public Clip() {}
 
 	public Clip(String title, String gameTitle, List<String> tags, Platform
-		platform, String sourceLink, User user) {
+		platform, String sourceLink, String embed, User user) {
 		this.title = title;
 		this.gameTitle = gameTitle;
 		this.tags = tags;
 		this.platform = platform;
 		this.sourceLink = sourceLink;
+		this.embed = embed;
 		this.postedTime = new Date();
 		this.RUser = user;
 	}
@@ -98,6 +102,14 @@ import javax.persistence.Table;
 
 	public void setSourceLink(String sourceLink) {
 		this.sourceLink = sourceLink;
+	}
+
+	public String getEmbed() {
+		return this.embed;
+	}
+
+	public void setEmbed(String embed) {
+		this.embed = embed;
 	}
 
 	public Date getPostedTime() {
