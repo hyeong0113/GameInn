@@ -3,6 +3,7 @@ package com.cmpt276.gameinn.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Scanner;
 
 import com.cmpt276.gameinn.constant.EnumCollection.Platform;
 import com.cmpt276.gameinn.models.Clip;
@@ -107,24 +109,57 @@ import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
 
 			String embed = "";
 
-			System.out.println(path[2]);
-			System.out.println(path.length);
-
 			if (path.length == 3) {
-				System.out.println("hi");
 				embed = "https://player.twitch.tv/?video=" + path[2] +
 					"&parent=localhost&parent=gameinn.herokuapp.com&autoplay=false";
-				System.out.println(embed);
 			} else if (path.length == 4) {
-				System.out.println("hi");
 				embed = "https://clips.twitch.tv/embed?clip=" + path[3] +
 					"&parent=localhost&parent=gameinn.herokuapp.com";
-				System.out.println(embed);
 			}
 
 			return embed;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	public static String redditEmbed(String link) {
+		try {
+			URL url = new URL(link);
+			String[] path = url.getPath().split("/");
+
+			String title = redditTitle(link);
+			String embed = "<blockquote class='reddit-card'><a href='" + url +
+				"?ref_source=embed&amp;ref=share'>" + title +
+				"</a> from <a href='https://www.reddit.com/r/" + path[2] +
+				"/'>" + path[2] +
+				"</a></blockquote><script async src='https://embed.redditmedia.com/widgets/platform.js' charset='UTF-8'></script>";
+
+			return embed;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	public static String redditTitle(String link) {
+		InputStream response = null;
+		try {
+			String url = "link";
+			response = new URL(url).openStream();
+
+			Scanner scanner = new Scanner(response);
+			String responseBody = scanner.useDelimiter("\\A").next();
+			String title = responseBody.substring(responseBody.indexOf(
+				"<title>") + 7, responseBody.indexOf("</title>"));
+
+			title = title.substring(0, title.indexOf(" : "));
+
+			response.close();
+			return title;
+		} catch (Exception ex) {
+			ex.printStackTrace();
 			return "error";
 		}
 	}
@@ -137,6 +172,8 @@ import com.cmpt276.gameinn.repositories.Clip.IClipRepository;
 			embed = "https://www.youtube.com/embed/" + ytID;
 		} else if (p.getPlatformName() == "Twitch") {
 			embed = twitchEmbed(link);
+		} else if (p.getPlatformName() == "Reddit") {
+			embed = redditEmbed(link);
 		}
 
 		return embed;
