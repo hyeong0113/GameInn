@@ -37,8 +37,8 @@ import com.cmpt276.gameinn.services.*;
 	String groupFinderListPage(@PathVariable(required = false) String sub,
 		@RequestParam("page") Optional<Integer> page,
 		@RequestParam("size") Optional<Integer> size, Model model,
-		HttpServletRequest request, @AuthenticationPrincipal OidcUser
-		principal) {
+		HttpServletRequest request, @AuthenticationPrincipal OidcUser principal,
+		@RequestParam(value = "query", required = false) String query) {
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(5);
 		String url = "";
@@ -63,7 +63,7 @@ import com.cmpt276.gameinn.services.*;
 		model.addAttribute("url", url);
 		Page<GroupFinder> groupFinderPage =
 			groupFinderService.getGroupFindersPaginated(PageRequest.of(
-			currentPage - 1, pageSize));
+			currentPage - 1, pageSize), query);
 		model.addAttribute("groupFinders", groupFinderPage);
 
 		int totalPages = groupFinderPage.getTotalPages();
