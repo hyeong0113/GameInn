@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/profile.css">
+        <title>User Profile</title>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
+
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content mt-5 mb-4">
+                        <h1 class="mb-4">User Profile</h1>
+
+                        <form action="#" th:action="${url}" th:object="${profile}" method="post">
+                            <div class="row flex-column align-items-center mb-4 g-3">
+                                <div class="col-auto">
+                                    <input type="image" id="img" th:src="*{picture}" alt="file" class="rounded-circle d-block" />
+                                </div>
+
+                                <div class="col-auto">
+                                    <span class="ml-3 mt-5 pt-4" id='name' th:text="*{name}"></span>
+                                </div>
+
+                                <div class="col-auto align-self-end ms-auto g-3" sec:authorize="!isAnonymous()" th:if="${profile.getSubId() == user.getSubId()}">
+                                    <button type="submit" class="btn" id="saveProfile">Save</button>
+                                    <a th:href="${backUrl}">
+                                        <button class="btn" id="cancel">Cancel</button>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row row-cols-1 g-3 mb-4">
+                                <div class="col">
+                                    <label cid="textareatext" for="about" class="form-label">About me:</label>
+                                    <textarea class="form-control border border-dark user-description" id='about' th:field="*{about}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mb-4" sec:authorize="!isAnonymous()" th:if="${profile.getSubId() == user.getSubId()}">
+                                <label for="email">Email:</label>
+                                <span id="email" th:text="*{email}"></span>
+                            </div>
+
+                            <!-- <div>
+                            <label for="fixedP">Password:</label>
+                            <input class="ml-3 border border-dark" id='fixedP' type="password" required>
+                        </div> -->
+
+                            <!-- <div>
+                            <label for="fixedRP">Re-enter Password:</label>
+                            <input class="ml-1 border border-dark" id='fixedRP' type="password" required>
+                        </div> -->
+
+                            <div class="row row-cols-md-2 g-3">
+                                <div class="col-md">
+                                    <i class="fab fa-facebook fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="facebook" class="form-control border border-dark" th:field="*{facebook}">
+                                        <label for="facebook">Facebook Username</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-twitter fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="twitter" class="form-control border border-dark" th:field="*{twitter}">
+                                        <label for="twitter">Twitter Handle</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-discord fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="discord" class="form-control border border-dark" th:field="*{discord}">
+                                        <label for="discord">Discord Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-guilded fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="guilded" class="form-control border border-dark" th:field="*{guilded}">
+                                        <label for="guilded">Guilded Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-twitch fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="twitch" class="form-control border border-dark" th:field="*{twitch}">
+                                        <label for="twitch">Twitch Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-youtube fa-2x pb-2"></i>
+                                    <div class="row row-cols-1 socialInput g-3">
+                                        <div class="form-floating col">
+                                            <input type="text" id="youtube" class="form-control border border-dark" th:field="*{youtube}">
+                                            <label for="youtube">Youtube Channel Link</label>
+                                        </div>
+
+                                        <div class="form-floating col">
+                                            <input type="text" id="youtube_name" class="form-control border border-dark" th:field="*{youtube_name}">
+                                            <label for="youtube">Youtube Channel Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-steam fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="steam" class="form-control border border-dark" th:field="*{steam}">
+                                        <label for="steam">Steam Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-xbox fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="xbox" class="form-control border border-dark" th:field="*{xbox}">
+                                        <label for="xbox">Xbox LIVE Gamertag</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-playstation fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" class="form-control border border-dark" th:field="*{psn}">
+                                        <label for="battle_net">PSN Username</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md">
+                                    <i class="fab fa-battle-net fa-2x pb-2"></i>
+                                    <div class="form-floating socialInput">
+                                        <input type="text" id="battle_net" class="form-control border border-dark" th:field="*{battle_net}">
+                                        <label for="battle_net">Battle.net Username</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,4 +1,9 @@
-.Center {
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* .Center {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -38,12 +43,9 @@
 
 .number-currentplayer {
     padding-right: 23%;
-}
-
-
+} */
 /* buttons */
-
-.buttons {
+/* .buttons {
     padding-left: 60%;
 }
 
@@ -64,4 +66,4 @@
 
 #editButton {
     margin-right: 10px;
-}
+} */

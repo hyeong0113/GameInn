@@ -1,28 +1,21 @@
 package com.cmpt276.gameinn.constant;
 
 public class EnumCollection {
-    public enum RequiredLevel {
-        ANY, BEGINNER, INTERMEDIATE, EXPERT
-    }
+	public enum RequiredLevel {
+		ANY, BEGINNER, INTERMEDIATE, EXPERT;
+	} public enum GameStyle {
+		CASUAL, PROFESSIONAL;
+	} public enum Platform {
+		YOUTUBE("YouTube"), TWITTER("Twitter"), REDDIT("Reddit"), TWITCH(
+			"Twitch");
 
-    public enum GameStyle {
-        CASUAL, PROFESSIONAL;
-    }
+		private final String platformName;
 
-    public enum Platform {
-        TWITCH("Twitch"),
-        YOUTUBE("Youtube"),
-        NINEGAG("9Gag"),
-        TWITTER("Twitter");
+		Platform(String platformName) {
+			this.platformName = platformName;
+		}
 
-        private final String platformName;
-
-        Platform(String platformName) {
-            this.platformName = platformName;
-        }
-
-        public String getPlatformName() {
-            return this.platformName;
-        }
-    }
-}
+		public String getPlatformName() {
+			return this.platformName;
+		}
+	} }

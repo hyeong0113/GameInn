@@ -1,90 +1,108 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:replace="fragments/common :: mainHeader"></div>
-    <title>Clips</title>
-    <script th:src="@{/js/clip_list.js} "></script>
-    <script th:src="@{/js/option_button.js} "></script>
-    <link rel="stylesheet" href="/css/clipList.css">
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <title>Clips</title>
+        <script th:src="@{/js/clip_list.js} "></script>
+        <script th:src="@{/js/option_button.js} "></script>
+        <link rel="stylesheet" href="/css/clipList.css">
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+        <meta name="twitter:widgets:theme" content="light">
+    </head>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="content-50">
-                <h2 class="mb-4 mt-5">Clips </h2>
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-                <div class="buttons mb-3">
-                    <a th:href="${url}" class="btn add-clip-button float-start" role="button" aria-pressed="true">Add Clip</a>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content mt-5 mb-4">
+                        <h2 class="mb-4">Clips </h2>
 
-                    <form class="search" th:action="@{/clips}" method="get">
-                        <input type="text" placeholder="Search.." name="query" id="query" th:value="${query}">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
+                        <div class="buttons flex-nowrap mb-3">
+                            <div class="col">
+                                <a th:href="${url}" class="btn add-clip-button float-start me-3" role="button" aria-pressed="true">Add Clip</a>
+                            </div>
 
-                <div th:each="clip : ${clip_list}">
-                    <div class="shadow-sm p-4 mb-5 bg-body rounded card-content">
+                            <form class="col-auto search" th:action="@{/clips}" method="get">
+                                <input type="text" placeholder="Search.." name="query" id="query" th:value="${query}">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
 
-                        <div class="post-header">
-                            <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />
-                            <p>
-                                <span th:text="${clip.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${clip.getId()}"></span>
-                            </p>
-                            <script th:inline="javascript">
-                                /*<![CDATA[*/
-                                var posted_time = /*[[${clip.getPostedTime().getTime()}]]*/ '';
-                                var content_id = /*[[${clip.getId()}]]*/ '';
-                                var id = 'time' + content_id;
-                                document.getElementById(id).innerHTML = display_diff_time(posted_time);
-                                /*]]>*/
-                            </script>
-                            <div class="dropdown ms-auto" sec:authorize="!isAnonymous()">
-                                <button class="btn button-option btn-sm dropdownMenuButton" type="button" iz data-bs-toggle="dropdown" aria-expanded="false" th:id="${clip.getId()}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                        </svg>
-                                    </button>
-                                <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                    <li><a th:id="'edit' + ${clip.getId()}" class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
-                                    <li><a th:id="'delete' + ${clip.getId()}" class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
-                                </ul>
-                                <script th:inline="javascript">
-                                    /*<![CDATA[*/
-                                    var sub = /*[[${user.getSubId()}]]*/ '';
-                                    var clip_sub = /*[[${clip.getUser().getSubId()}]]*/ '';
-                                    var role = /*[[${user.getRole()}]]*/ '';
-                                    var content_id = /*[[${clip.getId()}]]*/ '';
-                                    var id = '#' + content_id;
-                                    var edit_id = '#edit' + content_id
-                                    display_button(id, sub, clip_sub, role, edit_id)
+                        <div th:each="clip : ${clip_list}">
+                            <div class="shadow-sm p-4 mb-5 bg-white rounded card-content">
+
+                                <div class="post-header">
+                                    <img class="user-photo rounded-circle me-2" th:src="${clip.getUser().getPicture()}" />
+                                    <p>
+                                        <span th:text="${clip.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${clip.getId()}"></span>
+                                    </p>
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        var posted_time = /*[[${clip.getPostedTime().getTime()}]]*/ '';
+                                        var content_id = /*[[${clip.getId()}]]*/ '';
+                                        var id = 'time' + content_id;
+                                        document.getElementById(id).innerHTML = display_diff_time(posted_time);
                                         /*]]>*/
-                                </script>
-                            </div>
-                        </div>
+                                    </script>
+                                    <div class="dropdown ms-auto" sec:authorize="!isAnonymous()">
+                                        <button class="btn button-option btn-sm dropdownMenuButton" type="button" iz data-bs-toggle="dropdown" aria-expanded="false" th:id="${clip.getId()}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                            </svg>
+                                        </button>
+                                        <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                            <li><a th:id="'edit' + ${clip.getId()}" class="dropdown-item" th:href="@{/clips/{sub}/addEdit/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Edit</a></li>
+                                            <li><a th:id="'delete' + ${clip.getId()}" class="dropdown-item" th:href="@{/clips/{sub}/delete/{id}(sub=${clip.getUser().getSubId()}, id=${clip.getId()})}">Delete</a></li>
+                                        </ul>
+                                        <script th:inline="javascript">
+                                            /*<![CDATA[*/
+                                            var sub = /*[[${user.getSubId()}]]*/ '';
+                                            var clip_sub = /*[[${clip.getUser().getSubId()}]]*/ '';
+                                            var role = /*[[${user.getRole()}]]*/ '';
+                                            var content_id = /*[[${clip.getId()}]]*/ '';
+                                            var id = '#' + content_id;
+                                            var edit_id = '#edit' + content_id
+                                            display_button(id, sub, clip_sub, role, edit_id)
+                                            /*]]>*/
+                                        </script>
+                                    </div>
+                                </div>
 
-                        <div class="post-body my-3">
-                            <p th:text="${clip.getTitle()}"></p>
-                            <div class="post-clip mt-3">
-                                <iframe id="clip-source" src="https://www.youtube.com/embed/eoGplps8BBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                    </iframe>
-                            </div>
-                        </div>
+                                <div class="post-body my-3">
+                                    <p th:text="${clip.getTitle()}"></p>
+                                    <div class="post-clip mt-3 ratio ratio-16x9" th:if="${clip.getPlatform().getPlatformName() == 'YouTube'}">
+                                        <iframe id="clip-source" th:src="${clip.getEmbed()}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
 
-                        <div class="post-footer">
-                            <p class="m-0">
-                                Game: <span th:text="${clip.getGameTitle()}" th:remove="tag">(game)</span>
-                            </p>
+                                    <div class="post-clip mt-3 ratio ratio-16x9" th:if="${clip.getPlatform().getPlatformName() == 'Twitch'}">
+                                        <iframe id="clip-source" th:src="${clip.getEmbed()}" allowfullscreen="true">
+                                        </iframe>
+                                    </div>
+
+                                    <div class="post-clip mt-3" th:if="${clip.getPlatform().getPlatformName() == 'Reddit'}">
+                                        <div th:remove="tag" th:utext="${clip.getEmbed()}"></div>
+                                    </div>
+
+                                    <div class="post-clip mt-3" th:if="${clip.getPlatform().getPlatformName() == 'Twitter'}">
+                                        <div th:remove="tag" th:utext="${clip.getEmbed()}"></div>
+                                    </div>
+                                </div>
+
+                                <div class="post-footer">
+                                    <p class="m-0">
+                                        Game: <span th:text="${clip.getGameTitle()}" th:remove="tag">(game)</span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </main>
             </div>
-
-        </main>
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>

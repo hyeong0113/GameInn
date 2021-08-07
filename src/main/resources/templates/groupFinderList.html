@@ -1,66 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:replace="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/list.css" />
-    <title>Group Finder</title>
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/list.css" />
+        <title>Group Finder</title>
+    </head>
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="content">
-                <h2 class="mb-4 mt-5">Group Finder</h2>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content mt-5 mb-4">
+                        <h2 class="mb-4">Group Finder</h2>
 
-                <div class="buttons mb-3">
-                    <a th:href="${url}" class="btn add-groupfinder-button float-start" role="button" aria-pressed="true">Add GroupFinder</a>
+                        <div class="buttons flex-nowrap mb-3">
+                            <div class="col">
+                                <a th:href="${url}" class="btn add-groupfinder-button float-start me-3" role="button" aria-pressed="true">Add GroupFinder</a>
+                            </div>
 
-                    <form class="search" th:action="@{/groupfinders}" method="get">
-                        <input type="text" placeholder="Search.." name="query" id="query" th:value="${query}">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
+                            <form class="col-auto search" th:action="@{/groupfinders}" method="get">
+                                <input type="text" placeholder="Search.." name="query" id="query" th:value="${query}">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
 
-
-                <!--Table Content-->
-                <table class="table1">
-                    <thead>
-                        <tr>
-                            <th> Title </th>
-                            <th> Game </th>
-                            <th> UserName </th>
-                            <th> Status </th>
-                            <th> Total number of Players </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="groupFinder, iStat : ${groupFinders.content}" th:alt-title="${iStat.even}? 'even' : 'odd'">
-                            <td sec:authorize="!isAnonymous()">
-                                <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
-                            </td>
-                            <td class="nav-item" sec:authorize="isAnonymous()">
-                                <a href="/oauth2/authorization/auth0" th:text="${groupFinder.getTitle()}"></a>
-                            </td>
-                            <td th:text="${groupFinder.getGameTitle()}"></td>
-                            <td th:text="${groupFinder.getUser().getName()}"></td>
-                            <td th:text="${groupFinder.getStatus()}"></td>
-                            <td th:text="${groupFinder.getTotalPlayers()}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation groupfinder">
-                    <ul class="pagination">
-                        <li class="page-item" th:if="${groupFinders.totalPages> 0}" th:each="pageNumber : ${pageNumbers}">
-                            <a class="page-link" th:href="@{/groupfinders(size=${groupFinders.size}, page=${pageNumber})} " th:text=${pageNumber}></a>
-                        </li>
-                    </ul>
-                </nav>
+                        <!--Table Content-->
+                        <table class="table1">
+                            <thead>
+                                <tr>
+                                    <th> Title </th>
+                                    <th> Game </th>
+                                    <th> UserName </th>
+                                    <th> Status </th>
+                                    <th> Total number of Players </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="groupFinder, iStat : ${groupFinders.content}" th:alt-title="${iStat.even}? 'even' : 'odd'">
+                                    <td sec:authorize="!isAnonymous()">
+                                        <a th:href="@{/groupfinders/{sub}/detail/{id}(sub=${groupFinder.getUser().getSubId()}, id=${groupFinder.getId()})}" th:text="${groupFinder.getTitle()}"></a>
+                                    </td>
+                                    <td class="nav-item" sec:authorize="isAnonymous()">
+                                        <a href="/oauth2/authorization/auth0" th:text="${groupFinder.getTitle()}"></a>
+                                    </td>
+                                    <td th:text="${groupFinder.getGameTitle()}"></td>
+                                    <td th:text="${groupFinder.getUser().getName()}"></td>
+                                    <td th:text="${groupFinder.getStatus()}"></td>
+                                    <td th:text="${groupFinder.getTotalPlayers()}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <nav class="mt-3" aria-label="Page navigation groupfinder">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" th:if="${groupFinders.totalPages> 0}" th:each="pageNumber : ${pageNumbers}">
+                                    <a class="page-link" th:href="@{/groupfinders(size=${groupFinders.size}, page=${pageNumber})} " th:text=${pageNumber}></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </main>
             </div>
-        </main>
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>

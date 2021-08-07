@@ -8,15 +8,17 @@
     </head>
 
     <body>
-        <div class="row">
-            <div th:replace="fragments/common :: sidebar"></div>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content">
-                    <h2 class="mb-4 mt-5">Group Finder</h2>
-                </div>
-            </main>
-        </div>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content mt-5 mb-4">
+                        <h2 class="mb-4">Group Finder</h2>
+                    </div>
+                </main>
+            </div>
+            </siv>
     </body>
 
 </html>

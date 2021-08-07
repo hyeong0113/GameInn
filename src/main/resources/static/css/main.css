@@ -2,13 +2,8 @@ body {
     background-color: #E5E5E5;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+#favicon {
+    min-width: 32px;
 }
 
 .nav-link {
@@ -22,19 +17,8 @@ body {
     color: #7063F8;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 0.75rem
-}
-
 .content {
     width: 75%;
-    margin: auto
-}
-
-.content-50 {
-    width: 50%;
     margin: auto
 }
 
@@ -66,10 +50,6 @@ body {
     text-align: center;
 }
 
-input[type=text] {
-    padding: 6px;
-}
-
 .ui-autocomplete {
     max-height: 250px;
     overflow-y: auto;
@@ -80,6 +60,7 @@ input[type=text] {
 .btn {
     background-color: #7063F8;
     color: #ffffff;
+    border: 1px solid #7063F8;
 }
 
 .btn:hover {

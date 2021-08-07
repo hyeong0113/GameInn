@@ -1,129 +1,139 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <div th:replace="fragments/common :: mainHeader"></div>
-    <link rel="stylesheet" href="/css/groupfinder_detail.css">
-    <link rel="stylesheet" href="/css/comment.css">
-    <script th:src="@{/js/option_button.js} "></script>
-    <script th:src="@{/js/comment.js} "></script>
-    <title>form</title>
-</head>
-</head>
+    <head>
+        <div th:replace="fragments/common :: mainHeader"></div>
+        <link rel="stylesheet" href="/css/groupfinder_detail.css">
+        <link rel="stylesheet" href="/css/comment.css">
+        <script th:src="@{/js/option_button.js} "></script>
+        <script th:src="@{/js/comment.js} "></script>
+        <script th:src="@{/js/groupDetails.js} "></script>
+        <title>form</title>
+    </head>
 
-<body>
-    <div class="row">
-        <div th:replace="fragments/common :: sidebar"></div>
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="fragments/common :: sidebar"></div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="back-button">
-                <a th:href="@{/groupfinders/{sub}(sub=${user.getSubId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Back to list</a>
-            </div>
+                <main class="col-sm-9 ms-sm-auto col-lg-10 flex-shrink-1 px-md-4">
+                    <div class="content mt-5 mb-4">
+                        <div class="row mb-3">
+                            <div class="col-auto">
+                                <a th:href="@{/groupfinders/{sub}(sub=${user.getSubId()})}" class="btn groupfinder-button float-start me-3" role="button" aria-pressed="true">Back to list</a>
+                            </div>
+                        </div>
 
-            <div class="groupfinder-info" th:switch="${groupFinder}">
-                <div class="groupfinder-title">
-                    <h1 th:text="${groupFinder.getTitle()}"></h1>
-                </div>
+                        <div class="row g-3" th:switch="${groupFinder}">
+                            <div>
+                                <h1 th:text="${groupFinder.getTitle()}"></h1>
+                            </div>
 
-                <div class="groupfinder-badge">
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameTitle()}"></span>
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getRequiredLevel()}"></span>
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getGameStyle()}"></span>
-                    <span class="p-1 badge badge-light border" th:text="${groupFinder.getStatus()}"></span>
-                </div>
+                            <div class="col">
+                                <span class="col badge bg-dark" th:text="${groupFinder.getGameTitle()}"></span>
+                                <span class="col badge bg-dark" th:text="${groupFinder.getRequiredLevel()}"></span>
+                                <span class="col badge bg-dark" th:text="${groupFinder.getGameStyle()}"></span>
+                                <span class="col badge bg-dark" th:text="${groupFinder.getStatus()}"></span>
+                            </div>
 
-                <div class="number-currentplayer">
-                    <i id="mx-auto" class="p-3 mx-auto fas fa-users">
-                            <sup th:text="${groupFinder.getCurrentPlayers()}">1</sup>&frasl;<sub th:text="${groupFinder.getTotalPlayers()}">2</sub>
-                        </i>
-                </div>
+                            <div class="col-auto ms-auto bg-white">
+                                <i class="fas fa-users">
+                                    <sup th:text="${groupFinder.getCurrentPlayers()}">1</sup>&frasl;<sub th:text="${groupFinder.getTotalPlayers()}">2</sub>
+                                </i>
+                            </div>
 
-                <textarea class="groupfinder-description" rows="15" cols="80" th:text="${groupFinder.getDescription()}" readonly></textarea>
+                            <textarea class="form-control border border-dark bg-white" th:text="${groupFinder.getDescription()}" readonly></textarea>
 
-                <!-- Join will be availble next iteration -->
-                <div class="buttons" id="buttons">
-                    <!-- <div class="join-button">
-                        <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
-                    </div> -->
-                    <!-- This button is for writer of this post -->
-                    <a id="editButton" th:href="@{/groupfinders/{sub}/addEdit/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Edit</a>
-                    <a id="deleteButton" th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Delete</a>
-                </div>
-                <script th:inline="javascript">
-                    /*<![CDATA[*/
-                    var sub = /*[[${user.getSubId()}]]*/ '';
-                    var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
-                    var role = /*[[${user.getRole()}]]*/ '';
-                    var id = '#buttons';
-                    var edit_id = '#editButton';
-                    display_button(id, sub, groupFinder_sub, role, edit_id)
-                        /*]]>*/
-                </script>
+                            <!-- Join will be availble next iteration -->
+                            <div class="col-auto align-self-end ms-auto g-3" id="buttons">
+                                <!-- <div class="join-button">
+                                    <a th:href="#" class="btn groupfinder-button float-start" role="button" aria-pressed="true">Join</a>
+                                </div> -->
 
-                <form id="create-comment-form" action="#" th:action="@{/comments/{sub}/{groupfinderId}/add(sub=${user.getSubId()}, groupfinderId=${groupFinder.getId()})}" th:object="${commentCreate}" method="post">
-                    <div>
-                        <label for="level">Select your Level:</label>
-                        <select name="level">
-                                <option th:each="level_option : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level_option}" th:text="${level_option}">
-                                </option>
-                        </select>
-                    </div>
-                    <div>
-                        <label id="content" for="content">Comments:</label>
-                        <textarea type="text" th:field="*{content}" class="form-control" id="description" placeholder="Description" cols="58" rows="3" required></textarea>
-                    </div>
-                    <input id="addComment" class="btn" type="submit" value="Submit" />
-                </form>
-
-                <div id="comment-list" th:each="comment_content : ${comments}">
-                    <div class="post-header">
-                        <img class="user-photo rounded-circle me-2" th:src="${comment_content.getUser().getPicture()}" />
-                        <p>
-                            <span th:text="${comment_content.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${comment_content.getId()}"></span>
-                        </p>
-                        <script th:inline="javascript">
-                            /*<![CDATA[*/
-                            var posted_time = /*[[${comment_content.getPostedTime().getTime()}]]*/ '';
-                            var content_id = /*[[${comment_content.getId()}]]*/ '';
-                            var id = 'time' + content_id;
-                            document.getElementById(id).innerHTML = display_diff_time(posted_time);
-                            /*]]>*/
-                        </script>
-                        <div class="dropdown ms-auto" sec:authorize="!isAnonymous()">
-                            <button class="btn button-option btn-sm dropdownMenuButton" type="button" iz data-bs-toggle="dropdown" aria-expanded="false" th:id="${comment_content.getId()}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                        </svg>
-                                                    </button>
-                            <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                <!-- <li><a th:id="'edit' + ${comment_content.getId()}" class="dropdown-item" th:href="@{/comments/{sub}/edit/{id}(sub=${comment_content.getUser().getSubId()}, id=${comment_content.getId()})}">Edit</a></li> -->
-                                <li><a th:id="'delete' + ${comment_content.getId()}" class="dropdown-item" th:href="@{/comments/{sub}/{groupfinderId}/delete/{id}(sub=${comment_content.getUser().getSubId()}, groupfinderId=${comment_content.getGroupFinder().getId()}, id=${comment_content.getId()})}">Delete</a></li>
-                            </ul>
+                                <!-- This button is for writer of this post -->
+                                <a id="editButton" th:href="@{/groupfinders/{sub}/addEdit/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn" role="button" aria-pressed="true">Edit</a>
+                                <a id="deleteButton" th:href="@{/groupfinders/{sub}/delete/{id}(sub=${user.getSubId()}, id=${groupFinder.getId()})}" class="btn" role="button" aria-pressed="true">Delete</a>
+                            </div>
                             <script th:inline="javascript">
                                 /*<![CDATA[*/
                                 var sub = /*[[${user.getSubId()}]]*/ '';
-                                var clip_sub = /*[[${comment_content.getUser().getSubId()}]]*/ '';
+                                var groupFinder_sub = /*[[${groupFinder.getUser().getSubId()}]]*/ '';
                                 var role = /*[[${user.getRole()}]]*/ '';
-                                var content_id = /*[[${comment_content.getId()}]]*/ '';
-                                var id = '#' + content_id;
-                                var edit_id = '#edit' + content_id
-                                display_button(id, sub, clip_sub, role, edit_id)
-                                    /*]]>*/
+                                var id = '#buttons';
+                                var edit_id = '#editButton';
+                                display_button(id, sub, groupFinder_sub, role, edit_id)
+                                /*]]>*/
                             </script>
+
+                            <form class="col-12 bg-white p-3" action="#" th:action="@{/comments/{sub}/{groupfinderId}/add(sub=${user.getSubId()}, groupfinderId=${groupFinder.getId()})}" th:object="${commentCreate}" method="post">
+                                <div class="row g-3">
+                                    <div>
+                                        <label for="level">Select your Level:</label>
+                                        <select name="level">
+                                            <option th:each="level_option : ${T(com.cmpt276.gameinn.constant.EnumCollection.RequiredLevel).values()}" th:value="${level_option}" th:text="${level_option}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label id="content" for="content" class="mb-2">Comments:</label>
+                                        <textarea type="text" th:field="*{content}" class="form-control border border-dark" id="description" placeholder="Description" cols="58" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-auto align-self-end ms-auto g-3">
+                                        <input class="btn" type="submit" value="Submit" />
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="shadow-sm p-4 mb-5 bg-white rounded card-content" th:each="comment_content : ${comments}">
+                                <div class="post-header">
+                                    <img class="user-photo rounded-circle me-2" th:src="${comment_content.getUser().getPicture()}" />
+                                    <p>
+                                        <span th:text="${comment_content.getUser().getName()}" th:remove="tag">Name</span> | <span th:id="'time' + ${comment_content.getId()}"></span>
+                                    </p>
+                                    <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                        var posted_time = /*[[${comment_content.getPostedTime().getTime()}]]*/ '';
+                                        var content_id = /*[[${comment_content.getId()}]]*/ '';
+                                        var id = 'time' + content_id;
+                                        document.getElementById(id).innerHTML = display_diff_time(posted_time);
+                                        /*]]>*/
+                                    </script>
+                                    <div class="dropdown ms-auto" sec:authorize="!isAnonymous()">
+                                        <button class="btn button-option btn-sm dropdownMenuButton" type="button" iz data-bs-toggle="dropdown" aria-expanded="false" th:id="${comment_content.getId()}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                            </svg>
+                                        </button>
+                                        <ul id="button-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                            <!-- <li><a th:id="'edit' + ${comment_content.getId()}" class="dropdown-item" th:href="@{/comments/{sub}/edit/{id}(sub=${comment_content.getUser().getSubId()}, id=${comment_content.getId()})}">Edit</a></li> -->
+                                            <li><a th:id="'delete' + ${comment_content.getId()}" class="dropdown-item"
+                                                    th:href="@{/comments/{sub}/{groupfinderId}/delete/{id}(sub=${comment_content.getUser().getSubId()}, groupfinderId=${comment_content.getGroupFinder().getId()}, id=${comment_content.getId()})}">Delete</a>
+                                            </li>
+                                        </ul>
+                                        <script th:inline="javascript">
+                                            /*<![CDATA[*/
+                                            var sub = /*[[${user.getSubId()}]]*/ '';
+                                            var clip_sub = /*[[${comment_content.getUser().getSubId()}]]*/ '';
+                                            var role = /*[[${user.getRole()}]]*/ '';
+                                            var content_id = /*[[${comment_content.getId()}]]*/ '';
+                                            var id = '#' + content_id;
+                                            var edit_id = '#edit' + content_id
+                                            display_button(id, sub, clip_sub, role, edit_id)
+                                            /*]]>*/
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="post-body my-3">
+                                    <p th:text="'User level: ' + ${comment_content.getLevel()}"></p>
+                                    <p th:text="'Comments: ' + ${comment_content.getContent()}"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p th:text="'User level:    ' + ${comment_content.getLevel()}"></p>
-                        <p th:text="'Comments:      ' + ${comment_content.getContent()}"></p>
-                    </div>
-
-                </div>
+                </main>
             </div>
-
-
-
-        </main>
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>
