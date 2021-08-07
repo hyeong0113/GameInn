@@ -1,4 +1,6 @@
 $(function() {
+    $("textarea").height($("textarea")[0].scrollHeight);
+
     hideEditButtons();
 
     $("#editProfile").click(function() {
@@ -26,4 +28,10 @@ function hideEditButtons() {
 
     $(".social").show();
     $(".socialInput").hide();
+}
+
+function load_admin_tag(role) {
+    if (role == "admin") {
+        $("#admin-tag").innerHTML = "ADMIN";
+    }
 }

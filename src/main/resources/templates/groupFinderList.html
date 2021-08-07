@@ -53,8 +53,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <nav aria-label="Page navigation groupfinder">
-                            <ul class="pagination">
+                        <nav class="mt-3" aria-label="Page navigation groupfinder">
+                            <ul class="pagination justify-content-center">
                                 <li class="page-item" th:if="${groupFinders.totalPages> 0}" th:each="pageNumber : ${pageNumbers}">
                                     <a class="page-link" th:href="@{/groupfinders(size=${groupFinders.size}, page=${pageNumber})} " th:text=${pageNumber}></a>
                                 </li>

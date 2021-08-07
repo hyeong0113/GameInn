@@ -26,15 +26,26 @@
                                     <span class="ml-3 mt-5 pt-4" id='name' th:text="*{name}"></span>
                                 </div>
 
+                                <div class="col-auto">
+                                    <span id="admin-tag" class="badge rounded-pill bg-secondary"></span>
+                                </div>
+
                                 <div class="col-auto align-self-end ms-auto g-3" sec:authorize="!isAnonymous()" th:if="${profile.getSubId() == user.getSubId()}">
                                     <button type="submit" class="btn" id="editProfile">Edit Profile</button>
                                 </div>
+
+                                <script th:inline="javascript">
+                                    /*<![CDATA[*/
+                                    var role = /*[[${user.getRole()}]]*/ '';
+                                    load_admin_tag(role);
+                                    /*]]>*/
+                                </script>
                             </div>
 
                             <div class="row row-cols-1 g-3 mb-4">
                                 <div class="col">
                                     <label cid="textareatext" for="about" class="form-label">About me:</label>
-                                    <textarea class="form-control border border-dark user-description" id='about' th:field="*{about}" readonly></textarea>
+                                    <textarea class="form-control border border-dark bg-white user-description" id='about' th:field="*{about}" readonly></textarea>
                                 </div>
                             </div>
 
