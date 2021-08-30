@@ -3,6 +3,11 @@
     height: 60px;
 }
 
+.twitter-tweet {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .dropdownMenuButton {
     background: none;
     color: Black;
