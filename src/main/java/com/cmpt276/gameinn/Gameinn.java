@@ -4,10 +4,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.
 		ErrorMvcAutoConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.stereotype.Controller;
 
-@SpringBootApplication(exclude = { ErrorMvcAutoConfiguration.class }) public
-class GameinnApplication {
+@Controller @SpringBootApplication(exclude =
+{ ErrorMvcAutoConfiguration.class }) public class Gameinn {
 	public static void main(String[] args) {
-		SpringApplication.run(GameinnApplication.class, args);
+		SpringApplication.run(Gameinn.class, args);
 	}
 }
